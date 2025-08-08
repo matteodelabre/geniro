@@ -1,0 +1,4 @@
+rdflib
+requests
+Unidecode
+beautifulsoup4
