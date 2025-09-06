@@ -149,7 +149,6 @@ def query_insert_records(graph, uri: URIRef) -> list[URIRef]:
             break
 
         degree, university, date = degree_tag.stripped_strings
-        print(student_name, degree, university, date)
 
         degree = normalize_whitespace(degree)
         project_degree = URIRef(degrees[degree]) if degree in degrees else None
@@ -219,7 +218,6 @@ def populate(graph, base_uris):
         visited_uris.add(item_uri)
 
         if list(graph.predicate_objects(item_uri)):
-            print("[skip]", item_uri)
             advisors_uris = [
                 advisor_uri
                 for project_uri in graph.subjects(Geniro.student, item_uri)

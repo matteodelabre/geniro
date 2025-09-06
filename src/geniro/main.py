@@ -5,12 +5,13 @@ from rdflib import Literal, URIRef
 from rdflib.namespace import RDF, FOAF, OWL
 from rdflib.plugins.sparql import prepareQuery
 import sys
+from pathlib import Path
 
 
-papyrus_graph_path = "data/papyrus.ttl"
-links_graph_path = "data/links.ttl"
-mathgenealogy_graph_path = "data/mathgenealogy.ttl"
-local_neg_graph_path = "data/local-neg.ttl"
+data_path = Path("data")
+papyrus_graph_path = data_path / "papyrus.ttl"
+links_graph_path = data_path / "links.ttl"
+mathgenealogy_graph_path = data_path / "mathgenealogy.ttl"
 
 
 def load_papyrus():
@@ -45,78 +46,14 @@ def link_persons(base_graph):
 
             for mathgen_uri in mathgenealogy.search_by_name(name):
                 links_graph.add((person_uri, OWL.sameAs, mathgen_uri))
-                print(person_uri, "==", mathgen_uri)
 
             for wikidata_uri in wikidata.search_by_name(name):
                 links_graph.add((person_uri, OWL.sameAs, wikidata_uri))
-                print(person_uri, "==", wikidata_uri)
-
-            print()
 
 
-def query_descendants(name):
-    graph = (
-        open_graph(papyrus_graph_path)
-        + open_graph(mathgenealogy_graph_path)
-        + open_graph(links_graph_path)
-        - open_graph(local_neg_graph_path)
-    )
-
-    graph.update(
-        """
-        DELETE { ?alias ?predicate ?object . }
-        INSERT { ?original ?predicate ?object . }
-        WHERE {
-          ?original owl:sameAs+ ?alias .
-          ?alias ?predicate ?object .
-        }
-        """
-    )
-    graph.update(
-        """
-        DELETE { ?object ?predicate ?alias . }
-        INSERT { ?object ?predicate ?original . }
-        WHERE {
-          ?original owl:sameAs+ ?alias .
-          ?object ?predicate ?alias .
-        }
-        """
-    )
-
-    query = prepareQuery(
-        """
-        SELECT ?parentName ?studentName ?projectDate
-        WHERE {
-          ?base foaf:name ?name .
-          ?base (^geniro:advisor/geniro:student)* ?parent .
-
-          ?project geniro:advisor ?parent .
-          ?parent foaf:name ?parentName .
-
-          ?project geniro:student ?student .
-          ?student foaf:name ?studentName .
-
-          ?project geniro:dateEnd ?projectDate .
-        }
-        GROUP BY ?parent ?student ?project
-        ORDER BY ?projectDate
-        """,
-        initNs={
-            "geniro": Geniro
-        }
-    )
-
-    res = graph.query(query, initBindings={"name": Literal(name)})
-
-    for row in res:
-        parent = row.parentName
-        student = row.studentName
-        date = row.projectDate.split("-")[0]
-        print(f"{parent:>30} -[{date}]-> {student}")
-
-
-if __name__ == "__main__":
+def main():
     args = sys.argv[1:]
+    data_path.mkdir(parents=True, exist_ok=True)
 
     match args:
         case ["load_papyrus"]:
@@ -131,9 +68,23 @@ if __name__ == "__main__":
                 + open_graph(mathgenealogy_graph_path)
             )
 
-        case ["query_descendants", name]:
-            query_descendants(name)
-
         case _:
-            print("invalid command")
+            print(f"""\
+Usage: geniro [load_papyrus|link_persons|load_mathgenealogy]
+
+Available subcommands:
+    - load_papyrus: Retrieve thesis data from Papyrus and insert the resulting triples
+      in '{papyrus_graph_path}'.
+
+    - link_persons: Load all databases and run full-text searches in MathGenealogy and
+      Wikidata to infer links between URIs referring to the same person in different
+      databases. Insert the resulting triples in '{links_graph_path}'. As this may
+      create false positives when multiple persons bear the same name or similar names,
+      the results from this command need to be manually validated.
+
+    - load_mathgenealogy: Retrieve information from MathGenealogy about all persons
+      whose URI is already present in '{links_graph_path}' and walk up their ascendant
+      tree to retrieve all of their ancestor’s information from MathGenealogy. Insert
+      the resulting triples in '{mathgenealogy_graph_path}'.
+""")
             exit(1)
