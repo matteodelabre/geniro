@@ -1,0 +1,30 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rep: <http://www.openrdf.org/config/repository#>.
+@prefix sr: <http://www.openrdf.org/config/repository/sail#>.
+@prefix sail: <http://www.openrdf.org/config/sail#>.
+@prefix graphdb: <http://www.ontotext.com/config/graphdb#>.
+
+[] a rep:Repository ;
+    rep:repositoryID "geniro" ;
+    rdfs:label "Main Geniro Database" ;
+    rep:repositoryImpl [
+        rep:repositoryType "graphdb:SailRepository" ;
+        sr:sailImpl [
+            sail:sailType "graphdb:Sail" ;
+
+            # Group together entities linked by owl:sameAs triples under the same
+            # equivalence class. See the following page for details:
+            # <https://graphdb.ontotext.com/documentation/11.1/sameas-optimisation.html>
+            graphdb:disable-sameAs "false" ;
+
+            # Build an index to allow making full text searches. For details, see:
+            # <https://graphdb.ontotext.com/documentation/11.1/full-text-search.html>
+            graphdb:enable-fts-index "true" ;
+            graphdb:fts-indexes ("en") ;
+            graphdb:fts-string-literals-index "en" ;
+            graphdb:fts-iris-index "none" ;
+
+            # Smallest inference ruleset that includes owl:sameAs
+            graphdb:ruleset "owl-horst-optimized"
+        ]
+    ].

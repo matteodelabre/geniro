@@ -1,0 +1,22 @@
+{
+    "tasks": {
+        "dev": "deno run --watch main.ts"
+    },
+    "imports": {
+        "@oak/oak": "jsr:@oak/oak@^17.1.6",
+        "@rdfjs/data-model": "npm:@rdfjs/data-model@^2.1.1",
+        "@rdfjs/namespace": "npm:@rdfjs/namespace@^2.0.1",
+        "graphdb": "npm:graphdb@^3.1.0-RC3",
+        "rdf-sparql-builder": "npm:rdf-sparql-builder@^0.2.5",
+        "sparqljson-parse": "npm:sparqljson-parse@^3.1.0"
+    },
+    "fmt": {
+        "lineWidth": 90,
+        "indentWidth": 4
+    },
+    "lint": {
+        "rules": {
+            "exclude": ["no-control-regex"]
+        }
+    }
+}
