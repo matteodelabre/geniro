@@ -73,3 +73,53 @@ préfixe `geniro:`. Les entités suivantes sont représentées:
 Les identifiants d’entités de ces trois types peuvent être reliés par des propriétés
 `owl:sameAs` pour signifier que ces identifiants provenant de différentes sources de
 données réfèrent à la même entité.
+
+## Web
+
+Dans le répertoire `src/geniro-web/`, un serveur et une interface web de base permettent
+de requêter rapidement les données de la base de données. Ce serveur est écrit en
+TypeScript avec [Deno](https://deno.com/) et interagit avec une base de données
+[GraphDB](https://graphdb.ontotext.com/).
+
+### Base de données
+
+La **base de données** peut être lancée dans un conteneur Podman à l’aide de la commande
+suivante. Les fichiers de travail seront stockés dans le répertoire `data/graphdb/` et
+le service sera rendu disponible sur le port 7200.
+
+Pour **initialiser** la base de données avec les triplets obtenus par les scrapers, créer le
+répertoire `data/graphdb/` puis lancer la commande suivante:
+
+```
+podman container run -it \
+    -v $PWD/graphdb-config.ttl:/graphdb-config.ttl \
+    -v $PWD/data:/import-data \
+    -v $PWD/data/graphdb:/opt/graphdb/home \
+    --entrypoint /opt/graphdb/dist/bin/importrdf \
+    docker.io/ontotext/graphdb:10.8.9 \
+    load -Dgraphdb.home=/opt/graphdb/home \
+    --config-file /graphdb-config.ttl \
+    /import-data/papyrus.ttl \
+    /import-data/mathgenealogy.ttl \
+    /import-data/links.ttl
+```
+
+Pour **lancer** la base de données par la suite, utiliser la commande suivante:
+
+```bash
+podman container run -it \
+    -p 7200:7200 \
+    -v $PWD/data/graphdb:/opt/graphdb/home \
+    docker.io/ontotext/graphdb:10.8.9
+```
+
+Une interface web, fournie par GraphDB, permet d’inspecter l’état de la base de données
+et de lancer manuellement des requêtes, à l’adresse `http://localhost:7200`.
+
+### Serveur
+
+Le **serveur web** peut être lancé à l’aide de la commande suivante.
+
+```bash
+deno run --allow-net --allow-env=READABLE_STREAM src/geniro-web/server.ts
+```
