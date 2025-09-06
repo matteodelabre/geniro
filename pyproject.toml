@@ -1,0 +1,22 @@
+[project]
+name = "geniro"
+version = "0.1.0"
+description = "Scrapers for the DIRO Genealogy Project"
+readme = "README.md"
+authors = [
+    { name = "Mattéo Delabre", email = "git.matteo@delab.re" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4>=4.13.4",
+    "rdflib>=7.1.4",
+    "requests>=2.32.5",
+    "unidecode>=1.4.0",
+]
+
+[project.scripts]
+geniro = "geniro.main:main"
+
+[build-system]
+requires = ["uv_build>=0.8.3,<0.9.0"]
+build-backend = "uv_build"
