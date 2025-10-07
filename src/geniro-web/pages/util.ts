@@ -1,21 +1,20 @@
 import { mainRdfNamespace, webRoot } from "../config.ts";
 
-export const uriToHTML = (uri) => {
-    let target = uri;
-    let label = uri;
+export const uriToUrl = (uri) => {
+    let url = uri;
 
     if (uri.startsWith(mainRdfNamespace)) {
         const stem = uri.slice(mainRdfNamespace.length);
-        target = webRoot + stem;
-        label = "geniro:" + stem;
+        url = webRoot + stem;
     }
 
-    return `<a href="${target}">${label}</a>`;
+    return url;
 };
 
 export const nodeToHTML = (node) => {
     if (node.termType === "NamedNode") {
-        return uriToHTML(node.value);
+        const url = uriToUrl(node.value);
+        return `<a href="${url}">${node.value}</a>`;
     } else {
         return node.value;
     }

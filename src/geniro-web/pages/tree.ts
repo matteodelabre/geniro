@@ -1,49 +1,79 @@
 import { Router } from "@oak/oak/router";
-import { uriToHTML } from "./util.ts";
+import { uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
 import { getPersonURI } from "../data/model.ts";
+import { mainRdfNamespace } from "../config.ts";
 
 export const tree = new Router();
 
-const treeToHTML = (index, root, dates = []) => {
-    let parts = ["<li>", uriToHTML(root)];
+const treeToHTML = (tree, root, visited, degree = null, date = null) => {
+    let parts = ["<li>"];
+    parts.push(`<a href="${uriToUrl(root)}">${tree[root].name}</a>`);
 
-    if (dates.length > 0) {
-        parts.push(" (", dates.join(", "), ")");
-    }
+    if (degree !== null && date !== null) {
+        let degreeLabel = "Unknown";
 
-    if (index[root] !== undefined) {
-        parts.push("<ul>");
+        switch (degree) {
+        case mainRdfNamespace + "/Degree#msc":
+            degreeLabel = "M.Sc.";
+            break;
 
-        for (const [student, projects] of Object.entries(index[root])) {
-            parts = parts.concat(treeToHTML(index, student, projects));
+        case mainRdfNamespace + "/Degree#phd":
+            degreeLabel = "Ph.D.";
+            break;
         }
 
-        parts.push("</ul>");
+        parts.push(" (" + degreeLabel + " " + date.split("-")[0] + ")");
     }
 
+    if (!visited.has(root)) {
+        let subtree = [];
+
+        for (const [student, data] of Object.entries(tree)) {
+            for (const project of Object.values(data.projects)) {
+                if (project.advisors.includes(root)) {
+                    subtree = subtree.concat(treeToHTML(
+                        tree,
+                        student,
+                        visited,
+                        project.degree,
+                        project.dateEnd,
+                    ));
+                }
+            }
+        }
+
+        if (subtree.length > 0) {
+            parts.push("<ul>");
+            parts = parts.concat(subtree);
+            parts.push("</ul>");
+        }
+    }
+
+    visited.add(root);
     parts.push("</li>");
     return parts;
 };
 
 tree.get("/tree/:id", async (ctx) => {
     const person = getPersonURI(ctx.params.id);
-    const edges = await query.descendants(person);
-    const index = {};
+    const tree = await query.descendants(person);
 
-    for (const edge of edges) {
-        if (!(edge.descendant.value in index)) {
-            index[edge.descendant.value] = {};
-        }
-
-        if (!(edge.student.value in index[edge.descendant.value])) {
-            index[edge.descendant.value][edge.student.value] = [];
-        }
-
-        index[edge.descendant.value][edge.student.value].push(edge.projectEndDate.value);
+    if (!(person.value in tree)) {
+        ctx.throw(404, "Person not found");
+        return;
     }
 
-    const html = treeToHTML(index, person.value).join("");
-    ctx.response.body = html;
-    ctx.response.type = "text/html";
+    switch (ctx.request.accepts("text/html", "application/json")) {
+        case "text/html":
+            const html = treeToHTML(tree, person.value, new Set()).join("");
+            ctx.response.body = html;
+            ctx.response.type = "text/html";
+            break;
+
+        case "application/json":
+            ctx.response.body = JSON.stringify(tree);
+            ctx.response.type = "application/json";
+            break;
+    }
 });

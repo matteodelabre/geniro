@@ -1,6 +1,6 @@
 import rdf from "@rdfjs/data-model";
 import { Router } from "@oak/oak/router";
-import { nodeToHTML, uriToHTML } from "./util.ts";
+import { nodeToHTML, uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
 import { webRoot } from "../config.ts";
 import { getPersonURI } from "../data/model.ts";
@@ -30,13 +30,14 @@ const makeEntityPage = async (uri) => {
     parts.push("<ul>");
 
     for (const alias in data) {
-        parts.push("<li>", uriToHTML(alias), "</li>");
+        const url = uriToUrl(alias);
+        parts.push(`<li><a href="${url}">${alias}</a></li>`);
     }
 
     parts.push("</ul>");
 
     for (const alias in data) {
-        parts.push("<h2>", uriToHTML(alias), "</h2>");
+        parts.push("<h2>", alias, "</h2>");
         parts.push(triplesToTable(data[alias]));
     }
 
