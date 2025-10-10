@@ -3,7 +3,7 @@ import * as builder from "rdf-sparql-builder";
 import Aggregate from "rdf-sparql-builder/lib/Aggregate.js";
 import { foaf, geniro, owl, rdf as rdfns } from "./model.ts";
 import { onto, query } from "./sparql.ts";
-import { mainRdfNamespace, databaseEndpoint } from "../config.ts";
+import { databaseEndpoint, mainRdfNamespace } from "../config.ts";
 
 const builderSample = (variable, as) => new Aggregate("SAMPLE", variable, as);
 
@@ -126,10 +126,12 @@ export const descendants = async (person: rdf.NamedNode): Promise<> => {
         const advisorKey = edge.advisor.value;
         const projectKey = edge.project.value;
 
-        for (const [key, name] of [
-            [studentKey, edge.studentNameUnique.value],
-            [advisorKey, edge.advisorNameUnique.value],
-        ]) {
+        for (
+            const [key, name] of [
+                [studentKey, edge.studentNameUnique.value],
+                [advisorKey, edge.advisorNameUnique.value],
+            ]
+        ) {
             if (!(key in index)) {
                 index[key] = {
                     "name": name,

@@ -14,13 +14,13 @@ const treeToHTML = (tree, root, visited, degree = null, date = null) => {
         let degreeLabel = "Unknown";
 
         switch (degree) {
-        case mainRdfNamespace + "/Degree#msc":
-            degreeLabel = "M.Sc.";
-            break;
+            case mainRdfNamespace + "/Degree#msc":
+                degreeLabel = "M.Sc.";
+                break;
 
-        case mainRdfNamespace + "/Degree#phd":
-            degreeLabel = "Ph.D.";
-            break;
+            case mainRdfNamespace + "/Degree#phd":
+                degreeLabel = "Ph.D.";
+                break;
         }
 
         parts.push(" (" + degreeLabel + " " + date.split("-")[0] + ")");

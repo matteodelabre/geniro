@@ -68,7 +68,7 @@ entity.get("/papyrus/person/:person", async (ctx) => {
 entity.get("/papyrus/person/:person/project/:year", async (ctx) => {
     const { person, year } = ctx.params;
     const uri = rdf.namedNode(
-        `https://diro.umontreal.ca/geniro/papyrus/person/${person}/project/${year}`
+        `https://diro.umontreal.ca/geniro/papyrus/person/${person}/project/${year}`,
     );
     ctx.response.body = await makeEntityPage(uri);
     ctx.response.type = "text/html";
