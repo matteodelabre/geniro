@@ -156,20 +156,37 @@ export const descendants = async (person: rdf.NamedNode): Promise<> => {
 
 export const search = async (terms: string) => {
     const uri = rdf.variable("uri");
-    const match = rdf.variable("match");
+    const firstName = rdf.variable("firstName");
+    const lastName = rdf.variable("lastName");
     const termsLiteral = rdf.literal(terms);
 
-    const results = await query(
+    const triples = await query(
         databaseEndpoint,
-        builder.select([uri])
+        builder.select([uri, firstName, lastName])
             .distinct()
             .from(onto["disable-sameAs"])
             .where([
-                [uri, foaf.name, match],
                 [uri, rdfns.type, foaf.Person],
-                [match, onto.fts, termsLiteral],
+                [uri, foaf.firstName, firstName],
+                [uri, foaf.lastName, lastName],
+                builder.union([
+                    [
+                        [firstName, onto.fts, termsLiteral],
+                        [lastName, onto.fts, termsLiteral],
+                    ],
+                    [
+                        [firstName, onto.fts, termsLiteral],
+                    ],
+                    [
+                        [lastName, onto.fts, termsLiteral],
+                    ],
+                ]),
             ]),
     );
 
-    return results.map((binding) => binding.uri);
+    return triples.map(({ uri, firstName, lastName }) => ({
+        uri: uri.value,
+        firstName: firstName.value,
+        lastName: lastName.value,
+    }));
 };

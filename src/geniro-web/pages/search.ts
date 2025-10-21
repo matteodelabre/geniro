@@ -1,5 +1,5 @@
 import { Router } from "@oak/oak/router";
-import { nodeToHTML } from "./util.ts";
+import { uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
 
 export const search = new Router();
@@ -17,8 +17,14 @@ search.get("/search", async (ctx) => {
         const results = await query.search(terms);
         parts.push("<ul>");
 
-        for (const result of results) {
-            parts.push("<li>", nodeToHTML(result), "</li>");
+        for (const { uri, firstName, lastName } of results) {
+            parts.push(
+                "<li>",
+                `<a href="${uriToUrl(uri)}">`,
+                `${firstName} ${lastName}`,
+                "</a>",
+                "</li>",
+            );
         }
 
         parts.push("</ul>");
