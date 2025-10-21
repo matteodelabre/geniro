@@ -1,7 +1,7 @@
 import rdf from "@rdfjs/data-model";
 import { assertEquals } from "jsr:@std/assert";
 import { processRecord } from "./oai-pmh.ts";
-import { geniro, rdf as rdfns, dcterms, xsd, foaf, owl } from "../data/model.ts";
+import { dcterms, foaf, geniro, owl, rdf as rdfns, xsd } from "../data/model.ts";
 import * as xml from "./xml.ts";
 
 Deno.test("should extract triples from record", () => {
@@ -63,9 +63,15 @@ Deno.test("should extract triples from record", () => {
     const origin = "example.org";
     const grantor = rdf.namedNode("http://example.org/org/example");
     const project = rdf.namedNode("oai:umontreal.scholaris.ca:1866/30688");
-    const student = rdf.namedNode("http://diro.umontreal.ca/geniro/external/example.org/person/mostafa-azizi");
-    const advisor1 = rdf.namedNode("http://diro.umontreal.ca/geniro/external/example.org/person/el-mostapha-aboulhamid");
-    const advisor2 = rdf.namedNode("http://diro.umontreal.ca/geniro/external/example.org/person/sofiene-tabar");
+    const student = rdf.namedNode(
+        "http://diro.umontreal.ca/geniro/external/example.org/person/mostafa-azizi",
+    );
+    const advisor1 = rdf.namedNode(
+        "http://diro.umontreal.ca/geniro/external/example.org/person/el-mostapha-aboulhamid",
+    );
+    const advisor2 = rdf.namedNode(
+        "http://diro.umontreal.ca/geniro/external/example.org/person/sofiene-tabar",
+    );
 
     assertEquals(
         Array.from(processRecord(record, origin, grantor)),
@@ -87,7 +93,11 @@ Deno.test("should extract triples from record", () => {
             [project, geniro.advisor, advisor2],
             [advisor2, foaf.firstName, rdf.literal("Sofiene")],
             [advisor2, foaf.lastName, rdf.literal("Tabar")],
-            [project, geniro.thesisUri, rdf.namedNode("http://hdl.handle.net/1866/30688")],
-        ]
+            [
+                project,
+                geniro.thesisUri,
+                rdf.namedNode("http://hdl.handle.net/1866/30688"),
+            ],
+        ],
     );
 });

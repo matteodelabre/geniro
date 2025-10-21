@@ -3,7 +3,11 @@ import { Document, Node } from "@xmldom/xmldom/lib/dom.js";
 
 const parser = new DOMParser();
 
-export const findAll = (node: Node, namespaces: string | string[], name: string): Node[] => {
+export const findAll = (
+    node: Node,
+    namespaces: string | string[],
+    name: string,
+): Node[] => {
     if (!node) {
         return [];
     }
@@ -17,7 +21,11 @@ export const findAll = (node: Node, namespaces: string | string[], name: string)
     ).flat();
 };
 
-export const findOne = (node: Node, namespaces: string | string[], name: string): Node => {
+export const findOne = (
+    node: Node,
+    namespaces: string | string[],
+    name: string,
+): Node => {
     return findAll(node, namespaces, name)[0];
 };
 
