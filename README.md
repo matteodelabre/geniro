@@ -93,15 +93,13 @@ répertoire `data/graphdb/` puis lancer la commande suivante:
 ```
 podman container run -it \
     -v $PWD/graphdb-config.ttl:/graphdb-config.ttl \
-    -v $PWD/data:/import-data \
+    -v $PWD/geniro.ttl:/geniro.ttl \
     -v $PWD/data/graphdb:/opt/graphdb/home \
     --entrypoint /opt/graphdb/dist/bin/importrdf \
     docker.io/ontotext/graphdb:10.8.9 \
     load -Dgraphdb.home=/opt/graphdb/home \
     --config-file /graphdb-config.ttl \
-    /import-data/papyrus.ttl \
-    /import-data/mathgenealogy.ttl \
-    /import-data/links.ttl
+    /geniro.ttl
 ```
 
 Pour **lancer** la base de données par la suite, utiliser la commande suivante:
