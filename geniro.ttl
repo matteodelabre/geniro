@@ -54,7 +54,7 @@ geniro:grantedBy a owl:ObjectProperty ;
     rdfs:domain geniro:Project ;
     rdfs:range org:Organization .
 
-geniro:thesisURI a owl:DatatypeProperty ;
+geniro:thesisUri a owl:DatatypeProperty ;
     rdfs:isDefinedBy geniro: ;
     rdfs:label "Thesis URI"@en ;
     rdfs:comment "Link to the thesis or dissertation that was written for this project."@en ;

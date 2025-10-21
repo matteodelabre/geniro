@@ -44,3 +44,20 @@ export const query = async (
         throw new Error("Invalid server response: " + data);
     }
 };
+
+export const update = async (
+    endpoint: string,
+    updateObject: Node,
+): Promise<void> => {
+    console.log("running update:", updateObject.toString());
+
+    const res = await fetch(endpoint + "/statements", {
+        method: "POST",
+        headers: { "content-type": "application/sparql-update" },
+        body: updateObject.toString(),
+    });
+
+    if (!res.ok) {
+        throw new Error(`Invalid server response: ${res.statusText} (${res.status})`);
+    }
+};

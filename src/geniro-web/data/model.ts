@@ -43,7 +43,7 @@ export const geniro = makeClosedNamespace(
         "degree",
         "student",
         "thesisTitle",
-        "thesisURI",
+        "thesisUri",
     ],
 );
 
