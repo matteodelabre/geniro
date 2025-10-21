@@ -17,10 +17,19 @@ export const owl = makeClosedNamespace(
     ],
 );
 
+export const xsd = makeClosedNamespace(
+    namespace("http://www.w3.org/2001/XMLSchema#"),
+    [
+        "date",
+    ],
+);
+
 export const foaf = makeClosedNamespace(
     namespace("http://xmlns.com/foaf/0.1/"),
     [
         "Person",
+        "firstName",
+        "lastName",
         "name",
     ],
 );
@@ -32,17 +41,29 @@ export const org = makeClosedNamespace(
     ],
 );
 
+export const dcterms = makeClosedNamespace(
+    namespace("http://purl.org/dc/terms/"),
+    [
+        "title",
+        "creator",
+    ],
+);
+
 export const geniro = makeClosedNamespace(
     namespace(`${mainRdfNamespace}#`),
     [
+        "Affiliation",
+        "ProfessorAffiliation",
+        "MScProject",
+        "PhDProject",
         "Project",
         "advisor",
-        "awardedBy",
+        "affiliatedTo",
         "dateEnd",
         "dateStart",
-        "degree",
+        "grantedBy",
+        "hasAffiliation",
         "student",
-        "thesisTitle",
         "thesisUri",
     ],
 );
