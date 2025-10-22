@@ -41,8 +41,6 @@ const queryPaged = async function* (url: URL, verb: string, args: any) {
             };
 
         const data = await requests.query("GET", url, localArgs);
-        console.log(await data.text());
-        return;
         const tree = xml.parse(await data.text());
         const error = xml.findOne(tree, namespaces.oai, "error")?.textContent;
 
