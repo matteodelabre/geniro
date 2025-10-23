@@ -6,9 +6,20 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
 
 geniro: a owl:Ontology ;
-    dcterms:title "Academic genealogy ontology"@en .
+    dcterms:title "Academic genealogy ontology"@en ;
+    dcterms:creator "Mattéo Delabre" ;
+    dcterms:contributor "Mattéo Delabre" ;
+    dcterms:contributor "Alessandra Mancas" ;
+    dcterms:contributor "Ian Arawjo" ;
+    dcterms:contributor "Rémi Cérès" ;
+    dcterms:contributor "Pierre Maillot" ;
+    dcterms:contributor "Fabien Gandon" ;
+    dcterms:created "2025-10-13"^^xsd:date ;
+    vann:preferredNamespacePrefix "geniro" ;
+    vann:preferredNamespaceUri "http://diro.umontreal.ca/geniro#" .
 
 # Date range
 
