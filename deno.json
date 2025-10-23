@@ -6,6 +6,8 @@
         "@oak/oak": "jsr:@oak/oak@^17.1.6",
         "@rdfjs/data-model": "npm:@rdfjs/data-model@^2.1.1",
         "@rdfjs/namespace": "npm:@rdfjs/namespace@^2.0.1",
+        "@rdfjs/to-ntriples": "npm:@rdfjs/to-ntriples@^3.0.1",
+        "@std/cli": "jsr:@std/cli@^1.0.23",
         "@xmldom/xmldom": "npm:@xmldom/xmldom@^0.8.11",
         "graphdb": "npm:graphdb@^3.1.0-RC3",
         "rdf-sparql-builder": "npm:rdf-sparql-builder@^0.2.5",
