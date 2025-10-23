@@ -8,8 +8,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 geniro: a owl:Ontology ;
-    dcterms:title "Academic genealogy ontology"@en ;
-    dcterms:creator [ a foaf:Person; foaf:name "Mattéo Delabre" ] .
+    dcterms:title "Academic genealogy ontology"@en .
 
 # Date range
 
@@ -22,6 +21,14 @@ geniro:dateEnd a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:isDefinedBy geniro: ;
     rdfs:label "End date"@en ;
     rdfs:range xsd:date .
+
+# Preferred URI
+
+geniro:preferredUri a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:isDefinedBy geniro: ;
+    rdfs:label "Preferred URI"@en ;
+    rdfs:comment "Canonical URI used for referring to an entity obtained by merging information from several sources (must be provided as a literal)"@en ;
+    rdfs:range xsd:string .
 
 # geniro:Project
 # Uses dcterms:title for the full title of the thesis or dissertation associated to the project, if any, otherwise full title of the project.
