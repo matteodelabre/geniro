@@ -26,7 +26,13 @@ const makeDate = (repr: string) => {
     return rdf.literal(iso, xsd.date);
 };
 
-const queryPaged = async function* (url: URL, verb: string, args: any) {
+const queryPaged = async function* (
+    url: URL,
+    verb: string,
+    args: any,
+    maxResults: number = Infinity,
+) {
+    let totalResults = 0;
     let resumptionToken = null;
 
     do {
@@ -48,7 +54,16 @@ const queryPaged = async function* (url: URL, verb: string, args: any) {
             throw new Error(error);
         }
 
-        yield* xml.findAll(tree, namespaces.oai, "record");
+        const batch = xml.findAll(tree, namespaces.oai, "record");
+
+        if (totalResults + batch.length > maxResults) {
+            yield* batch.slice(0, maxResults - totalResults);
+            return;
+        }
+
+        yield* batch;
+        totalResults += batch.length;
+
         resumptionToken = xml.findOne(tree, namespaces.oai, "resumptionToken")
             ?.textContent;
     } while (resumptionToken);
@@ -152,6 +167,7 @@ export const fetchRecords = async function* (
     baseUrl: URL,
     baseSet: string,
     organization: NamedNode,
+    maxRecords: number = Infinity,
 ) {
     for await (
         const record of queryPaged(
@@ -161,6 +177,7 @@ export const fetchRecords = async function* (
                 metadataPrefix: "etdms",
                 set: baseSet,
             },
+            maxRecords,
         )
     ) {
         yield* processRecord(record, baseUrl.host, organization);

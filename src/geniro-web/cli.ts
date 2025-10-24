@@ -8,7 +8,9 @@ import * as sparql from "./data/sparql.ts";
 import { foaf, geniro, org, rdf as rdfns } from "./data/model.ts";
 
 const fetchOaiPmh = async (baseUrl, baseSet, grantorName, grantorUri) => {
-    const records = await Array.fromAsync(oaiPmh.fetchRecords(baseUrl, baseSet, grantorUri));
+    const records = await Array.fromAsync(
+        oaiPmh.fetchRecords(baseUrl, baseSet, grantorUri),
+    );
     records.push([grantorUri, rdfns.type, org.Organization]);
     records.push([grantorUri, foaf.name, grantorName]);
 
