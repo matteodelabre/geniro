@@ -59,7 +59,7 @@ const makeEntityUri = async (prefix, item, index) => {
         ? row.name.value
         : `${row.firstName.value} ${row.lastName.value}`;
 
-    let suffix = names.normalize(name);
+    let suffix = names.normalize(entityName);
 
     if (index !== 0) {
         suffix = `${suffix}-${index}`;

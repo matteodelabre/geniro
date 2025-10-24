@@ -38,8 +38,8 @@ const main = async () => {
             await fetchOaiPmh(
                 new URL("https://umontreal.scholaris.ca/server/oai/request"),
                 "col_1866_3001",
-                rdf.namedNode(`${mainRdfNamespace}/org/diro`),
                 rdf.literal("Département d’informatique et de recherche opérationnelle"),
+                rdf.namedNode(`${mainRdfNamespace}/org/diro`),
             );
             break;
 
