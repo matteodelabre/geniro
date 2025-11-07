@@ -87,29 +87,11 @@ geniro:PhDProject a owl:Class ;
     rdfs:subClassOf geniro:Project ;
     owl:disjointWith geniro:MScProject .
 
-# geniro:Affiliation
-# Uses geniro:dateStart to specify the start date of the affiliation
-# Uses geniro:dateEnd to specify the end date of the affiliation
+# To describe affiliations, use instances of the org:Membership class and link them to:
+#  - the affiliated person through org:member
+#  - the institution through org:organization
+#  - the role through org:role
+#  - the affiliation period through org:memberDuring
 
-geniro:Affiliation a owl:Class ;
-    rdfs:isDefinedBy geniro: ;
-    rdfs:label "Affiliation"@en ;
-    rdfs:comment "Relation of affiliation between a person and an institution during a given time range."@en .
-
-geniro:hasAffiliation a owl:ObjectProperty, owl:InverseFunctionalProperty ;
-    rdfs:isDefinedBy geniro: ;
-    rdfs:label "Has affiliation"@en ;
-    rdfs:domain foaf:Person ;
-    rdfs:range geniro:Affiliation .
-
-geniro:affiliatedTo a owl:ObjectProperty, owl:FunctionalProperty ;
-    rdfs:isDefinedBy geniro: ;
-    rdfs:label "Affiliated to"@en ;
-    rdfs:domain geniro:Affiliation ;
-    rdfs:range org:Organization .
-
-geniro:ProfessorAffiliation a owl:Class ;
-    rdfs:isDefinedBy geniro: ;
-    rdfs:label "Professorship"@en ;
-    rdfs:comment "Affiliation to an academic institution as a professor."@en ;
-    rdfs:subClassOf geniro:Affiliation .
+geniro:professorRole a org:Role .
+geniro:studentRole a org:Role .
