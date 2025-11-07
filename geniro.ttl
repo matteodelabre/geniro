@@ -7,6 +7,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
+@prefix time: <http://www.w3.org/2006/time#> .
 
 geniro: a owl:Ontology ;
     dcterms:title "Academic genealogy ontology"@en ;
@@ -20,18 +21,6 @@ geniro: a owl:Ontology ;
     dcterms:created "2025-10-13"^^xsd:date ;
     vann:preferredNamespacePrefix "geniro" ;
     vann:preferredNamespaceUri "http://diro.umontreal.ca/geniro#" .
-
-# Date range
-
-geniro:dateStart a owl:DatatypeProperty, owl:FunctionalProperty ;
-    rdfs:isDefinedBy geniro: ;
-    rdfs:label "Start date"@en ;
-    rdfs:range xsd:date .
-
-geniro:dateEnd a owl:DatatypeProperty, owl:FunctionalProperty ;
-    rdfs:isDefinedBy geniro: ;
-    rdfs:label "End date"@en ;
-    rdfs:range xsd:date .
 
 # Preferred URI
 
@@ -79,6 +68,13 @@ geniro:thesis a owl:DatatypeProperty ;
     rdfs:comment "Thesis or dissertation that was written for this project."@en ;
     rdfs:domain geniro:Project ;
     rdfs:range foaf:Document .
+
+geniro:timePeriod a owl:ObjectProperty ;
+    rdfs:isDefinedBy geniro: ;
+    rdfs:label "Time period"@en ;
+    rdfs:comment "Interval of time during which the project took place."@en ;
+    rdfs:domain geniro:Project ;
+    rdfs:range time:Interval .
 
 geniro:MScProject a owl:Class ;
     rdfs:isDefinedBy geniro: ;
