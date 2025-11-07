@@ -39,7 +39,7 @@ geniro:Project a owl:Class ;
     rdfs:isDefinedBy geniro: ;
     rdfs:label "Academic project"@en ;
     rdfs:comment "Any project involving a student and one or multiple advisors or supervisors inside one or multiple academic institutions, that may or may not have led to an official degree and the writing of a thesis or dissertation."@en ;
-    owl:equivalentClass foaf:Project .
+    rdfs:subClassOf foaf:Project .
 
 geniro:advisor a owl:ObjectProperty ;
     rdfs:isDefinedBy geniro: ;
