@@ -17,11 +17,11 @@ search.get("/search", async (ctx) => {
         const results = await query.search(terms);
         parts.push("<ul>");
 
-        for (const { uri, firstName, lastName } of results) {
+        for (const { uri, label } of results) {
             parts.push(
                 "<li>",
                 `<a href="${uriToUrl(uri)}">`,
-                `${firstName} ${lastName}`,
+                label,
                 "</a>",
                 "</li>",
             );

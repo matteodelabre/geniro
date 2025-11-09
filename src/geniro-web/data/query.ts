@@ -1,7 +1,7 @@
 import rdf from "@rdfjs/data-model";
 import * as builder from "rdf-sparql-builder";
 import Aggregate from "rdf-sparql-builder/lib/Aggregate.js";
-import { foaf, geniro, owl, rdf as rdfns } from "./model.ts";
+import { dcterms, foaf, geniro, owl, rdf as rdfns } from "./model.ts";
 import { onto, query } from "./sparql.ts";
 import { databaseEndpoint, mainRdfNamespace } from "../config.ts";
 
@@ -154,39 +154,58 @@ export const descendants = async (person: rdf.NamedNode): Promise<> => {
     return index;
 };
 
-export const search = async (terms: string) => {
-    const uri = rdf.variable("uri");
+/**
+ * Search for persons or projects whose name or title match a given set of terms.
+ *
+ * @param terms - Search terms
+ */
+export const search = async (terms: string): Promise<array> => {
+    const entity = rdf.variable("entity");
+    const label = rdf.variable("label");
     const firstName = rdf.variable("firstName");
     const lastName = rdf.variable("lastName");
+    const title = rdf.variable("title");
+    const uri = rdf.variable("uri");
     const termsLiteral = rdf.literal(terms);
 
     const triples = await query(
         databaseEndpoint,
-        builder.select([uri, firstName, lastName])
+        builder.select([uri, label])
             .distinct()
-            .from(onto["disable-sameAs"])
             .where([
-                [uri, rdfns.type, foaf.Person],
-                [uri, foaf.firstName, firstName],
-                [uri, foaf.lastName, lastName],
                 builder.union([
+                    // Search for persons
                     [
-                        [firstName, onto.fts, termsLiteral],
-                        [lastName, onto.fts, termsLiteral],
+                        [entity, rdfns.type, foaf.Person],
+                        builder.optional([[entity, foaf.firstName, firstName]]),
+                        builder.optional([[entity, foaf.lastName, lastName]]),
+                        builder.union([
+                            [
+                                [entity, foaf.firstName, firstName],
+                                [firstName, onto.fts, termsLiteral],
+                            ],
+                            [
+                                [entity, foaf.lastName, lastName],
+                                [lastName, onto.fts, termsLiteral],
+                            ],
+                        ]),
+                        builder.bind(label, "CONCAT(?firstName, ' ', ?lastName)"),
                     ],
+
+                    // Search for projects
                     [
-                        [firstName, onto.fts, termsLiteral],
-                    ],
-                    [
-                        [lastName, onto.fts, termsLiteral],
+                        [entity, rdfns.type, geniro.Project],
+                        [entity, dcterms.title, title],
+                        [title, onto.fts, termsLiteral],
+                        builder.bind(label, "?title"),
                     ],
                 ]),
+                [entity, geniro.preferredUri, uri],
             ]),
     );
 
-    return triples.map(({ uri, firstName, lastName }) => ({
+    return triples.map(({ uri, label }) => ({
         uri: uri.value,
-        firstName: firstName.value,
-        lastName: lastName.value,
+        label: label.value,
     }));
 };

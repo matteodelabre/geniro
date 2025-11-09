@@ -52,20 +52,25 @@ export const dcterms = makeClosedNamespace(
 export const geniro = makeClosedNamespace(
     namespace(`${mainRdfNamespace}#`),
     [
-        "Affiliation",
-        "ProfessorAffiliation",
         "MScProject",
         "PhDProject",
         "Project",
         "advisor",
-        "affiliatedTo",
-        "dateEnd",
-        "dateStart",
         "grantedBy",
-        "hasAffiliation",
-        "student",
-        "thesisUri",
         "preferredUri",
+        "student",
+        "thesis",
+        "timePeriod",
+    ],
+);
+
+export const time = makeClosedNamespace(
+    namespace("http://www.w3.org/2006/time#"),
+    [
+        "Interval",
+        "hasBeginning",
+        "hasEnd",
+        "inXSDDate",
     ],
 );
 
