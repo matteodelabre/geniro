@@ -67,16 +67,17 @@ export const triplesByAlias = async (entity: rdf.NamedNode) => {
 };
 
 /**
- * Retrieve information about the descendants of a given person.
+ * Retrieve edges of the genealogy graph, optionally starting from a root person.
  *
  * A child of a person A is a person B who was a student in at least one project that A
  * advised. The descendance relation is the reflexive transitive closure of this child
  * relation, i.e., the descendants of A are A, the children of A, the children of its
  * children, etc.
  *
- * @param person - URI for the person whose descendance is to be retrieved
+ * @param fromRoot - URI for the person whose descendance is to be retrieved, or null to
+ * retrieve edges for the entire graph.
  */
-export const descendants = async (person: rdf.NamedNode): Promise<> => {
+export const graph = async (fromRoot?: rdf.NamedNode = null): Promise<> => {
     const project = rdf.variable("project");
     const projectUri = rdf.variable("projectUri");
     const projectType = rdf.variable("projectType");
@@ -91,6 +92,40 @@ export const descendants = async (person: rdf.NamedNode): Promise<> => {
     const advisorUri = rdf.variable("advisorUri");
     const advisorFirstName = rdf.variable("advisorFirstName");
     const advisorLastName = rdf.variable("advisorLastName");
+
+    const conditions = [
+        [project, geniro.student, student],
+        [project, geniro.advisor, advisor],
+        [project, rdfns.type, projectType],
+        builder.filter([
+            builder.in(
+                projectType,
+                [geniro.PhDProject, geniro.MScProject],
+            ),
+        ]),
+        [
+            project,
+            [geniro.timePeriod, time.hasEnd, time.inXSDDate],
+            projectEndDate,
+        ],
+        [project, geniro.preferredUri, projectUri],
+
+        [advisor, foaf.firstName, advisorFirstName],
+        [advisor, foaf.lastName, advisorLastName],
+        [advisor, geniro.preferredUri, advisorUri],
+
+        [student, foaf.firstName, studentFirstName],
+        [student, foaf.lastName, studentLastName],
+        [student, geniro.preferredUri, studentUri],
+    ];
+
+    if (fromRoot !== null) {
+        conditions.unshift([
+            fromRoot,
+            `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
+            student,
+        ]);
+    }
 
     const edges = await query(
         databaseEndpoint,
@@ -107,37 +142,7 @@ export const descendants = async (person: rdf.NamedNode): Promise<> => {
             builderSample(studentFirstName, studentFirstName),
             builderSample(studentLastName, studentLastName),
         ])
-            .where([
-                [
-                    person,
-                    `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
-                    student,
-                ],
-
-                [project, geniro.student, student],
-                [project, geniro.advisor, advisor],
-                [project, rdfns.type, projectType],
-                builder.filter([
-                    builder.in(
-                        projectType,
-                        [geniro.PhDProject, geniro.MScProject],
-                    ),
-                ]),
-                [
-                    project,
-                    [geniro.timePeriod, time.hasEnd, time.inXSDDate],
-                    projectEndDate,
-                ],
-                [project, geniro.preferredUri, projectUri],
-
-                [advisor, foaf.firstName, advisorFirstName],
-                [advisor, foaf.lastName, advisorLastName],
-                [advisor, geniro.preferredUri, advisorUri],
-
-                [student, foaf.firstName, studentFirstName],
-                [student, foaf.lastName, studentLastName],
-                [student, geniro.preferredUri, studentUri],
-            ])
+            .where(conditions)
             .groupBy([
                 projectUri,
                 advisorUri,

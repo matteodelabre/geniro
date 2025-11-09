@@ -58,13 +58,6 @@ entity.get("/person/:person", async (ctx) => {
     ctx.response.type = "text/html";
 });
 
-// TODO: Rework Papyrus URLs
-
-// entity.get("/papyrus/person/:person", async (ctx) => {
-    // const { person } = ctx.params;
-    // ctx.response.redirect(`/person/${person}`);
-// });
-
 entity.get("/project/:project", async (ctx) => {
     const { project } = ctx.params;
     const uri = getProjectURI(project);

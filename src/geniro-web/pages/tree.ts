@@ -6,7 +6,18 @@ import { mainRdfNamespace } from "../config.ts";
 
 export const tree = new Router();
 
-const treeToHTML = (tree, root, visited, degree = null, date = null) => {
+const forestToHTML = (tree, root, visited, degree = null, date = null) => {
+    if (root === null) {
+        // if no root is specified, start from each root separately
+        return Array.prototype.concat(
+            ...(
+                Object.entries(tree)
+                    .filter(([_, data]) => Object.keys(data.projects).length === 0)
+                    .map(([key, _]) => forestToHTML(tree, key, visited))
+            ),
+        );
+    }
+
     let parts = ["<li>"];
     parts.push(
         '<a href="',
@@ -46,7 +57,7 @@ const treeToHTML = (tree, root, visited, degree = null, date = null) => {
         for (const [student, data] of Object.entries(tree)) {
             for (const project of Object.values(data.projects)) {
                 if (project.advisors.includes(root)) {
-                    subtree = subtree.concat(treeToHTML(
+                    subtree = subtree.concat(forestToHTML(
                         tree,
                         student,
                         visited,
@@ -70,17 +81,26 @@ const treeToHTML = (tree, root, visited, degree = null, date = null) => {
 };
 
 tree.get("/tree/:id", async (ctx) => {
-    const person = getPersonURI(ctx.params.id);
-    const tree = await query.descendants(person);
+    const { id } = ctx.params;
+    let person = null;
+    let tree = null;
 
-    if (!(person.value in tree)) {
-        ctx.throw(404, "Person not found");
-        return;
+    if (id === "all") {
+        tree = await query.graph();
+    } else {
+        const personNode = getPersonURI(id);
+        person = personNode.value;
+        tree = await query.graph(personNode);
+
+        if (!(person in tree)) {
+            ctx.throw(404, "Person not found");
+            return;
+        }
     }
 
     switch (ctx.request.accepts("text/html", "application/json")) {
         case "text/html":
-            const html = treeToHTML(tree, person.value, new Set()).join("");
+            const html = forestToHTML(tree, person, new Set()).join("");
             ctx.response.body = html;
             ctx.response.type = "text/html";
             break;
