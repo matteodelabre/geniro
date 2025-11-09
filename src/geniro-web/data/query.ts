@@ -85,31 +85,27 @@ export const descendants = async (person: rdf.NamedNode): Promise<> => {
     const student = rdf.variable("student");
     const studentUri = rdf.variable("studentUri");
     const studentFirstName = rdf.variable("studentFirstName");
-    const studentFirstNameSample = rdf.variable("studentFirstNameSample");
     const studentLastName = rdf.variable("studentLastName");
-    const studentLastNameSample = rdf.variable("studentLastNameSample");
 
     const advisor = rdf.variable("advisor");
     const advisorUri = rdf.variable("advisorUri");
     const advisorFirstName = rdf.variable("advisorFirstName");
-    const advisorFirstNameSample = rdf.variable("advisorFirstNameSample");
     const advisorLastName = rdf.variable("advisorLastName");
-    const advisorLastNameSample = rdf.variable("advisorLastNameSample");
 
     const edges = await query(
         databaseEndpoint,
         builder.select([
             projectUri,
-            projectType,
-            projectEndDate,
+            builderSample(projectType, projectType),
+            builderSample(projectEndDate, projectEndDate),
 
             advisorUri,
-            builderSample(advisorFirstName, advisorFirstNameSample),
-            builderSample(advisorLastName, advisorLastNameSample),
+            builderSample(advisorFirstName, advisorFirstName),
+            builderSample(advisorLastName, advisorLastName),
 
             studentUri,
-            builderSample(studentFirstName, studentFirstNameSample),
-            builderSample(studentLastName, studentLastNameSample),
+            builderSample(studentFirstName, studentFirstName),
+            builderSample(studentLastName, studentLastName),
         ])
             .where([
                 [
@@ -144,16 +140,8 @@ export const descendants = async (person: rdf.NamedNode): Promise<> => {
             ])
             .groupBy([
                 projectUri,
-                projectType,
-                projectEndDate,
-
                 advisorUri,
-                advisorFirstName,
-                advisorLastName,
-
                 studentUri,
-                studentFirstName,
-                studentLastName,
             ])
             .orderBy([projectEndDate]),
     );
@@ -169,13 +157,13 @@ export const descendants = async (person: rdf.NamedNode): Promise<> => {
             const [key, firstName, lastName] of [
                 [
                     studentKey,
-                    edge.studentFirstNameSample.value,
-                    edge.studentLastNameSample.value,
+                    edge.studentFirstName.value,
+                    edge.studentLastName.value,
                 ],
                 [
                     advisorKey,
-                    edge.advisorFirstNameSample.value,
-                    edge.advisorLastNameSample.value,
+                    edge.advisorFirstName.value,
+                    edge.advisorLastName.value,
                 ],
             ]
         ) {
