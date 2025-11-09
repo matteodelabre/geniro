@@ -96,7 +96,7 @@ const makeProjectUri = async (item, index) => {
     const studentName = row.name
         ? row.name.value
         : `${row.firstName.value} ${row.lastName.value}`;
-    const year = new Date(row.dateEnd.value).getFullYear();
+    const year = new Date(row.dateEnd.value).getUTCFullYear();
 
     let suffix = `${names.normalize(studentName)}-${year}`;
 
