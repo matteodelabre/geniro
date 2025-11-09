@@ -76,3 +76,6 @@ export const time = makeClosedNamespace(
 
 export const geniroPerson = namespace(`${mainRdfNamespace}/person/`);
 export const getPersonURI = (id: string) => sanitizeNamedNode(geniroPerson(id));
+
+export const geniroProject = namespace(`${mainRdfNamespace}/project/`);
+export const getProjectURI = (id: string) => sanitizeNamedNode(geniroProject(id));

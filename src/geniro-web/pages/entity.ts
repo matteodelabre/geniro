@@ -3,7 +3,7 @@ import { Router } from "@oak/oak/router";
 import { nodeToHTML, uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
 import { webRoot } from "../config.ts";
-import { getPersonURI } from "../data/model.ts";
+import { getPersonURI, getProjectURI } from "../data/model.ts";
 
 const triplesToTable = (triples) => {
     const parts = ["<table>"];
@@ -60,16 +60,14 @@ entity.get("/person/:person", async (ctx) => {
 
 // TODO: Rework Papyrus URLs
 
-entity.get("/papyrus/person/:person", async (ctx) => {
-    const { person } = ctx.params;
-    ctx.response.redirect(`/person/${person}`);
-});
+// entity.get("/papyrus/person/:person", async (ctx) => {
+    // const { person } = ctx.params;
+    // ctx.response.redirect(`/person/${person}`);
+// });
 
-entity.get("/papyrus/person/:person/project/:year", async (ctx) => {
-    const { person, year } = ctx.params;
-    const uri = rdf.namedNode(
-        `https://diro.umontreal.ca/geniro/papyrus/person/${person}/project/${year}`,
-    );
+entity.get("/project/:project", async (ctx) => {
+    const { project } = ctx.params;
+    const uri = getProjectURI(project);
     ctx.response.body = await makeEntityPage(uri);
     ctx.response.type = "text/html";
 });
