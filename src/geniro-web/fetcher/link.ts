@@ -1,6 +1,6 @@
 import rdf from "@rdfjs/data-model";
 import * as builder from "rdf-sparql-builder";
-import { foaf, geniro, owl, rdf as rdfns } from "../data/model.ts";
+import { foaf, geniro, owl, rdf as rdfns, time } from "../data/model.ts";
 import * as sparql from "../data/sparql.ts";
 import { databaseEndpoint, mainRdfNamespace } from "../config.ts";
 import * as names from "./names.ts";
@@ -81,7 +81,7 @@ const makeProjectUri = async (item, index) => {
             .from(sparql.onto["disable-sameAs"])
             .where([
                 [item, geniro.student, student],
-                [item, geniro.dateEnd, dateEnd],
+                [item, [geniro.timePeriod, time.hasEnd, time.inXSDDate], dateEnd],
                 builder.optional([[student, foaf.firstName, firstName]]),
                 builder.optional([[student, foaf.lastName, lastName]]),
                 builder.optional([[student, foaf.name, name]]),

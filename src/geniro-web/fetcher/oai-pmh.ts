@@ -1,6 +1,6 @@
 import rdf from "@rdfjs/data-model";
 import NamedNode from "@rdfjs/data-model/lib/NamedNode.js";
-import { dcterms, foaf, geniro, owl, rdf as rdfns, xsd } from "../data/model.ts";
+import { dcterms, foaf, geniro, owl, rdf as rdfns, time, xsd } from "../data/model.ts";
 import * as names from "./names.ts";
 import { mainRdfNamespace } from "../config.ts";
 import * as requests from "./requests.ts";
@@ -121,7 +121,11 @@ export const processRecord = function* (
     const dateEnd = xml.findOne(thesis, namespaces.etdms, "date")?.textContent;
 
     if (dateEnd) {
-        yield [projectNode, geniro.dateEnd, makeDate(dateEnd)];
+        const interval = rdf.blankNode();
+        const end = rdf.blankNode();
+        yield [projectNode, geniro.timePeriod, interval];
+        yield [interval, time.hasEnd, end];
+        yield [end, time.inXSDDate, makeDate(dateEnd)];
     }
 
     // Extract student and advisors
@@ -159,7 +163,7 @@ export const processRecord = function* (
     const thesisUri = xml.findOne(thesis, namespaces.etdms, "identifier")?.textContent;
 
     if (thesisUri) {
-        yield [projectNode, geniro.thesisUri, rdf.namedNode(thesisUri)];
+        yield [projectNode, geniro.thesis, rdf.namedNode(thesisUri)];
     }
 };
 
