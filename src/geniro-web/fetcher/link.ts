@@ -140,7 +140,7 @@ export const makeUri = async (type, item, index: number) => {
  */
 export const addPreferredUri = async (type, item) => {
     let preferredUri =
-        (await sparql.getObjects(databaseEndpoint, item, geniro.preferredUri))?.[0];
+        (await sparql.getObjects(databaseEndpoint, item, geniro.preferredUri))[0];
     let index = 0;
 
     while (!preferredUri) {

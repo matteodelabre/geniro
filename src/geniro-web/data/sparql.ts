@@ -89,7 +89,7 @@ export const getObjects = async (
 
     try {
         const parsed = JSON.parse(data);
-        return parsed[subject.value]?.[predicate.value];
+        return parsed[subject.value]?.[predicate.value] || [];
     } catch (_) {
         throw new Error("Invalid server response: " + data);
     }
