@@ -1,7 +1,7 @@
 import rdf from "@rdfjs/data-model";
 import * as builder from "rdf-sparql-builder";
 import Aggregate from "rdf-sparql-builder/lib/Aggregate.js";
-import { dcterms, foaf, geniro, owl, rdf as rdfns } from "./model.ts";
+import { dcterms, foaf, geniro, owl, rdf as rdfns, time } from "./model.ts";
 import { onto, query } from "./sparql.ts";
 import { databaseEndpoint, mainRdfNamespace } from "../config.ts";
 
@@ -77,64 +77,112 @@ export const triplesByAlias = async (entity: rdf.NamedNode) => {
  * @param person - URI for the person whose descendance is to be retrieved
  */
 export const descendants = async (person: rdf.NamedNode): Promise<> => {
-    const advisor = rdf.variable("advisor");
-    const student = rdf.variable("student");
-    const advisorName = rdf.variable("advisorName");
-    const advisorNameUnique = rdf.variable("advisorNameUnique");
-    const studentName = rdf.variable("studentName");
-    const studentNameUnique = rdf.variable("studentNameUnique");
     const project = rdf.variable("project");
-    const degree = rdf.variable("degree");
+    const projectUri = rdf.variable("projectUri");
+    const projectType = rdf.variable("projectType");
     const projectEndDate = rdf.variable("projectEndDate");
+
+    const student = rdf.variable("student");
+    const studentUri = rdf.variable("studentUri");
+    const studentFirstName = rdf.variable("studentFirstName");
+    const studentFirstNameSample = rdf.variable("studentFirstNameSample");
+    const studentLastName = rdf.variable("studentLastName");
+    const studentLastNameSample = rdf.variable("studentLastNameSample");
+
+    const advisor = rdf.variable("advisor");
+    const advisorUri = rdf.variable("advisorUri");
+    const advisorFirstName = rdf.variable("advisorFirstName");
+    const advisorFirstNameSample = rdf.variable("advisorFirstNameSample");
+    const advisorLastName = rdf.variable("advisorLastName");
+    const advisorLastNameSample = rdf.variable("advisorLastNameSample");
 
     const edges = await query(
         databaseEndpoint,
         builder.select([
-            project,
-            advisor,
-            student,
-            degree,
+            projectUri,
+            projectType,
             projectEndDate,
-            builderSample(advisorName, advisorNameUnique),
-            builderSample(studentName, studentNameUnique),
+
+            advisorUri,
+            builderSample(advisorFirstName, advisorFirstNameSample),
+            builderSample(advisorLastName, advisorLastNameSample),
+
+            studentUri,
+            builderSample(studentFirstName, studentFirstNameSample),
+            builderSample(studentLastName, studentLastNameSample),
         ])
             .where([
-                builder.filter([
-                    `STRSTARTS(STR(?advisor), "${mainRdfNamespace}/person/")`,
-                    `STRSTARTS(STR(?student), "${mainRdfNamespace}/person/")`,
-                ]),
                 [
                     person,
                     `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
                     student,
                 ],
-                [project, geniro.advisor, advisor],
+
                 [project, geniro.student, student],
-                [advisor, foaf.name, advisorName],
-                [student, foaf.name, studentName],
-                [project, geniro.degree, degree],
-                [project, geniro.dateEnd, projectEndDate],
+                [project, geniro.advisor, advisor],
+                [project, rdfns.type, projectType],
+                builder.filter([
+                    builder.in(
+                        projectType,
+                        [geniro.PhDProject, geniro.MScProject],
+                    ),
+                ]),
+                [
+                    project,
+                    [geniro.timePeriod, time.hasEnd, time.inXSDDate],
+                    projectEndDate,
+                ],
+                [project, geniro.preferredUri, projectUri],
+
+                [advisor, foaf.firstName, advisorFirstName],
+                [advisor, foaf.lastName, advisorLastName],
+                [advisor, geniro.preferredUri, advisorUri],
+
+                [student, foaf.firstName, studentFirstName],
+                [student, foaf.lastName, studentLastName],
+                [student, geniro.preferredUri, studentUri],
             ])
-            .groupBy([project, advisor, student, degree, projectEndDate])
+            .groupBy([
+                projectUri,
+                projectType,
+                projectEndDate,
+
+                advisorUri,
+                advisorFirstName,
+                advisorLastName,
+
+                studentUri,
+                studentFirstName,
+                studentLastName,
+            ])
             .orderBy([projectEndDate]),
     );
 
     const index = {};
 
     for (const edge of edges) {
-        const studentKey = edge.student.value;
-        const advisorKey = edge.advisor.value;
-        const projectKey = edge.project.value;
+        const projectKey = edge.projectUri.value;
+        const studentKey = edge.studentUri.value;
+        const advisorKey = edge.advisorUri.value;
 
         for (
-            const [key, name] of [
-                [studentKey, edge.studentNameUnique.value],
-                [advisorKey, edge.advisorNameUnique.value],
+            const [key, firstName, lastName] of [
+                [
+                    studentKey,
+                    edge.studentFirstNameSample.value,
+                    edge.studentLastNameSample.value,
+                ],
+                [
+                    advisorKey,
+                    edge.advisorFirstNameSample.value,
+                    edge.advisorLastNameSample.value,
+                ],
             ]
         ) {
             if (!(key in index)) {
                 index[key] = {
-                    "name": name,
+                    "firstName": firstName,
+                    "lastName": lastName,
                     "projects": {},
                 };
             }
@@ -142,7 +190,7 @@ export const descendants = async (person: rdf.NamedNode): Promise<> => {
 
         if (!(projectKey in index[studentKey].projects)) {
             index[studentKey].projects[projectKey] = {
-                "degree": edge.degree.value,
+                "type": edge.projectType.value,
                 "dateEnd": edge.projectEndDate.value,
                 "advisors": [],
             };

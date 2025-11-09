@@ -1,29 +1,43 @@
 import { Router } from "@oak/oak/router";
 import { uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
-import { getPersonURI } from "../data/model.ts";
+import { geniro, getPersonURI } from "../data/model.ts";
 import { mainRdfNamespace } from "../config.ts";
 
 export const tree = new Router();
 
 const treeToHTML = (tree, root, visited, degree = null, date = null) => {
     let parts = ["<li>"];
-    parts.push(`<a href="${uriToUrl(root)}">${tree[root].name}</a>`);
+    parts.push(
+        '<a href="',
+        uriToUrl(root),
+        '">',
+        tree[root].firstName,
+        " ",
+        tree[root].lastName,
+        "</a>",
+    );
 
     if (degree !== null && date !== null) {
         let degreeLabel = "Unknown";
 
         switch (degree) {
-            case mainRdfNamespace + "/Degree#msc":
+            case geniro.MScProject.value:
                 degreeLabel = "M.Sc.";
                 break;
 
-            case mainRdfNamespace + "/Degree#phd":
+            case geniro.PhDProject.value:
                 degreeLabel = "Ph.D.";
                 break;
         }
 
-        parts.push(" (" + degreeLabel + " " + date.split("-")[0] + ")");
+        parts.push(
+            " (",
+            degreeLabel,
+            " ",
+            date.split("-")[0],
+            ")",
+        );
     }
 
     if (!visited.has(root)) {
@@ -36,7 +50,7 @@ const treeToHTML = (tree, root, visited, degree = null, date = null) => {
                         tree,
                         student,
                         visited,
-                        project.degree,
+                        project.type,
                         project.dateEnd,
                     ));
                 }
