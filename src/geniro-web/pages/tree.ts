@@ -106,6 +106,7 @@ tree.get("/tree/:id", async (ctx) => {
             break;
 
         case "application/json":
+            ctx.response.headers.set("access-control-allow-origin", "*");
             ctx.response.body = JSON.stringify(tree);
             ctx.response.type = "application/json";
             break;
