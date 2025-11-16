@@ -79,3 +79,6 @@ export const getPersonURI = (id: string) => sanitizeNamedNode(geniroPerson(id));
 
 export const geniroProject = namespace(`${mainRdfNamespace}/project/`);
 export const getProjectURI = (id: string) => sanitizeNamedNode(geniroProject(id));
+export const geniroOrganization = namespace(`${mainRdfNamespace}/org/`);
+export const getOrganizationURI = (id: string) =>
+    sanitizeNamedNode(geniroOrganization(id));

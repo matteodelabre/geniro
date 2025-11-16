@@ -5,18 +5,16 @@ import * as oaiPmh from "./fetcher/oai-pmh.ts";
 import * as link from "./fetcher/link.ts";
 import { databaseEndpoint, mainRdfNamespace } from "./config.ts";
 import * as sparql from "./data/sparql.ts";
-import { foaf, geniro, org, rdf as rdfns } from "./data/model.ts";
+import { foaf, geniro, getOrganizationURI, org, rdf as rdfns } from "./data/model.ts";
 
-const fetchOaiPmh = async (baseUrl, baseSet, grantorName, grantorUri) => {
-    const records = await Array.fromAsync(
-        oaiPmh.fetchRecords(baseUrl, baseSet, grantorUri),
-    );
-    records.push([grantorUri, rdfns.type, org.Organization]);
-    records.push([grantorUri, foaf.name, grantorName]);
-
+const fetchOaiPmh = async (baseUrl, baseSet, grantorUri) => {
     await sparql.update(
         databaseEndpoint,
-        builder.insertData(records),
+        builder.insertData(
+            await Array.fromAsync(
+                oaiPmh.fetchRecords(baseUrl, baseSet, grantorUri),
+            ),
+        ),
     );
 };
 
@@ -40,8 +38,7 @@ const main = async () => {
             await fetchOaiPmh(
                 new URL("https://umontreal.scholaris.ca/server/oai/request"),
                 "col_1866_3001",
-                rdf.literal("Département d’informatique et de recherche opérationnelle"),
-                rdf.namedNode(`${mainRdfNamespace}/org/diro`),
+                getOrganizationURI("diro"),
             );
             break;
 
