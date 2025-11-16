@@ -150,14 +150,20 @@ export const addPreferredUri = async (type, item) => {
         const subject = rdf.variable("subject");
         const object = rdf.variable("object");
 
+        const statements = [
+            [preferredUri, geniro.preferredUri, preferredUriLiteral],
+        ];
+
+        // Add equivalence statement to the preferred URI when it is different
+        if (preferredUri.value !== item.value) {
+            statements.push([preferredUri, owl.sameAs, item]);
+        }
+
         // Use the minted URI as the preferred URI, unless it is already used by another
         // entity or if the item received a preferred URI in the mean time
         await sparql.update(
             databaseEndpoint,
-            builder.insert([
-                [preferredUri, owl.sameAs, item],
-                [preferredUri, geniro.preferredUri, preferredUriLiteral],
-            ])
+            builder.insert(statements)
                 .where([
                     "filter not exists {",
                     [subject, geniro.preferredUri, preferredUriLiteral],
