@@ -1,7 +1,7 @@
 import rdf from "@rdfjs/data-model";
 import * as builder from "rdf-sparql-builder";
 import Aggregate from "rdf-sparql-builder/lib/Aggregate.js";
-import { dcterms, foaf, geniro, owl, rdf as rdfns, time } from "./model.ts";
+import { dcterms, foaf, geniro, org, owl, rdf as rdfns, time, skos } from "./model.ts";
 import { onto, query } from "./sparql.ts";
 import { databaseEndpoint, mainRdfNamespace } from "../config.ts";
 
@@ -196,7 +196,8 @@ export const graph = async (fromRoot?: rdf.NamedNode = null): Promise<> => {
 };
 
 /**
- * Search for persons or projects whose name or title match a given set of terms.
+ * Search for persons, projects, or organizations whose name, title or label
+ * match a given set of terms.
  *
  * @param terms - Search terms
  */
@@ -205,13 +206,12 @@ export const search = async (terms: string): Promise<array> => {
     const label = rdf.variable("label");
     const firstName = rdf.variable("firstName");
     const lastName = rdf.variable("lastName");
-    const title = rdf.variable("title");
     const uri = rdf.variable("uri");
     const termsLiteral = rdf.literal(terms);
 
     const triples = await query(
         databaseEndpoint,
-        builder.select([uri, label])
+        builder.select([uri, builderSample(label, label)])
             .distinct()
             .where([
                 builder.union([
@@ -236,13 +236,20 @@ export const search = async (terms: string): Promise<array> => {
                     // Search for projects
                     [
                         [entity, rdfns.type, geniro.Project],
-                        [entity, dcterms.title, title],
-                        [title, onto.fts, termsLiteral],
-                        builder.bind(label, "?title"),
+                        [entity, dcterms.title, label],
+                        [label, onto.fts, termsLiteral],
+                    ],
+
+                    // Search for organizations
+                    [
+                        [entity, rdfns.type, org.Organization],
+                        [entity, skos.prefLabel, label],
+                        [label, onto.fts, termsLiteral],
                     ],
                 ]),
                 [entity, geniro.preferredUri, uri],
-            ]),
+            ])
+            .groupBy([uri])
     );
 
     return triples.map(({ uri, label }) => ({

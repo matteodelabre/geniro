@@ -74,11 +74,20 @@ export const time = makeClosedNamespace(
     ],
 );
 
+export const skos = makeClosedNamespace(
+    namespace("http://www.w3.org/2004/02/skos/core#"),
+    [
+        "prefLabel",
+        "altLabel",
+    ],
+);
+
 export const geniroPerson = namespace(`${mainRdfNamespace}/person/`);
 export const getPersonURI = (id: string) => sanitizeNamedNode(geniroPerson(id));
 
 export const geniroProject = namespace(`${mainRdfNamespace}/project/`);
 export const getProjectURI = (id: string) => sanitizeNamedNode(geniroProject(id));
+
 export const geniroOrganization = namespace(`${mainRdfNamespace}/org/`);
 export const getOrganizationURI = (id: string) =>
     sanitizeNamedNode(geniroOrganization(id));
