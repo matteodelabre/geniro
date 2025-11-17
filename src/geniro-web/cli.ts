@@ -19,7 +19,7 @@ const fetchOaiPmh = async (baseUrl, baseSet, grantorUri) => {
 };
 
 const fixUnidentified = async () => {
-    for (const type of [foaf.Person, geniro.Project]) {
+    for (const type of [foaf.Person, geniro.Project, org.Organization]) {
         for (const item of await link.findUnidentified(type)) {
             const preferredUri = await link.addPreferredUri(type, item);
             console.log(`Added preferred URI ${preferredUri.value} to ${item.value}`);

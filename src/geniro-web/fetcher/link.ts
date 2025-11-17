@@ -1,6 +1,16 @@
 import rdf from "@rdfjs/data-model";
 import * as builder from "rdf-sparql-builder";
-import { foaf, geniro, owl, rdf as rdfns, time } from "../data/model.ts";
+import {
+    foaf,
+    geniro,
+    getOrganizationURI,
+    getPersonURI,
+    getProjectURI,
+    org,
+    owl,
+    rdf as rdfns,
+    time,
+} from "../data/model.ts";
 import * as sparql from "../data/sparql.ts";
 import { databaseEndpoint, mainRdfNamespace } from "../config.ts";
 import * as names from "./names.ts";
@@ -30,11 +40,7 @@ export const findUnidentified = async (type) => {
     return rows.map((row) => row.item);
 };
 
-export const personPrefix = `${mainRdfNamespace}/person/`;
-export const orgPrefix = `${mainRdfNamespace}/org/`;
-export const projectPrefix = `${mainRdfNamespace}/project/`;
-
-const makeEntityUri = async (prefix, item, index) => {
+const makeEntityId = async (item, index) => {
     const firstName = rdf.variable("firstName");
     const lastName = rdf.variable("lastName");
     const name = rdf.variable("name");
@@ -59,16 +65,16 @@ const makeEntityUri = async (prefix, item, index) => {
         ? row.name.value
         : `${row.firstName.value} ${row.lastName.value}`;
 
-    let suffix = names.normalize(entityName);
+    const stem = names.normalize(entityName);
 
     if (index !== 0) {
-        suffix = `${suffix}-${index}`;
+        return `${stem}-${index}`;
     }
 
-    return rdf.namedNode(`${prefix}${suffix}`);
+    return stem;
 };
 
-const makeProjectUri = async (item, index) => {
+const makeProjectId = async (item, index) => {
     const student = rdf.variable("student");
     const dateEnd = rdf.variable("dateEnd");
     const firstName = rdf.variable("firstName");
@@ -98,13 +104,13 @@ const makeProjectUri = async (item, index) => {
         : `${row.firstName.value} ${row.lastName.value}`;
     const year = new Date(row.dateEnd.value).getUTCFullYear();
 
-    let suffix = `${names.normalize(studentName)}-${year}`;
+    const stem = `${names.normalize(studentName)}-${year}`;
 
     if (index !== 0) {
-        suffix = `${suffix}-${index}`;
+        return `${stem}-${index}`;
     }
 
-    return rdf.namedNode(`${projectPrefix}${suffix}`);
+    return stem;
 };
 
 /**
@@ -121,10 +127,13 @@ const makeProjectUri = async (item, index) => {
 export const makeUri = async (type, item, index: number) => {
     switch (type) {
         case foaf.Person:
-            return await makeEntityUri(personPrefix, item, index);
+            return getPersonURI(await makeEntityId(item, index));
 
         case geniro.Project:
-            return await makeProjectUri(item, index);
+            return getProjectURI(await makeProjectId(item, index));
+
+        case org.Organization:
+            return getOrganizationURI(await makeEntityId(item, index));
 
         default:
             throw new Error("unknown object type");
