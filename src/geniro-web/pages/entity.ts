@@ -3,7 +3,7 @@ import { Router } from "@oak/oak/router";
 import { nodeToHTML, uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
 import { webRoot } from "../config.ts";
-import { getPersonURI, getProjectURI } from "../data/model.ts";
+import { getOrganizationURI, getPersonURI, getProjectURI } from "../data/model.ts";
 
 const triplesToTable = (triples) => {
     const parts = ["<table>"];
@@ -61,6 +61,13 @@ entity.get("/person/:person", async (ctx) => {
 entity.get("/project/:project", async (ctx) => {
     const { project } = ctx.params;
     const uri = getProjectURI(project);
+    ctx.response.body = await makeEntityPage(uri);
+    ctx.response.type = "text/html";
+});
+
+entity.get("/org/:org", async (ctx) => {
+    const { org } = ctx.params;
+    const uri = getOrganizationURI(org);
     ctx.response.body = await makeEntityPage(uri);
     ctx.response.type = "text/html";
 });
