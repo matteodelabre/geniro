@@ -177,7 +177,7 @@ export const addPreferredUri = async (type, item) => {
         // Check whether the previous request succeeded in attributing a preferred URI
         preferredUri = (await sparql.getObjects(
             databaseEndpoint,
-            preferredUri,
+            item,
             geniro.preferredUri,
         ))?.[0];
         ++index;
