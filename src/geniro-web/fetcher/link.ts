@@ -9,6 +9,7 @@ import {
     org,
     owl,
     rdf as rdfns,
+    skos,
     time,
 } from "../data/model.ts";
 import * as sparql from "../data/sparql.ts";
@@ -40,7 +41,7 @@ export const findUnidentified = async (type) => {
     return rows.map((row) => row.item);
 };
 
-const makeEntityId = async (item, index) => {
+const makePersonId = async (item, index) => {
     const firstName = rdf.variable("firstName");
     const lastName = rdf.variable("lastName");
     const name = rdf.variable("name");
@@ -50,22 +51,26 @@ const makeEntityId = async (item, index) => {
         builder.select([firstName, lastName, name])
             .from(sparql.onto["disable-sameAs"])
             .where([
-                builder.optional([[item, foaf.firstName, firstName]]),
-                builder.optional([[item, foaf.lastName, lastName]]),
-                builder.optional([[item, foaf.name, name]]),
+                builder.union([
+                    [
+                        [item, foaf.firstName, firstName],
+                        [item, foaf.lastName, lastName],
+                    ],
+                    [[item, foaf.name, name]],
+                ]),
             ]),
     );
 
     if (rows.length === 0) {
-        throw new Error("no such entity");
+        throw new Error("no such person");
     }
 
     const row = rows[0];
-    const entityName = row.name
+    const personName = row.name
         ? row.name.value
         : `${row.firstName.value} ${row.lastName.value}`;
 
-    const stem = names.normalize(entityName);
+    const stem = names.normalize(personName);
 
     if (index !== 0) {
         return `${stem}-${index}`;
@@ -88,9 +93,13 @@ const makeProjectId = async (item, index) => {
             .where([
                 [item, geniro.student, student],
                 [item, [geniro.timePeriod, time.hasEnd, time.inXSDDate], dateEnd],
-                builder.optional([[student, foaf.firstName, firstName]]),
-                builder.optional([[student, foaf.lastName, lastName]]),
-                builder.optional([[student, foaf.name, name]]),
+                builder.union([
+                    [
+                        [student, foaf.firstName, firstName],
+                        [student, foaf.lastName, lastName],
+                    ],
+                    [[student, foaf.name, name]],
+                ]),
             ]),
     );
 
@@ -113,6 +122,35 @@ const makeProjectId = async (item, index) => {
     return stem;
 };
 
+const makeOrganizationId = async (item, index) => {
+    const label = rdf.variable("label");
+
+    const rows = await sparql.query(
+        databaseEndpoint,
+        builder.select([label])
+            .from(sparql.onto["disable-sameAs"])
+            .where([
+                builder.union([
+                    [[item, skos.altLabel, label]],
+                    [[item, skos.prefLabel, label]],
+                ]),
+            ]),
+    );
+
+    if (rows.length === 0) {
+        throw new Error("no such organization");
+    }
+
+    const row = rows[0];
+    const stem = names.normalize(row.label.value);
+
+    if (index !== 0) {
+        return `${stem}-${index}`;
+    }
+
+    return stem;
+};
+
 /**
  * Create a preferred URI.
  *
@@ -127,13 +165,13 @@ const makeProjectId = async (item, index) => {
 export const makeUri = async (type, item, index: number) => {
     switch (type) {
         case foaf.Person:
-            return getPersonURI(await makeEntityId(item, index));
+            return getPersonURI(await makePersonId(item, index));
 
         case geniro.Project:
             return getProjectURI(await makeProjectId(item, index));
 
         case org.Organization:
-            return getOrganizationURI(await makeEntityId(item, index));
+            return getOrganizationURI(await makeOrganizationId(item, index));
 
         default:
             throw new Error("unknown object type");
