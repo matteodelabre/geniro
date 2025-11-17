@@ -93,5 +93,6 @@ geniro:PhDProject a owl:Class ;
 #  - the role through org:role
 #  - the affiliation period through org:memberDuring
 
+geniro:directorRole a org:Role .
 geniro:professorRole a org:Role .
 geniro:studentRole a org:Role .
