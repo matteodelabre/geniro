@@ -38,6 +38,10 @@ export const org = makeClosedNamespace(
     namespace("http://www.w3.org/ns/org#"),
     [
         "Organization",
+        "organization",
+        "member",
+        "memberDuring",
+        "role",
     ],
 );
 
@@ -61,6 +65,8 @@ export const geniro = makeClosedNamespace(
         "student",
         "thesis",
         "timePeriod",
+        "professorRole",
+        "directorRole",
     ],
 );
 

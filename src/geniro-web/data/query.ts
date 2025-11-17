@@ -1,7 +1,7 @@
 import rdf from "@rdfjs/data-model";
 import * as builder from "rdf-sparql-builder";
 import Aggregate from "rdf-sparql-builder/lib/Aggregate.js";
-import { dcterms, foaf, geniro, org, owl, rdf as rdfns, time, skos } from "./model.ts";
+import { dcterms, foaf, geniro, org, owl, rdf as rdfns, skos, time } from "./model.ts";
 import { onto, query } from "./sparql.ts";
 import { databaseEndpoint, mainRdfNamespace } from "../config.ts";
 
@@ -196,6 +196,69 @@ export const graph = async (fromRoot?: rdf.NamedNode = null): Promise<> => {
 };
 
 /**
+ * Extract membership information for a given organization.
+ *
+ * @param item - URI of the organization to query
+ */
+export const timeline = async function* (item: rdf.NamedNode): Promise<> {
+    const person = rdf.variable("person");
+    const membership = rdf.variable("membership");
+    const personUri = rdf.variable("personUri");
+    const firstName = rdf.variable("firstName");
+    const lastName = rdf.variable("lastName");
+    const role = rdf.variable("role");
+    const dateStart = rdf.variable("dateStart");
+    const dateEnd = rdf.variable("dateEnd");
+
+    const rows = await query(
+        databaseEndpoint,
+        builder.select([
+            personUri,
+            builderSample(firstName),
+            builderSample(lastName),
+            role,
+            dateStart,
+            dateEnd,
+        ])
+            .where([
+                [membership, org.organization, item],
+                [membership, org.member, person],
+                [person, geniro.preferredUri, personUri],
+                [person, foaf.firstName, firstName],
+                [person, foaf.lastName, lastName],
+                [membership, org.role, role],
+                builder.optional([
+                    [membership, [
+                        org.memberDuring,
+                        time.hasBeginning,
+                        time.inXSDDate,
+                    ], dateStart],
+                ]),
+                builder.optional([
+                    [membership, [
+                        org.memberDuring,
+                        time.hasEnd,
+                        time.inXSDDate,
+                    ], dateEnd],
+                ]),
+            ])
+            .groupBy([personUri, role, dateStart, dateEnd])
+            .orderBy([role, dateStart]),
+    );
+
+    for (let row of rows) {
+        yield {
+            personUri: row.personUri.value,
+            firstName: row.firstName.value,
+            lastName: row.lastName.value,
+            role: row.role.value,
+            dateStart: row.dateStart?.value,
+            dateEnd: row.dateEnd?.value,
+        };
+    }
+};
+
+/**
  * Search for persons, projects, or organizations whose name, title or label
  * match a given set of terms.
  *
@@ -249,7 +312,7 @@ export const search = async (terms: string): Promise<array> => {
                 ]),
                 [entity, geniro.preferredUri, uri],
             ])
-            .groupBy([uri])
+            .groupBy([uri]),
     );
 
     return triples.map(({ uri, label }) => ({
