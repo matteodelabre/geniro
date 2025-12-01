@@ -1,63 +1,50 @@
-import { Router } from "@oak/oak/router";
+import { App } from "@fresh/core";
+import { accepts } from "@std/http/negotiation";
 import { uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
 import { geniro, getPersonURI } from "../data/model.ts";
 import { mainRdfNamespace } from "../config.ts";
 
-export const tree = new Router();
-
-const forestToHTML = (data, root, visited, degree = null, date = null) => {
+const renderGraph = (data, root, visited, degree = null, date = null) => {
     if (root === null) {
         // if no root is specified, start from each root separately
-        return Array.prototype.concat(
-            ...(
-                Object.entries(data)
+        return (
+            <>
+                {Object.entries(data)
                     .filter(([_, data]) => Object.keys(data.projects).length === 0)
-                    .map(([key, _]) => forestToHTML(data, key, visited))
-            ),
+                    .map(([key, _]) => renderGraph(data, key, visited))}
+            </>
         );
     }
 
-    let parts = ["<li>"];
-    parts.push(
-        '<a href="',
-        uriToUrl(root),
-        '">',
-        data[root].firstName,
-        " ",
-        data[root].lastName,
-        "</a>",
-    );
+    let degreeLabel;
 
     if (degree !== null && date !== null) {
-        let degreeLabel = "Unknown";
+        let degreeType = "Unknown";
 
         switch (degree) {
             case geniro.MScProject.value:
-                degreeLabel = "M.Sc.";
+                degreeType = "M.Sc.";
                 break;
 
             case geniro.PhDProject.value:
-                degreeLabel = "Ph.D.";
+                degreeType = "Ph.D.";
                 break;
         }
 
-        parts.push(
-            " (",
-            degreeLabel,
-            " ",
-            date.split("-")[0],
-            ")",
-        );
+        let degreeDate = date.split("-")[0];
+        degreeLabel = ` (${degreeType} ${degreeDate})`;
     }
 
+    let subtree;
+
     if (!visited.has(root)) {
-        let subtree = [];
+        let items = [];
 
         for (const [student, entry] of Object.entries(data)) {
             for (const project of Object.values(entry.projects)) {
                 if (project.advisors.includes(root)) {
-                    subtree = subtree.concat(forestToHTML(
+                    items.push(renderGraph(
                         data,
                         student,
                         visited,
@@ -68,25 +55,34 @@ const forestToHTML = (data, root, visited, degree = null, date = null) => {
             }
         }
 
-        if (subtree.length > 0) {
-            parts.push("<ul>");
-            parts = parts.concat(subtree);
-            parts.push("</ul>");
+        if (items.length > 0) {
+            subtree = <ul>{items}</ul>;
         }
     }
 
     visited.add(root);
-    parts.push("</li>");
-    return parts;
+
+    return (
+        <li>
+            <a href={uriToUrl(root)}>
+                {data[root].firstName} {data[root].lastName}
+            </a>
+            {degreeLabel}
+            {subtree}
+        </li>
+    );
 };
 
-tree.get("/tree/:id", async (ctx) => {
+export const tree = new App();
+
+tree.get("/:id", async (ctx) => {
     const { id } = ctx.params;
     let person = null;
     let data = null;
 
     if (id === "all") {
         data = await query.graph();
+        ctx.state.title = "Graphe complet";
     } else {
         const personNode = getPersonURI(id);
         person = personNode.value;
@@ -96,19 +92,23 @@ tree.get("/tree/:id", async (ctx) => {
             ctx.throw(404, "Person not found");
             return;
         }
+
+        ctx.state.title = <>{data[person].firstName} {data[person].lastName}</>;
     }
 
-    switch (ctx.request.accepts("text/html", "application/json")) {
+    switch (accepts(ctx.req, "text/html", "application/json")) {
         case "text/html":
-            const html = forestToHTML(data, person, new Set()).join("");
-            ctx.response.body = html;
-            ctx.response.type = "text/html";
-            break;
+            return ctx.render(<ul>{renderGraph(data, person, new Set())}</ul>);
 
         case "application/json":
-            ctx.response.headers.set("access-control-allow-origin", "*");
-            ctx.response.body = JSON.stringify(data);
-            ctx.response.type = "application/json";
-            break;
+            return new Response(
+                JSON.stringify(data),
+                {
+                    headers: {
+                        "access-control-allow-origin": "*",
+                        "content-type": "application/json",
+                    },
+                },
+            );
     }
 });

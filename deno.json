@@ -1,15 +1,17 @@
 {
     "tasks": {
-        "dev": "deno run --watch main.ts"
+        "dev": "deno run --allow-net --allow-env=READABLE_STREAM,DENO_DEPLOYMENT_ID,GITHUB_SHA,CI_COMMIT_SHA src/geniro-web/server.ts"
     },
     "imports": {
-        "@oak/oak": "jsr:@oak/oak@^17.1.6",
+        "@fresh/core": "jsr:@fresh/core@^2.2.0",
         "@rdfjs/data-model": "npm:@rdfjs/data-model@^2.1.1",
         "@rdfjs/namespace": "npm:@rdfjs/namespace@^2.0.1",
         "@rdfjs/to-ntriples": "npm:@rdfjs/to-ntriples@^3.0.1",
         "@std/cli": "jsr:@std/cli@^1.0.23",
+        "@std/http": "jsr:@std/http@^1.0.22",
         "@xmldom/xmldom": "npm:@xmldom/xmldom@^0.8.11",
         "graphdb": "npm:graphdb@^3.1.0-RC3",
+        "preact": "npm:preact@^10.27.2",
         "rdf-sparql-builder": "npm:rdf-sparql-builder@^0.2.5",
         "sparqljson-parse": "npm:sparqljson-parse@^3.1.0",
         "unidecode": "npm:unidecode@^1.1.0"
@@ -22,5 +24,9 @@
         "rules": {
             "exclude": ["no-control-regex"]
         }
+    },
+    "compilerOptions": {
+        "jsx": "precompile",
+        "jsxImportSource": "preact"
     }
 }
