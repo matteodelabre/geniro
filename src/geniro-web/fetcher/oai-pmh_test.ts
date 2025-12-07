@@ -1,7 +1,7 @@
 import rdf from "@rdfjs/data-model";
 import { assertEquals } from "@std/assert";
 import { processRecord } from "./oai-pmh.ts";
-import { dcterms, foaf, geniro, owl, rdf as rdfns, xsd } from "../data/model.ts";
+import { dcterms, foaf, geniro, owl, rdf as rdfns, time, xsd } from "../data/model.ts";
 import * as xml from "./xml.ts";
 
 Deno.test("should extract triples from record", () => {
@@ -73,31 +73,46 @@ Deno.test("should extract triples from record", () => {
         "http://diro.umontreal.ca/geniro/external/example.org/person/sofiene-tabar",
     );
 
-    assertEquals(
-        Array.from(processRecord(record, origin, grantor)),
-        [
-            [project, geniro.grantedBy, grantor],
-            [project, rdfns.type, geniro.PhDProject],
-            [project, dcterms.title, rdf.literal("Covérification des systèmes intégrés")],
-            [project, geniro.dateEnd, rdf.literal("2000-01-01", xsd.date)],
-            [student, rdfns.type, foaf.Person],
-            [project, geniro.student, student],
-            [student, foaf.firstName, rdf.literal("Mostafa")],
-            [student, foaf.lastName, rdf.literal("Azizi")],
-            [student, owl.sameAs, rdf.namedNode("https://orcid.org/0000-0003-2823-504X")],
-            [advisor1, rdfns.type, foaf.Person],
-            [project, geniro.advisor, advisor1],
-            [advisor1, foaf.firstName, rdf.literal("El Mostapha")],
-            [advisor1, foaf.lastName, rdf.literal("Aboulhamid")],
-            [advisor2, rdfns.type, foaf.Person],
-            [project, geniro.advisor, advisor2],
-            [advisor2, foaf.firstName, rdf.literal("Sofiene")],
-            [advisor2, foaf.lastName, rdf.literal("Tabar")],
-            [
-                project,
-                geniro.thesisUri,
-                rdf.namedNode("http://hdl.handle.net/1866/30688"),
-            ],
-        ],
-    );
+    const triples = Array.from(processRecord(record, origin, grantor));
+    assertEquals(triples[0], [project, geniro.grantedBy, grantor]);
+    assertEquals(triples[1], [project, rdfns.type, geniro.PhDProject]);
+    assertEquals(triples[2], [
+        project,
+        dcterms.title,
+        rdf.literal("Covérification des systèmes intégrés"),
+    ]);
+
+    const timeNode = triples[3][2];
+    assertEquals(triples[3], [project, geniro.timePeriod, timeNode]);
+
+    const timeEndNode = triples[4][2];
+    assertEquals(triples[4], [timeNode, time.hasEnd, timeEndNode]);
+    assertEquals(triples[5], [
+        timeEndNode,
+        time.inXSDDate,
+        rdf.literal("2000-01-01", xsd.date),
+    ]);
+
+    assertEquals(triples[6], [student, rdfns.type, foaf.Person]);
+    assertEquals(triples[7], [project, geniro.student, student]);
+    assertEquals(triples[8], [student, foaf.firstName, rdf.literal("Mostafa")]);
+    assertEquals(triples[9], [student, foaf.lastName, rdf.literal("Azizi")]);
+    assertEquals(triples[10], [
+        student,
+        owl.sameAs,
+        rdf.namedNode("https://orcid.org/0000-0003-2823-504X"),
+    ]);
+    assertEquals(triples[11], [advisor1, rdfns.type, foaf.Person]);
+    assertEquals(triples[12], [project, geniro.advisor, advisor1]);
+    assertEquals(triples[13], [advisor1, foaf.firstName, rdf.literal("El Mostapha")]);
+    assertEquals(triples[14], [advisor1, foaf.lastName, rdf.literal("Aboulhamid")]);
+    assertEquals(triples[15], [advisor2, rdfns.type, foaf.Person]);
+    assertEquals(triples[16], [project, geniro.advisor, advisor2]);
+    assertEquals(triples[17], [advisor2, foaf.firstName, rdf.literal("Sofiene")]);
+    assertEquals(triples[18], [advisor2, foaf.lastName, rdf.literal("Tabar")]);
+    assertEquals(triples[19], [
+        project,
+        geniro.thesis,
+        rdf.namedNode("http://hdl.handle.net/1866/30688"),
+    ]);
 });
