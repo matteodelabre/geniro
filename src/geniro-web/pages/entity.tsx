@@ -1,5 +1,4 @@
 import { App } from "@fresh/core";
-import rdf from "@rdfjs/data-model";
 import { uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
 import { webRoot } from "../config.ts";

@@ -4,7 +4,7 @@ type Namespace = (term: string) => NamedNode;
 type ClosedNamespace = { [key: string]: NamedNode };
 
 const closedNamespaceHandler = {
-    get(target, prop, receiver) {
+    get(target, prop, _) {
         if (prop in target) {
             return target[prop];
         }

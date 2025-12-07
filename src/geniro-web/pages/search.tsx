@@ -29,7 +29,7 @@ search.get("/", async (ctx) => {
         <>
             <form method="GET">
                 <input type="search" value={terms} name="q" autofocus />
-                <button>Rechercher</button>
+                <button type="submit">Rechercher</button>
             </form>
             {renderResults(results)}
         </>,

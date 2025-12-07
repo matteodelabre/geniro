@@ -1,6 +1,5 @@
 import { App } from "@fresh/core";
 import { accepts } from "@std/http/negotiation";
-import rdf from "@rdfjs/data-model";
 import { uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
 import { geniro, getOrganizationURI } from "../data/model.ts";

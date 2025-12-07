@@ -13,7 +13,7 @@ import {
     time,
 } from "../data/model.ts";
 import * as sparql from "../data/sparql.ts";
-import { databaseEndpoint, mainRdfNamespace } from "../config.ts";
+import { databaseEndpoint } from "../config.ts";
 import * as names from "./names.ts";
 
 /**

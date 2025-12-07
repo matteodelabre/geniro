@@ -1,5 +1,5 @@
 import rdf from "@rdfjs/data-model";
-import { assertEquals } from "jsr:@std/assert";
+import { assertEquals } from "@std/assert";
 import { processRecord } from "./oai-pmh.ts";
 import { dcterms, foaf, geniro, owl, rdf as rdfns, xsd } from "../data/model.ts";
 import * as xml from "./xml.ts";

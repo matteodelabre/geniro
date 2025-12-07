@@ -1,6 +1,4 @@
-import { setImmediate, setInterval, setTimeout } from "node:timers/promises";
-
-import { mainRdfNamespace } from "../config.ts";
+import { setTimeout } from "node:timers/promises";
 
 const lastRequestTime: Record<string, number> = {};
 const minRequestDelay = 1500;

@@ -1,4 +1,4 @@
-import { assertEquals } from "jsr:@std/assert";
+import { assertEquals } from "@std/assert";
 import * as names from "./names.ts";
 
 Deno.test("normalize names", () => {

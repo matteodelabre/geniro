@@ -3,7 +3,6 @@ import { accepts } from "@std/http/negotiation";
 import { uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
 import { geniro, getPersonURI } from "../data/model.ts";
-import { mainRdfNamespace } from "../config.ts";
 
 const renderGraph = (data, root, visited, degree = null, date = null) => {
     if (root === null) {
@@ -32,14 +31,14 @@ const renderGraph = (data, root, visited, degree = null, date = null) => {
                 break;
         }
 
-        let degreeDate = date.split("-")[0];
+        const degreeDate = date.split("-")[0];
         degreeLabel = ` (${degreeType} ${degreeDate})`;
     }
 
     let subtree;
 
     if (!visited.has(root)) {
-        let items = [];
+        const items = [];
 
         for (const [student, entry] of Object.entries(data)) {
             for (const project of Object.values(entry.projects)) {

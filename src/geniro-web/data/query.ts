@@ -3,7 +3,7 @@ import * as builder from "rdf-sparql-builder";
 import Aggregate from "rdf-sparql-builder/lib/Aggregate.js";
 import { dcterms, foaf, geniro, org, owl, rdf as rdfns, skos, time } from "./model.ts";
 import { onto, query } from "./sparql.ts";
-import { databaseEndpoint, mainRdfNamespace } from "../config.ts";
+import { databaseEndpoint } from "../config.ts";
 
 const builderSample = (variable, as) => new Aggregate("SAMPLE", variable, as);
 
@@ -246,7 +246,7 @@ export const timeline = async function* (item: rdf.NamedNode): Promise<> {
             .orderBy([role, dateStart]),
     );
 
-    for (let row of rows) {
+    for (const row of rows) {
         yield {
             personUri: row.personUri.value,
             firstName: row.firstName.value,

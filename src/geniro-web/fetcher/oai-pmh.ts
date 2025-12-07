@@ -136,7 +136,7 @@ export const processRecord = function* (
         (item) => ["advisor", item],
     );
 
-    for (let [status, person] of students.concat(advisors)) {
+    for (const [status, person] of students.concat(advisors)) {
         const personName = person.textContent;
         const personNode = makePersonUri(origin, personName);
 

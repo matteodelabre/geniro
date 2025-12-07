@@ -1,11 +1,9 @@
-import rdf from "@rdfjs/data-model";
-import { parseArgs } from "@std/cli/parse-args";
 import * as builder from "rdf-sparql-builder";
 import * as oaiPmh from "./fetcher/oai-pmh.ts";
 import * as link from "./fetcher/link.ts";
-import { databaseEndpoint, mainRdfNamespace } from "./config.ts";
 import * as sparql from "./data/sparql.ts";
-import { foaf, geniro, getOrganizationURI, org, rdf as rdfns } from "./data/model.ts";
+import { databaseEndpoint } from "./config.ts";
+import { foaf, geniro, getOrganizationURI, org } from "./data/model.ts";
 
 const fetchOaiPmh = async (baseUrl, baseSet, grantorUri) => {
     await sparql.update(
