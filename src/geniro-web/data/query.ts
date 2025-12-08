@@ -77,42 +77,43 @@ export const triplesByAlias = async (entity: rdf.NamedNode) => {
 export const graph = async (fromRoot?: rdf.NamedNode = null): Promise<> => {
     const project = rdf.variable("project");
     const projectUri = rdf.variable("projectUri");
-    const projectType = rdf.variable("projectType");
-    const projectEndDate = rdf.variable("projectEndDate");
+
+    const type = rdf.variable("projectType");
+    const dateStart = rdf.variable("dateStart");
+    const dateEnd = rdf.variable("dateEnd");
 
     const student = rdf.variable("student");
     const studentUri = rdf.variable("studentUri");
-    const studentFirstName = rdf.variable("studentFirstName");
-    const studentLastName = rdf.variable("studentLastName");
 
     const advisor = rdf.variable("advisor");
     const advisorUri = rdf.variable("advisorUri");
-    const advisorFirstName = rdf.variable("advisorFirstName");
-    const advisorLastName = rdf.variable("advisorLastName");
 
     const conditions = [
         [project, geniro.student, student],
         [project, geniro.advisor, advisor],
-        [project, rdfns.type, projectType],
+        [project, rdfns.type, type],
         builder.filter([
             builder.in(
-                projectType,
+                type,
                 [geniro.PhDProject, geniro.MScProject],
             ),
         ]),
-        [
-            project,
-            [geniro.timePeriod, time.hasEnd, time.inXSDDate],
-            projectEndDate,
-        ],
+        builder.optional([
+            [project, [
+                geniro.timePeriod,
+                time.hasBeginning,
+                time.inXSDDate,
+            ], dateStart],
+        ]),
+        builder.optional([
+            [project, [
+                geniro.timePeriod,
+                time.hasEnd,
+                time.inXSDDate,
+            ], dateEnd],
+        ]),
         [project, geniro.preferredUri, projectUri],
-
-        [advisor, foaf.firstName, advisorFirstName],
-        [advisor, foaf.lastName, advisorLastName],
         [advisor, geniro.preferredUri, advisorUri],
-
-        [student, foaf.firstName, studentFirstName],
-        [student, foaf.lastName, studentLastName],
         [student, geniro.preferredUri, studentUri],
     ];
 
@@ -128,68 +129,126 @@ export const graph = async (fromRoot?: rdf.NamedNode = null): Promise<> => {
         databaseEndpoint,
         builder.select([
             projectUri,
-            builderSample(projectType, projectType),
-            builderSample(projectEndDate, projectEndDate),
-
+            builder.sample(type, type),
+            builder.sample(dateStart, dateStart),
+            builder.sample(dateEnd, dateEnd),
             advisorUri,
-            builderSample(advisorFirstName, advisorFirstName),
-            builderSample(advisorLastName, advisorLastName),
-
             studentUri,
-            builderSample(studentFirstName, studentFirstName),
-            builderSample(studentLastName, studentLastName),
         ])
             .where(conditions)
-            .groupBy([
-                projectUri,
-                advisorUri,
-                studentUri,
-            ])
-            .orderBy([projectEndDate]),
+            .groupBy([projectUri, advisorUri, studentUri])
+            .orderBy([dateEnd]),
     );
 
     const index = {};
 
     for (const edge of edges) {
-        const projectKey = edge.projectUri.value;
-        const studentKey = edge.studentUri.value;
-        const advisorKey = edge.advisorUri.value;
+        const projectKey = edge[projectUri.value].value;
+        const studentKey = edge[studentUri.value].value;
+        const advisorKey = edge[advisorUri.value].value;
 
-        for (
-            const [key, firstName, lastName] of [
-                [
-                    studentKey,
-                    edge.studentFirstName.value,
-                    edge.studentLastName.value,
-                ],
-                [
-                    advisorKey,
-                    edge.advisorFirstName.value,
-                    edge.advisorLastName.value,
-                ],
-            ]
-        ) {
-            if (!(key in index)) {
-                index[key] = {
-                    "firstName": firstName,
-                    "lastName": lastName,
-                    "projects": {},
-                };
-            }
+        if (!(studentKey in index)) {
+            index[studentKey] = {};
         }
 
-        if (!(projectKey in index[studentKey].projects)) {
-            index[studentKey].projects[projectKey] = {
-                "type": edge.projectType.value,
-                "dateEnd": edge.projectEndDate.value,
+        if (!(projectKey in index[studentKey])) {
+            index[studentKey][projectKey] = {
+                "type": edge[type.value].value,
+                "dateStart": edge[dateStart.value]?.value,
+                "dateEnd": edge[dateEnd.value]?.value,
                 "advisors": [],
             };
         }
 
-        index[studentKey].projects[projectKey].advisors.push(advisorKey);
+        index[studentKey][projectKey].advisors.push(advisorKey);
     }
 
     return index;
+};
+
+/**
+ * Retrieve information about a set of persons.
+ *
+ * @param persons - Array of URIs for the persons to query.
+ * @return Object indexed by the requested URIs, each entry contains the first name,
+ * last name, preferred URI and affiliation list of the corresponding person.
+ */
+export const persons = async (persons: rdf.NamedNode[]): Promise<> => {
+    const person = rdf.variable("person");
+    const preferredUri = rdf.variable("preferredUri");
+    const firstName = rdf.variable("firstName");
+    const lastName = rdf.variable("lastName");
+    const affiliation = rdf.variable("affiliation");
+    const role = rdf.variable("role");
+    const organization = rdf.variable("organization");
+    const dateStart = rdf.variable("dateStart");
+    const dateEnd = rdf.variable("dateEnd");
+
+    const rows = await query(
+        databaseEndpoint,
+        builder.select([
+            person,
+            preferredUri,
+            builder.sample(firstName, firstName),
+            builder.sample(lastName, lastName),
+            role,
+            organization,
+            dateStart,
+            dateEnd,
+        ])
+            .where([
+                builder.filter([builder.in(person, persons)]),
+                [person, geniro.preferredUri, preferredUri],
+                [person, foaf.firstName, firstName],
+                [person, foaf.lastName, lastName],
+                builder.optional([
+                    [affiliation, org.member, person],
+                    [affiliation, org.role, role],
+                    [affiliation, org.organization, organization],
+                    builder.optional([
+                        [affiliation, [
+                            org.memberDuring,
+                            time.hasBeginning,
+                            time.inXSDDate,
+                        ], dateStart],
+                    ]),
+                    builder.optional([
+                        [affiliation, [
+                            org.memberDuring,
+                            time.hasEnd,
+                            time.inXSDDate,
+                        ], dateEnd],
+                    ]),
+                ]),
+            ])
+            .groupBy([person, preferredUri, role, organization, dateStart, dateEnd]),
+    );
+
+    const results = {};
+
+    for (const row of rows) {
+        const key = row[person.value].value;
+
+        if (!(key in results)) {
+            results[key] = {
+                firstName: row[firstName.value].value,
+                lastName: row[lastName.value].value,
+                preferredUri: row[preferredUri.value].value,
+                affiliations: [],
+            };
+        }
+
+        if (role.value in row && organization.value in row) {
+            results[key].affiliations.push({
+                role: row[role.value].value,
+                organization: row[organization.value].value,
+                dateStart: row[dateStart.value]?.value,
+                dateEnd: row[dateEnd.value]?.value,
+            });
+        }
+    }
+
+    return results;
 };
 
 /**
@@ -211,8 +270,8 @@ export const timeline = async function* (item: rdf.NamedNode): Promise<> {
         databaseEndpoint,
         builder.select([
             personUri,
-            builderSample(firstName),
-            builderSample(lastName),
+            builder.sample(firstName),
+            builder.sample(lastName),
             role,
             dateStart,
             dateEnd,
@@ -271,7 +330,7 @@ export const search = async (terms: string): Promise<array> => {
 
     const triples = await query(
         databaseEndpoint,
-        builder.select([uri, builderSample(label, label)])
+        builder.select([uri, builder.sample(label, label)])
             .distinct()
             .where([
                 builder.union([
