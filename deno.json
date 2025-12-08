@@ -1,6 +1,7 @@
 {
     "tasks": {
-        "dev": "deno run --allow-net --allow-env=READABLE_STREAM,DENO_DEPLOYMENT_ID,GITHUB_SHA,CI_COMMIT_SHA src/geniro-web/server.ts"
+        "dev": "deno run --allow-net --allow-env=READABLE_STREAM,DENO_DEPLOYMENT_ID,GITHUB_SHA,CI_COMMIT_SHA src/geniro-web/server.ts",
+        "cli": "deno run --allow-net --allow-env=READABLE_STREAM src/geniro-web/cli.ts"
     },
     "imports": {
         "@fresh/core": "jsr:@fresh/core@^2.2.0",
