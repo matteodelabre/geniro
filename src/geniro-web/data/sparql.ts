@@ -2,7 +2,6 @@ import rdf from "@rdfjs/data-model";
 import toNT from "@rdfjs/to-ntriples";
 import namespace from "@rdfjs/namespace";
 import { SparqlJsonParser } from "sparqljson-parse";
-import { Node } from "rdf-sparql-builder/lib/Node";
 import { makeClosedNamespace } from "./util.ts";
 
 export const onto = makeClosedNamespace(

@@ -1,5 +1,5 @@
 import rdf from "@rdfjs/data-model";
-import * as builder from "rdf-sparql-builder";
+import * as builder from "../data/builder.ts";
 import {
     foaf,
     geniro,

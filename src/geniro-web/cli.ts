@@ -1,4 +1,4 @@
-import * as builder from "rdf-sparql-builder";
+import * as builder from "./data/builder.ts";
 import * as oaiPmh from "./fetcher/oai-pmh.ts";
 import * as link from "./fetcher/link.ts";
 import * as sparql from "./data/sparql.ts";

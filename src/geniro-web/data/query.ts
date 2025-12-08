@@ -1,11 +1,8 @@
 import rdf from "@rdfjs/data-model";
-import * as builder from "rdf-sparql-builder";
-import Aggregate from "rdf-sparql-builder/lib/Aggregate.js";
+import * as builder from "./builder.ts";
 import { dcterms, foaf, geniro, org, owl, rdf as rdfns, skos, time } from "./model.ts";
 import { onto, query } from "./sparql.ts";
 import { databaseEndpoint } from "../config.ts";
-
-const builderSample = (variable, as) => new Aggregate("SAMPLE", variable, as);
 
 const sameAsClosure = builder.zeroOrMore(
     builder.alternative([
