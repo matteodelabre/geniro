@@ -1,8 +1,9 @@
-import { App } from "@fresh/core";
+import { Router } from "@oak/oak";
 import { uriToUrl } from "./util.ts";
 import * as query from "../data/query.ts";
+import render from "../render.tsx";
 
-export const search = new App();
+export const search = new Router();
 
 const renderResults = (results) => {
     if (results.length === 0) {
@@ -21,17 +22,19 @@ const renderResults = (results) => {
 };
 
 search.get("/", async (ctx) => {
-    const terms = new URL(ctx.req.url).searchParams.get("q") || "";
+    const terms = ctx.request.url.searchParams.get("q") || "";
     const results = terms !== "" ? await query.search(terms) : [];
 
-    ctx.state.title = "Recherche";
-    return ctx.render(
-        <>
-            <form method="GET">
-                <input type="search" value={terms} name="q" autofocus />
-                <button type="submit">Rechercher</button>
-            </form>
-            {renderResults(results)}
-        </>,
-    );
+    render(ctx, {
+        title: "Recherche",
+        content: (
+            <>
+                <form method="GET">
+                    <input type="search" value={terms} name="q" autofocus />
+                    <button type="submit">Rechercher</button>
+                </form>
+                {renderResults(results)}
+            </>
+        ),
+    });
 });

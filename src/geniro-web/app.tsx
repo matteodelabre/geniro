@@ -1,27 +1,53 @@
-import { App } from "@fresh/core";
+import { Application, Router, send } from "@oak/oak";
+import * as path from "@std/path";
+import { isHttpError } from "@oak/commons/http_errors";
 import { entity } from "./pages/entity.tsx";
 import { search } from "./pages/search.tsx";
 import { timeline } from "./pages/timeline.tsx";
 import { tree } from "./pages/tree.tsx";
 
-export const app = new App();
+export const app = new Application();
 
-app.appWrapper((ctx) => (
-    <html>
-        <head>
-            <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>{ctx.state.title} · Geniro</title>
-        </head>
-        <body>
-            <ctx.Component />
-        </body>
-    </html>
-));
+// handle and present errors
+app.use(async (ctx, next) => {
+    try {
+        await next();
+    } catch (err) {
+        if (isHttpError(err)) {
+            ctx.response.with(err.asResponse({ request: ctx.request }));
+        } else {
+            ctx.response.status = 500;
+            ctx.response.type = "text";
+            ctx.response.body = "Internal server error";
+            console.error(err);
+        }
+    }
+});
 
-app.get("/", (ctx) => ctx.redirect("/search"));
+// serve static files
+const staticRoot = path.join(import.meta.dirname, "static");
 
-app.mountApp("/", entity);
-app.mountApp("/search", search);
-app.mountApp("/tree", tree);
-app.mountApp("/timeline", timeline);
+app.use(async (ctx, next) => {
+    const pathname = ctx.request.url.pathname;
+
+    if (pathname !== "/") {
+        try {
+            await send(ctx, pathname, { root: staticRoot });
+        } catch (_) {
+            await next();
+        }
+    } else {
+        await next();
+    }
+});
+
+// serve normal pages
+const router = new Router();
+
+router.get("/", (ctx) => ctx.response.redirect("/search"));
+router.use("", entity.routes());
+router.use("/tree", tree.routes());
+router.use("/timeline", timeline.routes());
+router.use("/search", search.routes());
+
+app.use(router.routes());

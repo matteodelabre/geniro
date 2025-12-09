@@ -97,14 +97,7 @@ class DeleteInsert extends Node {
         }
 
         parts.push(this._where.toString());
-
-        let str = parts.join("\n");
-
-        if (indent) {
-            str = str.split("\n").map((line) => space(2) + line).join("\n");
-        }
-
-        return str;
+        return parts.join("\n");
     }
 }
 

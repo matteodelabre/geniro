@@ -1,7 +1,8 @@
 import rdf from "@rdfjs/data-model";
-import { App, HttpError } from "@fresh/core";
-import { accepts } from "@std/http/negotiation";
+import { Router } from "@oak/oak";
+import { errors } from "@oak/commons/http_errors";
 import { uriToUrl } from "./util.ts";
+import render from "../render.tsx";
 import * as query from "../data/query.ts";
 import { geniro, getPersonURI } from "../data/model.ts";
 
@@ -103,12 +104,12 @@ const renderGraph = (
     );
 };
 
-export const tree = new App();
+export const tree = new Router();
 
 tree.get("/:id", async (ctx) => {
     const { id } = ctx.params;
 
-    // Collect graph edges
+    // collect graph edges
     let root = null;
     let projectData = null;
 
@@ -120,7 +121,7 @@ tree.get("/:id", async (ctx) => {
         projectData = await query.graph(rootNode);
     }
 
-    // Retrieve information about the graph nodes
+    // retrieve information about the graph nodes
     let persons = new Set(Object.keys(projectData));
 
     for (const projects of Object.values(projectData)) {
@@ -131,35 +132,34 @@ tree.get("/:id", async (ctx) => {
 
     const personData = await query.persons(Array.from(persons).map(rdf.namedNode));
 
-    // Prepare page title
+    // prepare page title
+    let title;
+
     if (id === "all") {
-        ctx.state.title = <>Graphe complet</>;
+        title = <>Graphe complet</>;
     } else {
         if (!(root in personData)) {
-            throw new HttpError(404, "Person not found");
+            throw new errors.NotFound("Person not found");
         }
 
-        ctx.state.title = <>{personData[root].firstName} {personData[root].lastName}</>;
+        title = <>{personData[root].firstName} {personData[root].lastName}</>;
     }
 
-    switch (accepts(ctx.req, "text/html", "application/json")) {
+    switch (ctx.request.accepts("text/html", "application/json")) {
         case "text/html":
-            return ctx.render(
-                <ul>{renderGraph(projectData, personData, root, new Set())}</ul>,
-            );
+            render(ctx, {
+                title,
+                content: <ul>{renderGraph(projectData, personData, root, new Set())}</ul>,
+            });
+            break;
 
         case "application/json":
-            return new Response(
-                JSON.stringify({
-                    projects: projectData,
-                    persons: personData,
-                }),
-                {
-                    headers: {
-                        "access-control-allow-origin": "*",
-                        "content-type": "application/json",
-                    },
-                },
-            );
+            ctx.response.type = "json";
+            ctx.response.body = {
+                projects: projectData,
+                persons: personData,
+            };
+            ctx.response.headers.set("access-control-allow-origin", "*");
+            break;
     }
 });

@@ -1,6 +1,7 @@
 import rdf from "@rdfjs/data-model";
-import { App } from "@fresh/core";
+import { Router } from "@oak/oak";
 import { uriToUrl } from "./util.ts";
+import render from "../render.tsx";
 import * as query from "../data/query.ts";
 import * as update from "../data/update.ts";
 import { webRoot } from "../config.ts";
@@ -41,8 +42,6 @@ const renderPage = (data) => (
     </>
 );
 
-export const entity = new App();
-
 const form = {
     merge: {
         source: "merge-source",
@@ -51,36 +50,41 @@ const form = {
 };
 
 const renderPerson = async (ctx, person, uri) => {
-    ctx.state.title = <>Personne · {person}</>;
-    return ctx.render(
-        <>
-            <p>
-                <a href={`${webRoot}/tree/${person}`}>Voir la descendance</a>
-            </p>
-            <h2>Fusion</h2>
-            <form method="POST">
-                <label for={form.merge.source}>Source</label>
-                <input type="url" name={form.merge.source} id={form.merge.source} />
-                <input
-                    type="submit"
-                    name={form.merge.submit}
-                    value="Fusionner avec la personne actuelle"
-                />
-            </form>
-            {renderPage(await query.triplesByAlias(uri))}
-        </>,
-    );
+    render(ctx, {
+        title: <>Personne · {person}</>,
+        content: (
+            <>
+                <p>
+                    <a href={`${webRoot}/tree/${person}`}>Voir la descendance</a>
+                </p>
+                <h2>Fusion</h2>
+                <form method="POST">
+                    <label for={form.merge.source}>Source</label>
+                    <input type="url" name={form.merge.source} id={form.merge.source} />
+                    <input
+                        type="submit"
+                        name={form.merge.submit}
+                        value="Fusionner avec la personne actuelle"
+                    />
+                </form>
+                {renderPage(await query.triplesByAlias(uri))}
+            </>
+        ),
+    });
 };
 
+export const entity = new Router();
+
 entity.get("/person/:person", async (ctx) => {
+    console.log("here");
     const { person } = ctx.params;
     const uri = getPersonURI(person);
-    return await renderPerson(ctx, person, uri);
+    await renderPerson(ctx, person, uri);
 });
 
 entity.post("/person/:person", async (ctx) => {
     const { person } = ctx.params;
-    const data = await ctx.req.formData();
+    const data = await ctx.request.body.formData();
     const uri = getPersonURI(person);
 
     if (data.has(form.merge.submit)) {
@@ -88,27 +92,30 @@ entity.post("/person/:person", async (ctx) => {
         await update.merge(uri, source);
     }
 
-    return await renderPerson(ctx, person, uri);
+    await renderPerson(ctx, person, uri);
 });
 
 entity.get("/project/:project", async (ctx) => {
     const { project } = ctx.params;
     const uri = getProjectURI(project);
-    ctx.state.title = <>Projet · {project}</>;
-    return ctx.render(renderPage(await query.triplesByAlias(uri)));
+    render(ctx, {
+        title: <>Projet · {project}</>,
+        content: renderPage(await query.triplesByAlias(uri)),
+    });
 });
 
 entity.get("/org/:org", async (ctx) => {
     const { org } = ctx.params;
     const uri = getOrganizationURI(org);
-
-    ctx.state.title = <>Organisation · {org}</>;
-    return ctx.render(
-        <>
-            <p>
-                <a href={`${webRoot}/timeline/${org}`}>Voir la chronologie</a>
-            </p>
-            {renderPage(await query.triplesByAlias(uri))}
-        </>,
-    );
+    render(ctx, {
+        title: <>Organisation · {org}</>,
+        content: (
+            <>
+                <p>
+                    <a href={`${webRoot}/timeline/${org}`}>Voir la chronologie</a>
+                </p>
+                {renderPage(await query.triplesByAlias(uri))}
+            </>
+        ),
+    });
 });

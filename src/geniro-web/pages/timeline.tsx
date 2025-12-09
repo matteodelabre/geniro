@@ -1,6 +1,6 @@
-import { App } from "@fresh/core";
-import { accepts } from "@std/http/negotiation";
+import { Router } from "@oak/oak";
 import { uriToUrl } from "./util.ts";
+import render from "../render.tsx";
 import * as query from "../data/query.ts";
 import { geniro, getOrganizationURI } from "../data/model.ts";
 
@@ -42,27 +42,25 @@ const renderTimeline = (data) => (
     </table>
 );
 
-export const timeline = new App();
+export const timeline = new Router();
 
 timeline.get("/:org", async (ctx) => {
     const { org } = ctx.params;
     const uri = getOrganizationURI(org);
     const data = await Array.fromAsync(query.timeline(uri));
 
-    switch (accepts(ctx.req, "text/html", "application/json")) {
+    switch (ctx.request.accepts("text/html", "application/json")) {
         case "text/html":
-            ctx.state.title = <>Chronologie · {org}</>;
-            return ctx.render(renderTimeline(data));
+            render(ctx, {
+                title: <>Chronologie · {org}</>,
+                content: renderTimeline(data),
+            });
+            break;
 
         case "application/json":
-            return new Response(
-                JSON.stringify(data),
-                {
-                    headers: {
-                        "access-control-allow-origin": "*",
-                        "content-type": "application/json",
-                    },
-                },
-            );
+            ctx.response.type = "json";
+            ctx.response.body = data;
+            ctx.response.headers.set("access-control-allow-origin", "*");
+            break;
     }
 });
