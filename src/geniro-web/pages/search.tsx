@@ -1,5 +1,5 @@
 import { Router } from "@oak/oak";
-import { uriToUrl } from "./util.ts";
+import { uriToUrl } from "./util.tsx";
 import * as query from "../data/query.ts";
 import render from "../render.tsx";
 

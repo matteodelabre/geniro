@@ -1,45 +1,35 @@
 import { Router } from "@oak/oak";
-import { uriToUrl } from "./util.ts";
+import { uriToUrl } from "./util.tsx";
 import render from "../render.tsx";
 import * as query from "../data/query.ts";
-import { geniro, getOrganizationURI } from "../data/model.ts";
-
-const roleLabel = (role) => {
-    switch (role) {
-        case geniro.professorRole.value:
-            return "Professeur.e";
-
-        case geniro.directorRole.value:
-            return "Directeur.ice";
-
-        default:
-            return role.substring(geniro.$().value.length);
-    }
-};
+import { geniroAffiliationRoleLabel, getOrganizationURI } from "../data/model.ts";
 
 const renderTimeline = (data) => (
-    <table>
-        <thead>
-            <tr>
-                <th>Nom complet</th>
-                <th>Rôle</th>
-                <th>Date de début</th>
-                <th>Date de fin</th>
-            </tr>
-        </thead>
-        {data.map((row) => (
-            <tr>
-                <td>
-                    <a href={uriToUrl(row.personUri)}>
-                        {row.firstName} {row.lastName}
-                    </a>
-                </td>
-                <td>{roleLabel(row.role)}</td>
-                <td>{row.dateStart}</td>
-                <td>{row.dateEnd}</td>
-            </tr>
-        ))}
-    </table>
+    <>
+        <h2>Membres</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom complet</th>
+                    <th>Rôle</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                </tr>
+            </thead>
+            {data.map((row) => (
+                <tr>
+                    <td>
+                        <a href={uriToUrl(row.personUri)}>
+                            {row.firstName} {row.lastName}
+                        </a>
+                    </td>
+                    <td>{geniroAffiliationRoleLabel(row.role)}</td>
+                    <td>{row.dateStart}</td>
+                    <td>{row.dateEnd}</td>
+                </tr>
+            ))}
+        </table>
+    </>
 );
 
 export const timeline = new Router();

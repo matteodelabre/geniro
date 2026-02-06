@@ -231,9 +231,9 @@ export const persons = async (persons: rdf.NamedNode[]): Promise<> => {
 
         if (!(key in results)) {
             results[key] = {
+                preferredUri: row[preferredUri.value].value,
                 firstName: row[firstName.value].value,
                 lastName: row[lastName.value].value,
-                preferredUri: row[preferredUri.value].value,
                 affiliations: [],
             };
         }
@@ -245,6 +245,102 @@ export const persons = async (persons: rdf.NamedNode[]): Promise<> => {
                 dateStart: row[dateStart.value]?.value,
                 dateEnd: row[dateEnd.value]?.value,
             });
+        }
+    }
+
+    return results;
+};
+
+/**
+ * Retrieve information about a set of projects.
+ *
+ * @param args.advisors - Persons who advised on this project.
+ * @param args.student - Student who worked on this psoject.
+ *
+ * -- TODO
+ * @return Object indexed by the requested URIs, each entry contains the first name,
+ * last name, preferred URI and affiliation list of the corresponding person.
+ */
+export const projects = async ({
+    advisors, //: rdf.NamedNode[]?,
+    student, //: rdf.NamedNode?,
+}): Promise<> => {
+    const project = rdf.variable("project");
+    const preferredUri = rdf.variable("preferredUri");
+    const type = rdf.variable("type");
+    const title = rdf.variable("title");
+    const grantedBy = rdf.variable("grantedBy");
+    const thesis = rdf.variable("thesis");
+    const dateStart = rdf.variable("dateStart");
+    const dateEnd = rdf.variable("dateEnd");
+
+    const advisorsConditions = advisors !== undefined
+        ? advisors.map((advisor) => [project, geniro.advisor, advisor])
+        : [];
+
+    const studentConditions = student !== undefined
+        ? [[project, geniro.student, student]]
+        : [];
+
+    const rows = await query(
+        databaseEndpoint,
+        builder.select([
+            preferredUri,
+            type,
+            title,
+            grantedBy,
+            thesis,
+            dateStart,
+            dateEnd,
+        ])
+            .where([
+                ...advisorsConditions,
+                ...studentConditions,
+                [project, rdfns.type, type],
+                [project, geniro.preferredUri, preferredUri],
+                builder.filter([
+                    builder.in(
+                        type,
+                        [geniro.PhDProject, geniro.MScProject],
+                    ),
+                ]),
+                [project, dcterms.title, title],
+                [project, geniro.grantedBy, grantedBy],
+                [project, geniro.thesis, thesis],
+                builder.optional([
+                    [project, [
+                        geniro.timePeriod,
+                        time.hasBeginning,
+                        time.inXSDDate,
+                    ], dateStart],
+                ]),
+                builder.optional([
+                    [project, [
+                        geniro.timePeriod,
+                        time.hasEnd,
+                        time.inXSDDate,
+                    ], dateEnd],
+                ]),
+            ])
+            .groupBy([preferredUri, type, title, grantedBy, thesis, dateStart, dateEnd])
+            .orderBy([[dateEnd, "DESC"]]),
+    );
+
+    const results = {};
+
+    for (const row of rows) {
+        const key = row[preferredUri.value].value;
+
+        if (!(key in results)) {
+            results[key] = {
+                preferredUri: row[preferredUri.value].value,
+                type: row[type.value].value,
+                title: row[title.value].value,
+                grantedBy: row[grantedBy.value].value,
+                thesis: row[thesis.value].value,
+                dateStart: row[dateStart.value]?.value,
+                dateEnd: row[dateEnd.value]?.value,
+            };
         }
     }
 

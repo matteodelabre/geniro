@@ -36,6 +36,11 @@ const render = (
                     <link rel="stylesheet" href="/style.css" />
                 </head>
                 <body>
+                    <header>
+                        <h1>
+                            <a href="/">Projet Geniro</a>
+                        </h1>
+                    </header>
                     {content}
                 </body>
             </html>

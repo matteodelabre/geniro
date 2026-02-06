@@ -1,11 +1,9 @@
-import rdf from "@rdfjs/data-model";
 import { Router } from "@oak/oak";
-import { uriToUrl } from "./util.ts";
+import { uriToUrl } from "./util.tsx";
 import render from "../render.tsx";
 import * as query from "../data/query.ts";
-import * as update from "../data/update.ts";
 import { webRoot } from "../config.ts";
-import { getOrganizationURI, getPersonURI, getProjectURI } from "../data/model.ts";
+import { getOrganizationURI, getProjectURI } from "../data/model.ts";
 
 const renderNode = (node) => {
     if (node.termType === "NamedNode") {
@@ -42,58 +40,7 @@ const renderPage = (data) => (
     </>
 );
 
-const form = {
-    merge: {
-        source: "merge-source",
-        submit: "merge-submit",
-    },
-};
-
-const renderPerson = async (ctx, person, uri) => {
-    render(ctx, {
-        title: <>Personne · {person}</>,
-        content: (
-            <>
-                <p>
-                    <a href={`${webRoot}/tree/${person}`}>Voir la descendance</a>
-                </p>
-                <h2>Fusion</h2>
-                <form method="POST">
-                    <label for={form.merge.source}>Source</label>
-                    <input type="url" name={form.merge.source} id={form.merge.source} />
-                    <input
-                        type="submit"
-                        name={form.merge.submit}
-                        value="Fusionner avec la personne actuelle"
-                    />
-                </form>
-                {renderPage(await query.triplesByAlias(uri))}
-            </>
-        ),
-    });
-};
-
 export const entity = new Router();
-
-entity.get("/person/:person", async (ctx) => {
-    console.log("here");
-    const { person } = ctx.params;
-    const uri = getPersonURI(person);
-    await renderPerson(ctx, person, uri);
-});
-
-entity.post("/person/:person", async (ctx) => {
-    const { person } = ctx.params;
-    const data = await ctx.request.body.formData();
-    const uri = getPersonURI(person);
-
-    if (data.has(form.merge.submit)) {
-        const source = rdf.namedNode(data.get(form.merge.source));
-        await update.merge(uri, source);
-    }
-
-    await renderPerson(ctx, person, uri);
-});
 
 entity.get("/project/:project", async (ctx) => {
     const { project } = ctx.params;

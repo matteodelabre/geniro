@@ -1,7 +1,7 @@
 import rdf from "@rdfjs/data-model";
 import { Router } from "@oak/oak";
 import { errors } from "@oak/commons/http_errors";
-import { uriToUrl } from "./util.ts";
+import { uriToUrl } from "./util.tsx";
 import render from "../render.tsx";
 import * as query from "../data/query.ts";
 import { geniro, getPersonURI } from "../data/model.ts";

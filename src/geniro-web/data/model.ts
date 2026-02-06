@@ -97,3 +97,29 @@ export const getProjectURI = (id: string) => sanitizeNamedNode(geniroProject(id)
 export const geniroOrganization = namespace(`${mainRdfNamespace}/org/`);
 export const getOrganizationURI = (id: string) =>
     sanitizeNamedNode(geniroOrganization(id));
+
+export const geniroAffiliationRoleLabel = (role) => {
+    switch (role) {
+        case geniro.professorRole.value:
+            return "Professeur·e";
+
+        case geniro.directorRole.value:
+            return "Directeur·ice";
+
+        default:
+            return role.substring(geniro.$().value.length);
+    }
+};
+
+export const geniroProjectTypeLabel = (type) => {
+    switch (type) {
+        case geniro.MScProject.value:
+            return "M.\xA0Sc.";
+
+        case geniro.PhDProject.value:
+            return "Ph.\xA0D.";
+
+        default:
+            return type.substring(geniro.$().value.length);
+    }
+};

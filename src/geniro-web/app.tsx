@@ -2,6 +2,7 @@ import { Application, Router, send } from "@oak/oak";
 import * as path from "@std/path";
 import { isHttpError } from "@oak/commons/http_errors";
 import { entity } from "./pages/entity.tsx";
+import { person } from "./pages/person.tsx";
 import { search } from "./pages/search.tsx";
 import { timeline } from "./pages/timeline.tsx";
 import { tree } from "./pages/tree.tsx";
@@ -46,8 +47,9 @@ const router = new Router();
 
 router.get("/", (ctx) => ctx.response.redirect("/search"));
 router.use("", entity.routes());
-router.use("/tree", tree.routes());
-router.use("/timeline", timeline.routes());
+router.use("/person", person.routes());
 router.use("/search", search.routes());
+router.use("/timeline", timeline.routes());
+router.use("/tree", tree.routes());
 
 app.use(router.routes());
