@@ -2,9 +2,13 @@
     box-sizing: border-box;
 }
 
+:root {
+    --font-size: 16px;
+}
+
 html, body {
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: var(--font-size);
     margin: 0;
     padding: 0;
 }
@@ -55,4 +59,15 @@ dt {
 dd ul {
     padding-left: 0;
     list-style-type: none;
+}
+
+.search {
+    display: flex;
+}
+
+.search input[type="search"] {
+    font-size: var(--font-size);
+    width: 100%;
+    padding: .5em;
+    margin-right: .5em;
 }
