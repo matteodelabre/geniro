@@ -1,11 +1,10 @@
 import { Application, Router, send } from "@oak/oak";
 import * as path from "@std/path";
 import { isHttpError } from "@oak/commons/http_errors";
-import { entity } from "./pages/entity.tsx";
+import { org } from "./pages/org.tsx";
 import { person } from "./pages/person.tsx";
 import { project } from "./pages/project.tsx";
 import { search } from "./pages/search.tsx";
-import { timeline } from "./pages/timeline.tsx";
 import { tree } from "./pages/tree.tsx";
 
 export const app = new Application();
@@ -47,11 +46,10 @@ app.use(async (ctx, next) => {
 const router = new Router();
 
 router.get("/", (ctx) => ctx.response.redirect("/search"));
-router.use("", entity.routes());
+router.use("/org", org.routes());
 router.use("/person", person.routes());
 router.use("/project", project.routes());
 router.use("/search", search.routes());
-router.use("/timeline", timeline.routes());
 router.use("/tree", tree.routes());
 
 app.use(router.routes());

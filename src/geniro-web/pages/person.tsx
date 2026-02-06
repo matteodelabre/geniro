@@ -10,7 +10,7 @@ import { dateShowYear, renderTable, uriToUrl } from "./util.tsx";
 
 export const person = new Router();
 
-const projectsBaseKey = {
+export const projectsBaseKey = {
     dateEnd: {
         label: "Date",
         display: dateShowYear,

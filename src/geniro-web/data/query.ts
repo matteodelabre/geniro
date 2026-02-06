@@ -1,6 +1,6 @@
 import rdf from "@rdfjs/data-model";
 import * as builder from "./builder.ts";
-import { dcterms, foaf, geniro, org, owl, rdf as rdfns, skos, time } from "./model.ts";
+import { dcterms, foaf, geniro, org as orgns, owl, rdf as rdfns, skos, time } from "./model.ts";
 import { onto, query } from "./sparql.ts";
 import { databaseEndpoint } from "../config.ts";
 
@@ -202,19 +202,19 @@ export const persons = async (persons: rdf.NamedNode[]): Promise<> => {
                 [person, foaf.firstName, firstName],
                 [person, foaf.lastName, lastName],
                 builder.optional([
-                    [affiliation, org.member, person],
-                    [affiliation, org.role, role],
-                    [affiliation, org.organization, organization],
+                    [affiliation, orgns.member, person],
+                    [affiliation, orgns.role, role],
+                    [affiliation, orgns.organization, organization],
                     builder.optional([
                         [affiliation, [
-                            org.memberDuring,
+                            orgns.memberDuring,
                             time.hasBeginning,
                             time.inXSDDate,
                         ], dateStart],
                     ]),
                     builder.optional([
                         [affiliation, [
-                            org.memberDuring,
+                            orgns.memberDuring,
                             time.hasEnd,
                             time.inXSDDate,
                         ], dateEnd],
@@ -254,9 +254,13 @@ export const persons = async (persons: rdf.NamedNode[]): Promise<> => {
 /**
  * Retrieve information about a set of projects.
  *
+ * Criteria can be provided to filter the projects list. Provided criteria are
+ * cumulative. If no criteria are given, all the projects are returned.
+ *
  * @param criteria.projects - Array of URIs for the projects to query.
- * @param criteria.advisors - Persons who advised on this project.
- * @param criteria.student - Student who worked on this psoject.
+ * @param criteria.advisors - Persons who advised on the projects.
+ * @param criteria.student - Student who worked on the projects.
+ * @param criteria.grantors - Organizations who granted the degree for the projects.
  * @return Object indexed by each project's canonical URI. Each entry contains the
  * project type, title, granting institution, thesis link, date information, student
  * data (URI, first name, last name) and advisors data.
@@ -291,6 +295,10 @@ export const projects = async (criteria): Promise<> => {
         ? [[project, geniro.student, criteria.student]]
         : [];
 
+    const grantorsConditions = criteria.grantors !== undefined
+        ? [builder.filter([builder.in(grantedBy, criteria.grantors)])]
+        : [];
+
     const rows = await query(
         databaseEndpoint,
         builder.select([
@@ -312,6 +320,8 @@ export const projects = async (criteria): Promise<> => {
                 ...projectsConditions,
                 ...advisorsConditions,
                 ...studentConditions,
+                ...grantorsConditions,
+
                 [project, geniro.preferredUri, projectUri],
 
                 [project, rdfns.type, type],
@@ -413,9 +423,12 @@ export const projects = async (criteria): Promise<> => {
  *
  * @param item - URI of the organization to query
  */
-export const timeline = async function* (item: rdf.NamedNode): Promise<> {
-    const person = rdf.variable("person");
+export const org = async (org: rdf.NamedNode): Promise<> => {
+    const orgUri = rdf.variable("orgUri");
+    const orgPrefLabel = rdf.variable("orgPrefLabel");
+    const orgAltLabel = rdf.variable("orgAltLabel");
     const membership = rdf.variable("membership");
+    const person = rdf.variable("person");
     const personUri = rdf.variable("personUri");
     const firstName = rdf.variable("firstName");
     const lastName = rdf.variable("lastName");
@@ -426,6 +439,9 @@ export const timeline = async function* (item: rdf.NamedNode): Promise<> {
     const rows = await query(
         databaseEndpoint,
         builder.select([
+            orgUri,
+            orgPrefLabel,
+            builder.sample(orgAltLabel),
             personUri,
             builder.sample(firstName),
             builder.sample(lastName),
@@ -434,41 +450,51 @@ export const timeline = async function* (item: rdf.NamedNode): Promise<> {
             dateEnd,
         ])
             .where([
-                [membership, org.organization, item],
-                [membership, org.member, person],
+                [org, geniro.preferredUri, orgUri],
+                [org, skos.prefLabel, orgPrefLabel],
+                [org, skos.altLabel, orgAltLabel],
+                [membership, orgns.organization, org],
+                [membership, orgns.member, person],
                 [person, geniro.preferredUri, personUri],
                 [person, foaf.firstName, firstName],
                 [person, foaf.lastName, lastName],
-                [membership, org.role, role],
+                [membership, orgns.role, role],
                 builder.optional([
                     [membership, [
-                        org.memberDuring,
+                        orgns.memberDuring,
                         time.hasBeginning,
                         time.inXSDDate,
                     ], dateStart],
                 ]),
                 builder.optional([
                     [membership, [
-                        org.memberDuring,
+                        orgns.memberDuring,
                         time.hasEnd,
                         time.inXSDDate,
                     ], dateEnd],
                 ]),
             ])
-            .groupBy([personUri, role, dateStart, dateEnd])
+            .groupBy([orgUri, orgPrefLabel, personUri, role, dateStart, dateEnd])
             .orderBy([role, dateStart]),
     );
 
-    for (const row of rows) {
-        yield {
-            personUri: row.personUri.value,
-            firstName: row.firstName.value,
-            lastName: row.lastName.value,
-            role: row.role.value,
-            dateStart: row.dateStart?.value,
-            dateEnd: row.dateEnd?.value,
-        };
+    if (!rows) {
+        return {};
     }
+
+    return {
+        uri: rows[0][orgUri.value].value,
+        prefLabel: rows[0][orgPrefLabel.value].value,
+        altLabel: rows[0][orgAltLabel.value].value,
+        members: rows.map(row => ({
+            uri: row[personUri.value].value,
+            firstName: row[firstName.value].value,
+            lastName: row[lastName.value].value,
+            role: row[role.value].value,
+            dateStart: row[dateStart.value]?.value,
+            dateEnd: row[dateEnd.value]?.value,
+        })),
+    };
 };
 
 /**
@@ -518,7 +544,7 @@ export const search = async (terms: string): Promise<array> => {
 
                     // Search for organizations
                     [
-                        [entity, rdfns.type, org.Organization],
+                        [entity, rdfns.type, orgns.Organization],
                         [entity, skos.prefLabel, label],
                         [label, onto.fts, termsLiteral],
                     ],

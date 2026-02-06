@@ -21,7 +21,6 @@ project.get("/:id", async (ctx) => {
     }
 
     const projectData = projectsData[uri.value];
-    console.log(projectData);
 
     render(ctx, {
         title: <>{projectData.title}</>,
