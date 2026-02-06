@@ -254,59 +254,78 @@ export const persons = async (persons: rdf.NamedNode[]): Promise<> => {
 /**
  * Retrieve information about a set of projects.
  *
- * @param args.advisors - Persons who advised on this project.
- * @param args.student - Student who worked on this psoject.
- *
- * -- TODO
- * @return Object indexed by the requested URIs, each entry contains the first name,
- * last name, preferred URI and affiliation list of the corresponding person.
+ * @param criteria.projects - Array of URIs for the projects to query.
+ * @param criteria.advisors - Persons who advised on this project.
+ * @param criteria.student - Student who worked on this psoject.
+ * @return Object indexed by each project's canonical URI. Each entry contains the
+ * project type, title, granting institution, thesis link, date information, student
+ * data (URI, first name, last name) and advisors data.
  */
-export const projects = async ({
-    advisors, //: rdf.NamedNode[]?,
-    student, //: rdf.NamedNode?,
-}): Promise<> => {
+export const projects = async (criteria): Promise<> => {
     const project = rdf.variable("project");
-    const preferredUri = rdf.variable("preferredUri");
+    const projectUri = rdf.variable("projectUri");
     const type = rdf.variable("type");
     const title = rdf.variable("title");
     const grantedBy = rdf.variable("grantedBy");
     const thesis = rdf.variable("thesis");
     const dateStart = rdf.variable("dateStart");
     const dateEnd = rdf.variable("dateEnd");
+    const student = rdf.variable("student");
+    const studentUri = rdf.variable("studentUri");
+    const studentFirstName = rdf.variable("studentFirstName");
+    const studentLastName = rdf.variable("studentLastName");
+    const advisor = rdf.variable("advisor");
+    const advisorUri = rdf.variable("advisorUri");
+    const advisorFirstName = rdf.variable("advisorFirstName");
+    const advisorLastName = rdf.variable("advisorLastName");
 
-    const advisorsConditions = advisors !== undefined
-        ? advisors.map((advisor) => [project, geniro.advisor, advisor])
+    const projectsConditions = criteria.projects !== undefined
+        ? [builder.filter([builder.in(project, criteria.projects)])]
         : [];
 
-    const studentConditions = student !== undefined
-        ? [[project, geniro.student, student]]
+    const advisorsConditions = criteria.advisors !== undefined
+        ? criteria.advisors.map((item) => [project, geniro.advisor, item])
+        : [];
+
+    const studentConditions = criteria.student !== undefined
+        ? [[project, geniro.student, criteria.student]]
         : [];
 
     const rows = await query(
         databaseEndpoint,
         builder.select([
-            preferredUri,
+            projectUri,
             type,
             title,
             grantedBy,
             thesis,
             dateStart,
             dateEnd,
+            studentUri,
+            builder.sample(studentFirstName, studentFirstName),
+            builder.sample(studentLastName, studentLastName),
+            advisorUri,
+            builder.sample(advisorFirstName, advisorFirstName),
+            builder.sample(advisorLastName, advisorLastName),
         ])
             .where([
+                ...projectsConditions,
                 ...advisorsConditions,
                 ...studentConditions,
+                [project, geniro.preferredUri, projectUri],
+
                 [project, rdfns.type, type],
-                [project, geniro.preferredUri, preferredUri],
                 builder.filter([
                     builder.in(
                         type,
                         [geniro.PhDProject, geniro.MScProject],
                     ),
                 ]),
+
                 [project, dcterms.title, title],
                 [project, geniro.grantedBy, grantedBy],
                 [project, geniro.thesis, thesis],
+
                 builder.optional([
                     [project, [
                         geniro.timePeriod,
@@ -321,25 +340,67 @@ export const projects = async ({
                         time.inXSDDate,
                     ], dateEnd],
                 ]),
+
+                builder.optional([
+                    [project, geniro.student, student],
+                    [student, geniro.preferredUri, studentUri],
+                    [student, foaf.firstName, studentFirstName],
+                    [student, foaf.lastName, studentLastName],
+                ]),
+
+                builder.optional([
+                    [project, geniro.advisor, advisor],
+                    [advisor, geniro.preferredUri, advisorUri],
+                    [advisor, foaf.firstName, advisorFirstName],
+                    [advisor, foaf.lastName, advisorLastName],
+                ]),
             ])
-            .groupBy([preferredUri, type, title, grantedBy, thesis, dateStart, dateEnd])
+            .groupBy([
+                projectUri,
+                type,
+                title,
+                grantedBy,
+                thesis,
+                dateStart,
+                dateEnd,
+                studentUri,
+                advisorUri,
+            ])
             .orderBy([[dateEnd, "DESC"]]),
     );
 
     const results = {};
 
     for (const row of rows) {
-        const key = row[preferredUri.value].value;
+        const key = row[projectUri.value].value;
 
         if (!(key in results)) {
             results[key] = {
-                preferredUri: row[preferredUri.value].value,
+                uri: key,
                 type: row[type.value].value,
                 title: row[title.value].value,
                 grantedBy: row[grantedBy.value].value,
                 thesis: row[thesis.value].value,
                 dateStart: row[dateStart.value]?.value,
                 dateEnd: row[dateEnd.value]?.value,
+                advisors: {},
+            };
+        }
+
+        if (studentUri.value in row) {
+            results[key].student = {
+                uri: row[studentUri.value]?.value,
+                firstName: row[studentFirstName.value].value,
+                lastName: row[studentLastName.value].value,
+            };
+        }
+
+        if (advisorUri.value in row) {
+            const subkey = row[advisorUri.value].value;
+            results[key].advisors[subkey] = {
+                uri: subkey,
+                firstName: row[advisorFirstName.value].value,
+                lastName: row[advisorLastName.value].value,
             };
         }
     }

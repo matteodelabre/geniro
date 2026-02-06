@@ -33,6 +33,26 @@ tr {
 }
 
 td, th {
-    padding: 0.2em 0.5em;
+    padding: 0.25em 0.5em;
     text-align: left;
+}
+
+td.nodata {
+    text-align: center;
+    font-style: italic;
+}
+
+dl {
+    display: grid;
+    grid-template-columns: 8em 1fr;
+    gap: .5em 0;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd ul {
+    padding-left: 0;
+    list-style-type: none;
 }

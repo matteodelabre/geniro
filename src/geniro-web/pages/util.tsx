@@ -32,8 +32,8 @@ export const renderTable = (data, fields) => {
                 ))
                 : (
                     <tr>
-                        <td colspan={keys.length}>
-                            <em>Aucune information</em>
+                        <td colspan={keys.length} class="nodata">
+                            Aucune information
                         </td>
                     </tr>
                 )}

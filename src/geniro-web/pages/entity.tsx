@@ -3,7 +3,7 @@ import { uriToUrl } from "./util.tsx";
 import render from "../render.tsx";
 import * as query from "../data/query.ts";
 import { webRoot } from "../config.ts";
-import { getOrganizationURI, getProjectURI } from "../data/model.ts";
+import { getOrganizationURI } from "../data/model.ts";
 
 const renderNode = (node) => {
     if (node.termType === "NamedNode") {
@@ -41,15 +41,6 @@ const renderPage = (data) => (
 );
 
 export const entity = new Router();
-
-entity.get("/project/:project", async (ctx) => {
-    const { project } = ctx.params;
-    const uri = getProjectURI(project);
-    render(ctx, {
-        title: <>Projet · {project}</>,
-        content: renderPage(await query.triplesByAlias(uri)),
-    });
-});
 
 entity.get("/org/:org", async (ctx) => {
     const { org } = ctx.params;
