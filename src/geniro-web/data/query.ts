@@ -1,6 +1,15 @@
 import rdf from "@rdfjs/data-model";
 import * as builder from "./builder.ts";
-import { dcterms, foaf, geniro, org as orgns, owl, rdf as rdfns, skos, time } from "./model.ts";
+import {
+    dcterms,
+    foaf,
+    geniro,
+    org as orgns,
+    owl,
+    rdf as rdfns,
+    skos,
+    time,
+} from "./model.ts";
 import { onto, query } from "./sparql.ts";
 import { databaseEndpoint } from "../config.ts";
 
@@ -478,15 +487,15 @@ export const org = async (org: rdf.NamedNode): Promise<> => {
             .orderBy([role, dateStart]),
     );
 
-    if (!rows) {
-        return {};
+    if (rows.length === 0) {
+        return undefined;
     }
 
     return {
         uri: rows[0][orgUri.value].value,
         prefLabel: rows[0][orgPrefLabel.value].value,
         altLabel: rows[0][orgAltLabel.value].value,
-        members: rows.map(row => ({
+        members: rows.map((row) => ({
             uri: row[personUri.value].value,
             firstName: row[firstName.value].value,
             lastName: row[lastName.value].value,

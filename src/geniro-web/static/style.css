@@ -49,7 +49,7 @@ td.nodata {
 dl {
     display: grid;
     grid-template-columns: 8em 1fr;
-    gap: .5em 0;
+    gap: 0.5em 0;
 }
 
 dt {
@@ -68,6 +68,6 @@ dd ul {
 .search input[type="search"] {
     font-size: var(--font-size);
     width: 100%;
-    padding: .5em;
-    margin-right: .5em;
+    padding: 0.5em;
+    margin-right: 0.5em;
 }
