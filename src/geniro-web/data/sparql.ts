@@ -13,8 +13,19 @@ export const onto = makeClosedNamespace(
     ],
 );
 
-const parser = new SparqlJsonParser();
 const iriDisallowedChars = /[<>\"{}|^`\\\][\x00-\x20]/g;
+const iriPattern = /^.+:.*$/;
+
+export const sanitizeNamedNode = (node: rdf.NamedNode | string) => {
+    const value = typeof node === "string" ? node : node.value;
+    const cleaned = value.replace(iriDisallowedChars, "");
+
+    if (!iriPattern.test(cleaned)) {
+        throw new Error("invalid IRI pattern");
+    }
+
+    return rdf.namedNode(cleaned);
+};
 
 const logQuery = (kind: string, endpoint: string, queryObject: Node) => {
     const maxLength = 2500;
@@ -29,9 +40,7 @@ const logQuery = (kind: string, endpoint: string, queryObject: Node) => {
     console.info(`[${kind}] to ${endpoint}\n${query}`);
 };
 
-export const sanitizeNamedNode = (node: rdf.NamedNode) => {
-    return rdf.namedNode(node.value.replace(iriDisallowedChars, ""));
-};
+const parser = new SparqlJsonParser();
 
 export const query = async (
     endpoint: string,
