@@ -31,9 +31,10 @@ geniro:preferredUri a owl:DatatypeProperty, owl:FunctionalProperty ;
     rdfs:range xsd:string .
 
 # geniro:Project
-# Uses dcterms:title for the full title of the thesis or dissertation associated to the project, if any, otherwise full title of the project.
-# Uses geniro:dateStart to specify the start date of the project
-# Uses geniro:dateEnd to specify the end date of the project
+#
+# - Use dcterms:title for the full title of the thesis or dissertation associated to
+#   the project, if any, otherwise for the full title of the project.
+# - Use dcterms:description for the abstract or description of the project.
 
 geniro:Project a owl:Class ;
     rdfs:isDefinedBy geniro: ;

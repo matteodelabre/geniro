@@ -12,6 +12,7 @@ const namespaces = {
         "http://www.ndltd.org/standards/metadata/etdms/1.0/",
         "http://www.ndltd.org/standards/metadata/etdms/1.1/",
     ],
+    dc: "http://purl.org/dc/elements/1.1/",
 };
 
 const makePersonUri = (origin: string, name: string) => {
@@ -115,6 +116,16 @@ export const processRecord = function* (
 
     if (title) {
         yield [projectNode, dcterms.title, rdf.literal(title.trim())];
+    }
+
+    // Extract abstracts
+    const descs = xml.findAll(thesis, namespaces.dc, "description");
+    const descLangs = ["fr", "en"];
+
+    for (const [i, desc] of Object.entries(descs)) {
+        // workaround: descriptions are double-encoded
+        const parsedDesc = xml.decode(desc.textContent);
+        yield [projectNode, dcterms.description, rdf.literal(parsedDesc, descLangs[i])];
     }
 
     // Extract end date

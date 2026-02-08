@@ -50,6 +50,7 @@ export const dcterms = makeClosedNamespace(
     [
         "title",
         "creator",
+        "description",
     ],
 );
 

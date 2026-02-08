@@ -30,3 +30,6 @@ export const findOne = (
 };
 
 export const parse = (data: string): Document => parser.parseFromString(data, "text/xml");
+
+export const decode = (data: string): string =>
+    parse(`<t>${data}</t>`).documentElement.textContent;
