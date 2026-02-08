@@ -9,8 +9,20 @@ Deno.test("normalize names", () => {
 });
 
 Deno.test("decompose names", () => {
+    assertEquals(names.decompose(""), ["", ""]);
     assertEquals(names.decompose("Mattéo Delabre"), ["Mattéo", "Delabre"]);
     assertEquals(names.decompose("Delabre, Mattéo"), ["Mattéo", "Delabre"]);
+    assertEquals(names.decompose("Lapalme , Guy"), ["Guy", "Lapalme"]);
     assertEquals(names.decompose("John S. Smith"), ["John S.", "Smith"]);
     assertEquals(names.decompose("Smith, John S."), ["John S.", "Smith"]);
+    assertEquals(names.decompose(" Smith\t, \tJohn \tS."), ["John S.", "Smith"]);
+    assertEquals(names.decompose("Nicolaas Govert de Bruijn"), [
+        "Nicolaas Govert",
+        "de Bruijn",
+    ]);
+    assertEquals(names.decompose("\nNicolaas  Govert \t de Bruijn"), [
+        "Nicolaas Govert",
+        "de Bruijn",
+    ]);
+    assertEquals(names.decompose("John"), ["", "John"]);
 });

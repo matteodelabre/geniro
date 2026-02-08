@@ -11,22 +11,32 @@ export const normalize = (name: string) => {
     return name.split(specialChars).join("-");
 };
 
+const splitSpaces = (value: string) => value.trim().split(/\s+/g);
+const startsLowercase = (value: string) => value[0].toLowerCase() === value[0];
+
 export const decompose = (name: string) => {
     if (name.indexOf(",") !== -1) {
         const separator = name.indexOf(",");
         return [
-            name.substring(separator + 1).trim(),
-            name.substring(0, separator).trim(),
+            splitSpaces(name.substring(separator + 1)).join(" "),
+            splitSpaces(name.substring(0, separator)).join(" "),
         ];
     }
 
-    if (name.lastIndexOf(" ") !== -1) {
-        const separator = name.lastIndexOf(" ");
-        return [
-            name.substring(0, separator).trim(),
-            name.substring(separator + 1).trim(),
-        ];
+    const parts = splitSpaces(name);
+
+    if (parts.length === 0) {
+        return ["", ""];
     }
 
-    return [name, ""];
+    let lastNameStart = parts.length - 1;
+
+    while (lastNameStart > 0 && startsLowercase(parts[lastNameStart - 1])) {
+        lastNameStart -= 1;
+    }
+
+    return [
+        parts.slice(0, lastNameStart).join(" "),
+        parts.slice(lastNameStart).join(" "),
+    ];
 };
