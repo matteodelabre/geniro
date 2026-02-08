@@ -48,3 +48,34 @@ export const merge = async (target: rdf.NamedNode, source: rdf.NamedNode) => {
             .where([[source, pred, object]]),
     );
 };
+
+/**
+ * Add aliases to a given entity.
+ *
+ * @param entity - Entity to which the aliases should be added.
+ * @param aliases - Aliases to add.
+ */
+export const addAliases = async (entity: rdf.NamedNode, aliases: rdf.NamedNode[]) => {
+    await sparql.update(
+        databaseEndpoint,
+        builder.insertData(aliases.map((alias) => [entity, owl.sameAs, alias])),
+    );
+};
+
+/**
+ * Remove aliases from a given entity.
+ *
+ * @param entity - Entity from which the aliases should be removed.
+ * @param aliases - Aliases to remove.
+ */
+export const removeAliases = async (entity: rdf.NamedNode, aliases: rdf.NamedNode[]) => {
+    await sparql.update(
+        databaseEndpoint,
+        builder.deleteData(
+            aliases.flatMap((alias) => [
+                [entity, owl.sameAs, alias],
+                [alias, owl.sameAs, entity],
+            ]),
+        ),
+    );
+};

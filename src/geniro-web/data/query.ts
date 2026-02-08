@@ -72,6 +72,36 @@ export const triplesByAlias = async (entity: rdf.NamedNode) => {
     return aliases;
 };
 
+export const aliases = async (entity: rdf.NamedNode) => {
+    const preferredUri = rdf.variable("preferredUri");
+    const sameAs = rdf.variable("sameAs");
+
+    const rows = await query(
+        databaseEndpoint,
+        builder.select([preferredUri, sameAs])
+            .where([
+                [entity, geniro.preferredUri, preferredUri],
+                builder.optional([[entity, owl.sameAs, sameAs]]),
+            ]),
+    );
+
+    if (rows.length === 0) {
+        return { uri: null, aliases: [] };
+    }
+
+    const uri = rows[0][preferredUri.value].value;
+    const aliases = new Set();
+
+    for (const row of rows) {
+        if (sameAs.value in row) {
+            aliases.add(row[sameAs.value].value);
+        }
+    }
+
+    aliases.delete(uri);
+    return { uri, aliases: Array.from(aliases) };
+};
+
 /**
  * Retrieve edges of the genealogy graph, optionally starting from a root person.
  *
@@ -550,13 +580,12 @@ export const search = async (terms: string): Promise<array> => {
                         [entity, dcterms.title, label],
                         [label, onto.fts, termsLiteral],
                     ],
-
                     // Search for organizations
-                    [
-                        [entity, rdfns.type, orgns.Organization],
-                        [entity, skos.prefLabel, label],
-                        [label, onto.fts, termsLiteral],
-                    ],
+                    // [
+                    //     [entity, rdfns.type, orgns.Organization],
+                    //     [entity, skos.prefLabel, label],
+                    //     [label, onto.fts, termsLiteral],
+                    // ],
                 ]),
                 [entity, geniro.preferredUri, uri],
             ])

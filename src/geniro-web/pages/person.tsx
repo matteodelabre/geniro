@@ -1,7 +1,10 @@
+import rdf from "@rdfjs/data-model";
 import { Router } from "@oak/oak";
 import { errors } from "@oak/commons/http_errors";
 import render from "../render.tsx";
 import * as query from "../data/query.ts";
+import * as update from "../data/update.ts";
+import { sanitizeNamedNode } from "../data/sparql.ts";
 import { webRoot } from "../config.ts";
 import {
     geniroAffiliationRoleLabel,
@@ -32,6 +35,9 @@ const renderPerson = (id, personData, advisedProjects, studentProjects) => ({
     content: (
         <>
             <h2>{personData.firstName} {personData.lastName}</h2>
+            <p>
+                <a href={`${webRoot}/person/${id}/edit`}>Éditer les informations →</a>
+            </p>
 
             <h3>Affiliations</h3>
             {renderTable(personData.affiliations, {
@@ -101,4 +107,106 @@ person.get("/:id", async (ctx) => {
             ctx.response.headers.set("access-control-allow-origin", "*");
             break;
     }
+});
+
+person.all("/:id/edit", async (ctx) => {
+    const { id } = ctx.params;
+    const uri = getPersonURI(id);
+    const data = ctx.request.body.has && await ctx.request.body.formData();
+
+    const formInputs = {
+        alias: {
+            remove: "alias-remove",
+            add: "alias-add",
+            addValue: "alias-add-value",
+        },
+        merge: {
+            source: "merge-source",
+            submit: "merge-submit",
+        },
+    };
+
+    if (data) {
+        if (data.has(formInputs.alias.add)) {
+            const alias = data.get(formInputs.alias.addValue);
+            await update.addAliases(uri, [sanitizeNamedNode(alias)]);
+        }
+
+        if (data.has(formInputs.alias.remove)) {
+            const alias = data.get(formInputs.alias.remove);
+            await update.removeAliases(uri, [sanitizeNamedNode(alias)]);
+        }
+
+        if (data.has(formInputs.merge.submit)) {
+            const source = data.get(formInputs.merge.source);
+            await update.merge(uri, sanitizeNamedNode(source));
+        }
+    }
+
+    const { aliases } = await query.aliases(uri);
+
+    render(ctx, {
+        title: <>Édition</>,
+        content: (
+            <>
+                <p>
+                    <a href={`${webRoot}/person/${id}`}>← Retour en consultation</a>
+                </p>
+                <h3>Sources</h3>
+                <table>
+                    <tr>
+                        <td>{uri.value}</td>
+                    </tr>
+                    {aliases.map((alias) => (
+                        <tr>
+                            <td>{alias}</td>
+                            <td>
+                                <form method="POST">
+                                    <button
+                                        type="submit"
+                                        name={formInputs.alias.remove}
+                                        value={alias}
+                                    >
+                                        Supprimer
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    ))}
+                    <tr>
+                        <form method="POST">
+                            <td>
+                                <input
+                                    type="url"
+                                    required
+                                    name={formInputs.alias.addValue}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="submit"
+                                    name={formInputs.alias.add}
+                                    value="Ajouter"
+                                />
+                            </td>
+                        </form>
+                    </tr>
+                </table>
+                <h3>Fusion</h3>
+                <form method="POST">
+                    <label for={formInputs.merge.source}>Source</label>
+                    <input
+                        type="url"
+                        name={formInputs.merge.source}
+                        id={formInputs.merge.source}
+                    />
+                    <input
+                        type="submit"
+                        name={formInputs.merge.submit}
+                        value="Fusionner avec la personne actuelle"
+                    />
+                </form>
+            </>
+        ),
+    });
 });
