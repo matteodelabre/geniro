@@ -1,11 +1,12 @@
+import { adminName, adminEmail } from "../config.ts";
 import { setTimeout } from "node:timers/promises";
 
 const lastRequestTime: Record<string, number> = {};
 const minRequestDelay = 1500;
 const maxAttempts = 3;
 const defaultHeaders = {
-    "User-Agent": "Mattéo Delabre (<geniro.matteo@delab.re>)",
-    "From": "geniro.matteo@delab.re",
+    "User-Agent": `${adminName} (<${adminEmail}>)`,
+    "From": adminEmail,
 };
 
 type Method = "GET" | "POST";
