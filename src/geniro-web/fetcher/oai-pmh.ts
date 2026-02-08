@@ -121,8 +121,8 @@ export const processRecord = function* (
     const dateEnd = xml.findOne(thesis, namespaces.etdms, "date")?.textContent;
 
     if (dateEnd) {
-        const interval = rdf.blankNode();
-        const end = rdf.blankNode();
+        const interval = rdf.namedNode(projectNode.value + "#timePeriod");
+        const end = rdf.namedNode(interval.value + "/end");
         yield [projectNode, geniro.timePeriod, interval];
         yield [interval, time.hasEnd, end];
         yield [end, time.inXSDDate, makeDate(dateEnd)];
@@ -161,9 +161,10 @@ export const processRecord = function* (
 
     // Extract thesis URI
     const thesisUri = xml.findOne(thesis, namespaces.etdms, "identifier")?.textContent;
+    const thesisUriTls = thesisUri.replace("http://", "https://");
 
     if (thesisUri) {
-        yield [projectNode, geniro.thesis, rdf.namedNode(thesisUri)];
+        yield [projectNode, geniro.thesis, rdf.namedNode(thesisUriTls)];
     }
 };
 
