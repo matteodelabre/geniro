@@ -16,6 +16,19 @@ export const onto = makeClosedNamespace(
 const parser = new SparqlJsonParser();
 const iriDisallowedChars = /[<>\"{}|^`\\\][\x00-\x20]/g;
 
+const logQuery = (kind: string, endpoint: string, queryObject: Node) => {
+    const maxLength = 2500;
+    let query = queryObject.toString();
+
+    if (query.length > maxLength) {
+        const trunc = query.substring(0, maxLength);
+        const remain = query.length - maxLength;
+        query = `${trunc}... (${remain} more chars)`;
+    }
+
+    console.info(`[${kind}] to ${endpoint}\n${query}`);
+};
+
 export const sanitizeNamedNode = (node: rdf.NamedNode) => {
     return rdf.namedNode(node.value.replace(iriDisallowedChars, ""));
 };
@@ -24,7 +37,7 @@ export const query = async (
     endpoint: string,
     queryObject: Node,
 ): Promise<unknown> => {
-    console.log("running query:", queryObject.toString());
+    logQuery("query", endpoint, queryObject);
 
     const res = await fetch(endpoint, {
         method: "POST",
@@ -49,7 +62,7 @@ export const update = async (
     endpoint: string,
     updateObject: Node,
 ): Promise<void> => {
-    console.log("running update:", updateObject.toString());
+    logQuery("update", endpoint, updateObject);
 
     const res = await fetch(endpoint + "/statements", {
         method: "POST",
