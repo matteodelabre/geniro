@@ -376,6 +376,9 @@ export const projects = async (criteria): Promise<> => {
                 [project, geniro.thesis, thesis],
 
                 builder.optional([
+                    [project, geniro.thesis, thesis],
+                ]),
+                builder.optional([
                     [project, [
                         geniro.timePeriod,
                         time.hasBeginning,
@@ -429,7 +432,7 @@ export const projects = async (criteria): Promise<> => {
                 type: row[type.value].value,
                 title: row[title.value].value,
                 grantedBy: row[grantedBy.value].value,
-                thesis: row[thesis.value].value,
+                thesis: row[thesis.value]?.value,
                 dateStart: row[dateStart.value]?.value,
                 dateEnd: row[dateEnd.value]?.value,
                 advisors: {},
