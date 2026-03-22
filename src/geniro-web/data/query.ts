@@ -310,6 +310,7 @@ export const projects = async (criteria): Promise<> => {
     const type = rdf.variable("type");
     const title = rdf.variable("title");
     const grantedBy = rdf.variable("grantedBy");
+    const grantedByUri = rdf.variable("grantedByUri");
     const thesis = rdf.variable("thesis");
     const dateStart = rdf.variable("dateStart");
     const dateEnd = rdf.variable("dateEnd");
@@ -344,7 +345,7 @@ export const projects = async (criteria): Promise<> => {
             projectUri,
             type,
             title,
-            grantedBy,
+            grantedByUri,
             thesis,
             dateStart,
             dateEnd,
@@ -373,7 +374,7 @@ export const projects = async (criteria): Promise<> => {
 
                 [project, dcterms.title, title],
                 [project, geniro.grantedBy, grantedBy],
-                [project, geniro.thesis, thesis],
+                [grantedBy, geniro.preferredUri, grantedByUri],
 
                 builder.optional([
                     [project, geniro.thesis, thesis],
@@ -411,7 +412,7 @@ export const projects = async (criteria): Promise<> => {
                 projectUri,
                 type,
                 title,
-                grantedBy,
+                grantedByUri,
                 thesis,
                 dateStart,
                 dateEnd,
@@ -431,7 +432,7 @@ export const projects = async (criteria): Promise<> => {
                 uri: key,
                 type: row[type.value].value,
                 title: row[title.value].value,
-                grantedBy: row[grantedBy.value].value,
+                grantedBy: row[grantedByUri.value].value,
                 thesis: row[thesis.value]?.value,
                 dateStart: row[dateStart.value]?.value,
                 dateEnd: row[dateEnd.value]?.value,
