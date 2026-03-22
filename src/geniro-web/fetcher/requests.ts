@@ -1,9 +1,7 @@
-import { adminEmail, adminName } from "../config.ts";
+import { adminEmail, adminName, minRequestDelay, maxRequestAttempts } from "../config.ts";
 import { setTimeout } from "node:timers/promises";
 
 const lastRequestTime: Record<string, number> = {};
-const minRequestDelay = 1500;
-const maxAttempts = 3;
 const defaultHeaders = {
     "User-Agent": `${adminName} (<${adminEmail}>)`,
     "From": adminEmail,
@@ -53,7 +51,7 @@ export const query = async (
         } catch (err) {
             attempt += 1;
 
-            if (attempt == maxAttempts) {
+            if (attempt == maxRequestAttempts) {
                 throw err;
             }
 
