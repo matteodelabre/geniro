@@ -363,19 +363,21 @@ export const projects = async (criteria): Promise<> => {
                 ...grantorsConditions,
 
                 [project, geniro.preferredUri, projectUri],
-
-                [project, rdfns.type, type],
-                builder.filter([
-                    builder.in(
-                        type,
-                        [geniro.PhDProject, geniro.MScProject],
-                    ),
-                ]),
-
+                [project, rdfns.type, geniro.Project],
                 [project, dcterms.title, title],
+
                 [project, geniro.grantedBy, grantedBy],
                 [grantedBy, geniro.preferredUri, grantedByUri],
 
+                builder.optional([
+                    [project, rdfns.type, type],
+                    builder.filter([
+                        builder.in(
+                            type,
+                            [geniro.PhDProject, geniro.MScProject],
+                        ),
+                    ]),
+                ]),
                 builder.optional([
                     [project, geniro.thesis, thesis],
                 ]),
@@ -430,9 +432,9 @@ export const projects = async (criteria): Promise<> => {
         if (!(key in results)) {
             results[key] = {
                 uri: key,
-                type: row[type.value].value,
                 title: row[title.value].value,
                 grantedBy: row[grantedByUri.value].value,
+                type: row[type.value]?.value,
                 thesis: row[thesis.value]?.value,
                 dateStart: row[dateStart.value]?.value,
                 dateEnd: row[dateEnd.value]?.value,
