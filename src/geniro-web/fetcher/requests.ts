@@ -17,11 +17,16 @@ export const query = async (
     params: Record<string, string> | undefined = undefined,
     headers: object = {},
 ) => {
+    let body;
     url = new URL(url);
 
     if (params !== undefined) {
-        // @ts-ignore Assignment is supported even though `url.search` is a string
-        url.search = new URLSearchParams(params);
+        if (method === "POST") {
+            body = new URLSearchParams(params);
+        } else {
+            // @ts-ignore Assignment is supported even though `url.search` is a string
+            url.search = new URLSearchParams(params);
+        }
     }
 
     if (url.host in lastRequestTime) {
@@ -42,6 +47,7 @@ export const query = async (
 
             return await fetch(url, {
                 method,
+                body,
                 headers: { ...headers, ...defaultHeaders },
             });
         } catch (err) {
