@@ -53,6 +53,9 @@ const renderPerson = (id, personData, advisedProjects, studentProjects) => ({
                 dateEnd: { label: "Date de fin" },
             })}
 
+            <h3>Projets réalisés</h3>
+            {renderTable(Object.values(studentProjects), projectsBaseKey)}
+
             <h3>Projets encadrés</h3>
             <p>
                 <a href={`${webRoot}/tree/${id}`}>Voir l’arbre de descendance →</a>
@@ -69,9 +72,6 @@ const renderPerson = (id, personData, advisedProjects, studentProjects) => ({
                     ),
                 },
             })}
-
-            <h3>Projets réalisés</h3>
-            {renderTable(Object.values(studentProjects), projectsBaseKey)}
         </>
     ),
 });
