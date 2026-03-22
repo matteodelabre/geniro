@@ -92,7 +92,9 @@ const makeProjectId = async (item, index) => {
             .from(sparql.onto["disable-sameAs"])
             .where([
                 [item, geniro.student, student],
-                [item, [geniro.timePeriod, time.hasEnd, time.inXSDDate], dateEnd],
+                builder.optional([
+                    [item, [geniro.timePeriod, time.hasEnd, time.inXSDDate], dateEnd],
+                ]),
                 builder.union([
                     [
                         [student, foaf.firstName, firstName],
@@ -111,7 +113,10 @@ const makeProjectId = async (item, index) => {
     const studentName = row.name
         ? row.name.value
         : `${row.firstName.value} ${row.lastName.value}`;
-    const year = new Date(row.dateEnd.value).getUTCFullYear();
+
+    const year = "dateEnd" in row
+        ? new Date(row.dateEnd.value).getUTCFullYear().toString()
+        : "unknown"
 
     const stem = `${names.normalize(studentName)}-${year}`;
 
