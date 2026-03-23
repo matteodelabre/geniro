@@ -116,26 +116,26 @@ export const aliases = async (entity: rdf.NamedNode) => {
 export const graph = async (fromRoot?: rdf.NamedNode = null): Promise<> => {
     const project = rdf.variable("project");
     const projectUri = rdf.variable("projectUri");
-
     const type = rdf.variable("projectType");
     const dateStart = rdf.variable("dateStart");
     const dateEnd = rdf.variable("dateEnd");
-
     const student = rdf.variable("student");
     const studentUri = rdf.variable("studentUri");
-
     const advisor = rdf.variable("advisor");
     const advisorUri = rdf.variable("advisorUri");
 
     const conditions = [
         [project, geniro.student, student],
         [project, geniro.advisor, advisor],
-        [project, rdfns.type, type],
-        builder.filter([
-            builder.in(
-                type,
-                [geniro.PhDProject, geniro.MScProject],
-            ),
+        [project, rdfns.type, geniro.Project],
+        builder.optional([
+            [project, rdfns.type, type],
+            builder.filter([
+                builder.in(
+                    type,
+                    [geniro.PhDProject, geniro.MScProject],
+                ),
+            ]),
         ]),
         builder.optional([
             [project, [
@@ -192,7 +192,7 @@ export const graph = async (fromRoot?: rdf.NamedNode = null): Promise<> => {
 
         if (!(projectKey in index[studentKey])) {
             index[studentKey][projectKey] = {
-                "type": edge[type.value].value,
+                "type": edge[type.value]?.value,
                 "dateStart": edge[dateStart.value]?.value,
                 "dateEnd": edge[dateEnd.value]?.value,
                 "advisors": [],
