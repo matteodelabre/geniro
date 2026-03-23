@@ -4,20 +4,7 @@ import { errors } from "@oak/commons/http_errors";
 import { uriToUrl } from "./util.tsx";
 import render from "../render.tsx";
 import * as query from "../data/query.ts";
-import { geniro, getPersonURI } from "../data/model.ts";
-
-const degreeLabel = (degree) => {
-    switch (degree) {
-        case geniro.MScProject.value:
-            return "M.Sc.";
-
-        case geniro.PhDProject.value:
-            return "Ph.D.";
-
-        default:
-            return "Unknown degree";
-    }
-};
+import { geniro, getPersonURI, geniroProjectTypeLabel } from "../data/model.ts";
 
 const renderGraph = (
     projectData,
@@ -60,8 +47,8 @@ const renderGraph = (
         }
     }
 
-    if (degree !== null && date !== null) {
-        badges.push(`(${degreeLabel(degree)} ${date.split("-")[0]})`);
+    if (degree !== null || date !== null) {
+        badges.push(`(${geniroProjectTypeLabel(degree)} ${date?.split("-")?.[0]})`);
     }
 
     let subtree;

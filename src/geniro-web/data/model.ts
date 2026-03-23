@@ -100,6 +100,10 @@ export const getOrganizationURI = (id: string) =>
     sanitizeNamedNode(geniroOrganization(id));
 
 export const geniroAffiliationRoleLabel = (role) => {
+    if (!role) {
+        return "Rôle inconnu";
+    }
+
     switch (role) {
         case geniro.professorRole.value:
             return "Professeur·e";
@@ -113,6 +117,10 @@ export const geniroAffiliationRoleLabel = (role) => {
 };
 
 export const geniroProjectTypeLabel = (type) => {
+    if (!type) {
+        return "Grade inconnu";
+    }
+
     switch (type) {
         case geniro.MScProject.value:
             return "M.\xA0Sc.";
