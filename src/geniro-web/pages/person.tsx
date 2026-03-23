@@ -7,6 +7,7 @@ import * as update from "../data/update.ts";
 import { sanitizeNamedNode } from "../data/sparql.ts";
 import { webRoot } from "../config.ts";
 import {
+    geniro,
     geniroAffiliationRoleLabel,
     geniroProjectTypeLabel,
     getPersonURI,
@@ -36,7 +37,7 @@ const renderPerson = (id, personData, advisedProjects, studentProjects) => ({
         <>
             <h2>{personData.firstName} {personData.lastName}</h2>
             <p>
-                <a href={`${webRoot}/person/${id}/edit`}>Éditer les informations →</a>
+                <a href={`${webRoot}/person/${id}/edit`}>Éditer les informations</a> · <a href={`${webRoot}/person/${id}/desc`}>Voir l’arbre de descendance</a> · <a href={`${webRoot}/person/${id}/asc`}>Voir l’arbre d’ascendance</a>
             </p>
 
             <h3>Affiliations</h3>
@@ -57,10 +58,6 @@ const renderPerson = (id, personData, advisedProjects, studentProjects) => ({
             {renderTable(Object.values(studentProjects), projectsBaseKey)}
 
             <h3>Projets encadrés</h3>
-            <p>
-                <a href={`${webRoot}/tree/${id}`}>Voir l’arbre de descendance →</a>
-            </p>
-
             {renderTable(Object.values(advisedProjects), {
                 ...projectsBaseKey,
                 student: {
@@ -208,5 +205,175 @@ person.all("/:id/edit", async (ctx) => {
                 </form>
             </>
         ),
+    });
+});
+
+const renderTree = (
+    root,
+    tree,
+    projects,
+    persons,
+    visited,
+    degree = null,
+    date = null,
+) => {
+    const badges = [];
+
+    for (const affil of persons[root].affiliations) {
+        if (affil.organization === "http://diro.umontreal.ca/geniro/org/diro") {
+            const yearStart = affil.dateStart
+                ? new Date(affil.dateStart).getUTCFullYear()
+                : "";
+            const yearEnd = affil.dateEnd ? new Date(affil.dateEnd).getUTCFullYear() : "";
+            const range = `${yearStart}-${yearEnd}`;
+
+            switch (affil.role) {
+                case geniro.professorRole.value:
+                    badges.push(`(professeur.e DIRO ${range})`);
+                    break;
+
+                case geniro.directorRole.value:
+                    badges.push(`(directeur.ice DIRO ${range})`);
+                    break;
+            }
+        }
+    }
+
+    for (const {type: degree, dateEnd: date} of projects[root]) {
+        badges.push(`(${geniroProjectTypeLabel(degree)} ${date?.split("-")?.[0]})`);
+    }
+
+    let subtree;
+
+    if (!visited.has(root) && tree[root].length > 0) {
+        subtree = <ul>
+            {tree[root].map(child => 
+                renderTree(child, tree, projects, persons, visited, null, null)
+            )}
+        </ul>;
+    }
+
+    const head = <>
+        <a href={uriToUrl(root)}>
+            {persons[root].firstName} {persons[root].lastName}
+        </a>
+        {" " + badges.join(" ")}
+    </>;
+
+    visited.add(root);
+
+    if (subtree) {
+        return <li>
+            <details open>
+                <summary>{head}</summary>
+                {subtree}
+            </details>
+        </li>;
+    }
+
+    return <li>{head}</li>;
+};
+
+const processProjectsForTree = async (root, projects) => {
+    // Retrieve persons information
+    let personsUris = new Set();
+    personsUris.add(root.value);
+
+    for (const project of Object.values(projects)) {
+        personsUris.add(project.student.uri);
+        personsUris = personsUris.union(new Set(Object.keys(project.advisors)));
+    }
+
+    const persons = await query.persons(Array.from(personsUris).map(rdf.namedNode));
+
+    // Collect projects by student
+    const projectsByStudent = {};
+
+    for (const person of personsUris) {
+        projectsByStudent[person] = [];
+    }
+
+    for (const project of Object.values(projects)) {
+        projectsByStudent[project.student.uri].push(project);
+    }
+
+    return [persons, projectsByStudent];
+};
+
+person.get("/:id/desc", async (ctx) => {
+    const { id } = ctx.params;
+    const uri = getPersonURI(id);
+
+    // Retrieve project and persons information
+    const projects = await query.projects({ ancestors: [uri] });
+    const [persons, projectsByStudent] = await processProjectsForTree(uri, projects);
+
+    // Create tree
+    const tree = {};
+
+    for (const person of Object.keys(persons)) {
+        tree[person] = [];
+    }
+
+    for (const project of Object.values(projects)) {
+        for (const advisor of Object.values(project.advisors)) {
+            if (tree[advisor.uri].indexOf(project.student.uri) === -1) {
+                tree[advisor.uri].push(project.student.uri);
+            }
+        }
+    }
+
+    render(ctx, {
+        title: <>{persons[uri.value].firstName} {persons[uri.value].lastName} · Descendance</>,
+        content: <>
+            <h2>
+                Arbre de descendance de <a href={`${webRoot}/person/${id}`}>
+                    {persons[uri.value].firstName} {persons[uri.value].lastName}
+                </a>
+            </h2>
+
+            <ul class="tree">
+                {renderTree(uri.value, tree, projectsByStudent, persons, new Set())}
+            </ul>
+        </>,
+    });
+});
+
+person.get("/:id/asc", async (ctx) => {
+    const { id } = ctx.params;
+    const uri = getPersonURI(id);
+
+    // Retrieve project and persons information
+    const projects = await query.projects({ descendants: [uri] });
+    const [persons, projectsByStudent] = await processProjectsForTree(uri, projects);
+
+    // Create tree
+    const tree = {};
+
+    for (const person of Object.keys(persons)) {
+        tree[person] = [];
+    }
+
+    for (const project of Object.values(projects)) {
+        for (const advisor of Object.values(project.advisors)) {
+            if (tree[project.student.uri].indexOf(advisor.uri) === -1) {
+                tree[project.student.uri].push(advisor.uri);
+            }
+        }
+    }
+
+    render(ctx, {
+        title: <>{persons[uri.value].firstName} {persons[uri.value].lastName} · Ascendance</>,
+        content: <>
+            <h2>
+                Arbre d’ascendance de <a href={`${webRoot}/person/${id}`}>
+                    {persons[uri.value].firstName} {persons[uri.value].lastName}
+                </a>
+            </h2>
+
+            <ul class="tree">
+                {renderTree(uri.value, tree, projectsByStudent, persons, new Set())}
+            </ul>
+        </>,
     });
 });

@@ -71,3 +71,17 @@ dd ul {
     padding: 0.5em;
     margin-right: 0.5em;
 }
+
+ul.tree {
+    padding-left: 0pt;
+}
+
+ul.tree, ul.tree ul {
+    list-style: none;
+}
+
+ul.tree ul {
+    padding-left: .8em;
+    margin-left: .2em;
+    border-left: 1px solid black;
+}

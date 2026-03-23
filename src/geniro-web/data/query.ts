@@ -300,6 +300,10 @@ export const persons = async (persons: rdf.NamedNode[]): Promise<> => {
  * @param criteria.advisors - Persons who advised on the projects.
  * @param criteria.student - Student who worked on the projects.
  * @param criteria.grantors - Organizations who granted the degree for the projects.
+ * @param criteria.ancestors - Each project’s student must have the given person as
+ *  one of their academic ancestors.
+ * @param criteria.descendants - Each project’s student must have the given person as
+ *  one of their academic descendants.
  * @return Object indexed by each project's canonical URI. Each entry contains the
  * project type, title, granting institution, thesis link, date information, student
  * data (URI, first name, last name) and advisors data.
@@ -339,6 +343,24 @@ export const projects = async (criteria): Promise<> => {
         ? [builder.filter([builder.in(grantedBy, criteria.grantors)])]
         : [];
 
+    const ancestorsConditions = criteria.ancestors !== undefined
+        ? criteria.ancestors.map((ancestor) =>
+            [
+                ancestor,
+                `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
+                student,
+            ]
+        ) : [];
+
+    const descendantsConditions = criteria.descendants !== undefined
+        ? criteria.descendants.map((descendant) =>
+            [
+                student,
+                `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
+                descendant,
+            ]
+        ) : [];
+
     const rows = await query(
         databaseEndpoint,
         builder.select([
@@ -361,6 +383,11 @@ export const projects = async (criteria): Promise<> => {
                 ...advisorsConditions,
                 ...studentConditions,
                 ...grantorsConditions,
+                ...ancestorsConditions,
+                ...descendantsConditions,
+
+                [project, geniro.student, student],
+                [student, geniro.preferredUri, studentUri],
 
                 [project, geniro.preferredUri, projectUri],
                 [project, rdfns.type, geniro.Project],
@@ -397,8 +424,6 @@ export const projects = async (criteria): Promise<> => {
                 ]),
 
                 builder.optional([
-                    [project, geniro.student, student],
-                    [student, geniro.preferredUri, studentUri],
                     [student, foaf.firstName, studentFirstName],
                     [student, foaf.lastName, studentLastName],
                 ]),
@@ -444,9 +469,9 @@ export const projects = async (criteria): Promise<> => {
 
         if (studentUri.value in row) {
             results[key].student = {
-                uri: row[studentUri.value]?.value,
-                firstName: row[studentFirstName.value].value,
-                lastName: row[studentLastName.value].value,
+                uri: row[studentUri.value].value,
+                firstName: row[studentFirstName.value]?.value,
+                lastName: row[studentLastName.value]?.value,
             };
         }
 
