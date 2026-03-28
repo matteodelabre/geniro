@@ -1,9 +1,9 @@
 import rdf from "@rdfjs/data-model";
 import { foaf, geniro, rdf as rdfns } from "../../data/model.ts";
-import { onto, ofn, query, update } from "../../data/sparql.ts";
+import { ofn, query, update } from "../../data/sparql.ts";
 import * as builder from "../../data/builder.ts";
 import { databaseEndpoint, mathgenRefreshDelay } from "../../config.ts";
-import { mathgenNamespace, queryPerson, processRecord } from "./api.ts";
+import { mathgenNamespace, processRecord, queryPerson } from "./api.ts";
 
 const mergeTriples = async function* (token: string, schoolIds, persons: NamedNode[]) {
     for (const person of persons) {
@@ -17,7 +17,7 @@ export const refresh = async (token: string, schoolIds, persons: NamedNode[]) =>
     await update(
         databaseEndpoint,
         builder.insertData(
-            await Array.fromAsync(mergeTriples(token, schoolIds, persons))
+            await Array.fromAsync(mergeTriples(token, schoolIds, persons)),
         ),
     );
 };
@@ -25,7 +25,6 @@ export const refresh = async (token: string, schoolIds, persons: NamedNode[]) =>
 export const findExpiredPersons = async () => {
     const person = rdf.variable("person");
     const lastUpdate = rdf.variable("lastUpdate");
-    const elapsedSecs = rdf.variable("elapsedSecs");
 
     const results = await query(
         databaseEndpoint,
@@ -33,10 +32,12 @@ export const findExpiredPersons = async () => {
             .where([
                 [person, rdfns.type, foaf.Person],
                 builder.filter([
-                    `strstarts(str(?${person.value}), "${mathgenNamespace}")`
+                    `strstarts(str(?${person.value}), "${mathgenNamespace}")`,
                 ]),
                 builder.optional([[
-                    person, geniro.lastUpdate, lastUpdate
+                    person,
+                    geniro.lastUpdate,
+                    lastUpdate,
                 ]]),
                 builder.filter([
                     `<${ofn.secondsBetween.value}>(
@@ -45,10 +46,10 @@ export const findExpiredPersons = async () => {
                             "1970-01-01T00:00:00Z"^^xsd:dateTime
                         ),
                         now()
-                    ) > ${mathgenRefreshDelay}`
-                ])
+                    ) > ${mathgenRefreshDelay}`,
+                ]),
             ]),
     );
 
-    return results.map(({person}) => person);
+    return results.map(({ person }) => person);
 };

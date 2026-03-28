@@ -4,7 +4,7 @@ import { errors } from "@oak/commons/http_errors";
 import { uriToUrl } from "./util.tsx";
 import render from "../render.tsx";
 import * as query from "../data/query.ts";
-import { geniro, getPersonURI, geniroProjectTypeLabel } from "../data/model.ts";
+import { geniro, geniroProjectTypeLabel, getPersonURI } from "../data/model.ts";
 
 const renderGraph = (
     projectData,

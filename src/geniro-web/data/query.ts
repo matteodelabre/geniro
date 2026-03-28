@@ -344,22 +344,20 @@ export const projects = async (criteria): Promise<> => {
         : [];
 
     const ancestorsConditions = criteria.ancestors !== undefined
-        ? criteria.ancestors.map((ancestor) =>
-            [
-                ancestor,
-                `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
-                student,
-            ]
-        ) : [];
+        ? criteria.ancestors.map((ancestor) => [
+            ancestor,
+            `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
+            student,
+        ])
+        : [];
 
     const descendantsConditions = criteria.descendants !== undefined
-        ? criteria.descendants.map((descendant) =>
-            [
-                student,
-                `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
-                descendant,
-            ]
-        ) : [];
+        ? criteria.descendants.map((descendant) => [
+            student,
+            `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
+            descendant,
+        ])
+        : [];
 
     const rows = await query(
         databaseEndpoint,

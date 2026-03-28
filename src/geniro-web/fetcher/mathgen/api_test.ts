@@ -2,7 +2,17 @@ import rdf from "@rdfjs/data-model";
 import { assertEquals } from "@std/assert";
 import { processRecord } from "./api.ts";
 import { mathgenRefreshDelay, mathgenRefreshDelaySpread } from "../../config.ts";
-import { dcterms, foaf, geniro, owl, org, skos, rdf as rdfns, time, xsd } from "../../data/model.ts";
+import {
+    dcterms,
+    foaf,
+    geniro,
+    org,
+    owl,
+    rdf as rdfns,
+    skos,
+    time,
+    xsd,
+} from "../../data/model.ts";
 
 Deno.test("should extract triples from record", () => {
     const schoolIds = {
@@ -19,16 +29,16 @@ Deno.test("should extract triples from record", () => {
             "degrees": [
                 {
                     "advised by": {
-                        "73697": "Hopcroft, John Edward H."
+                        "73697": "Hopcroft, John Edward H.",
                     },
                     "degree_msc": "Unknown",
                     "degree_type": "Ph.D.",
                     "degree_year": "1979",
                     "schools": [
-                        "Cornell University, United States"
+                        "Cornell University, United States",
                     ],
-                    "thesis_title": "Relativized Cryptography"
-                }
+                    "thesis_title": "Relativized Cryptography",
+                },
             ],
             "descendants": {
                 "advisees": [
@@ -43,32 +53,32 @@ Deno.test("should extract triples from record", () => {
                     ["124702", "Salvail, Louis"],
                     ["24124", "Paquet, Sebastian"],
                 ],
-                "descendant_count": 14
-            }
-        }
+                "descendant_count": 14,
+            },
+        },
     };
 
     const studentNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=73123");
     const advisorNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=73697");
     const refreshNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/refresh/73123"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/refresh/73123",
     );
     const projectNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/73123-1979"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/73123-1979",
     );
     const timeNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/73123-1979#timePeriod"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/73123-1979#timePeriod",
     );
     const timeEndNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/73123-1979#timePeriod/end"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/73123-1979#timePeriod/end",
     );
     const schoolNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/school/42"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/school/42",
     );
 
     const triples = Array.from(processRecord(record, schoolIds));
@@ -79,7 +89,9 @@ Deno.test("should extract triples from record", () => {
 
     const refreshDate = Temporal.Instant.from(triples[5][2].value);
     const now = Temporal.Now.instant();
-    const minRefreshDate = now.add(mathgenRefreshDelay).subtract(mathgenRefreshDelaySpread);
+    const minRefreshDate = now.add(mathgenRefreshDelay).subtract(
+        mathgenRefreshDelaySpread,
+    );
     const maxRefreshDate = now.add(mathgenRefreshDelay).add(mathgenRefreshDelaySpread);
 
     assertEquals(Temporal.Instant.compare(minRefreshDate, refreshDate), -1);
@@ -90,7 +102,11 @@ Deno.test("should extract triples from record", () => {
         [studentNode, rdfns.type, foaf.Person],
         [studentNode, foaf.firstName, rdf.literal("Gilles")],
         [studentNode, foaf.lastName, rdf.literal("Brassard")],
-        [studentNode, owl.sameAs, rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=41075")],
+        [
+            studentNode,
+            owl.sameAs,
+            rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=41075"),
+        ],
         [refreshNode, geniro.preferredUri, rdf.literal(studentNode.value)],
         [projectNode, geniro.student, studentNode],
         [projectNode, rdfns.type, geniro.PhDProject],
@@ -121,46 +137,46 @@ Deno.test("process record with no advisor", () => {
             "degrees": [
                 {
                     "advised by": {
-                        "0": "Unknown"
+                        "0": "Unknown",
                     },
                     "degree_msc": "Unknown",
                     "degree_type": "M.A.",
                     "degree_year": "1640",
                     "schools": [
-                        "Martin-Luther-Universität Halle-Wittenberg, Germany"
+                        "Martin-Luther-Universität Halle-Wittenberg, Germany",
                     ],
-                    "thesis_title": "Unknown"
-                }
+                    "thesis_title": "Unknown",
+                },
             ],
             "descendants": {
                 "advisees": [
-                    ["127962", "Walther, Michael d. J."]
+                    ["127962", "Walther, Michael d. J."],
                 ],
-                "descendant_count": 168528
-            }
-        }
+                "descendant_count": 168528,
+            },
+        },
     };
 
     const studentNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=230796");
     const refreshNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/refresh/230796"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/refresh/230796",
     );
     const projectNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/230796-1640"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/230796-1640",
     );
     const timeNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/230796-1640#timePeriod"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/230796-1640#timePeriod",
     );
     const timeEndNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/230796-1640#timePeriod/end"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/230796-1640#timePeriod/end",
     );
     const schoolNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/school/42"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/school/42",
     );
 
     const triples = Array.from(processRecord(record, schoolIds));
@@ -174,7 +190,11 @@ Deno.test("process record with no advisor", () => {
         [projectNode, dcterms.title, rdf.literal("Unknown")],
         [projectNode, geniro.grantedBy, schoolNode],
         [schoolNode, rdfns.type, org.Organization],
-        [schoolNode, skos.prefLabel, rdf.literal("Martin-Luther-Universität Halle-Wittenberg")],
+        [
+            schoolNode,
+            skos.prefLabel,
+            rdf.literal("Martin-Luther-Universität Halle-Wittenberg"),
+        ],
         [projectNode, geniro.timePeriod, timeNode],
         [timeNode, time.hasEnd, timeEndNode],
         [timeEndNode, time.inXSDDate, rdf.literal("1640-01-01", xsd.date)],
@@ -196,40 +216,40 @@ Deno.test("process record with unknown degree date", () => {
             "degrees": [
                 {
                     "advised by": {
-                        "17864": "Lagrange, Joseph Louis"
+                        "17864": "Lagrange, Joseph Louis",
                     },
                     "degree_msc": "33",
                     "degree_type": "Ph.D.",
                     "degree_year": "Unknown",
                     "schools": [
-                        "École Normale Supérieure, France"
+                        "École Normale Supérieure, France",
                     ],
-                    "thesis_title": "Unknown"
-                }
+                    "thesis_title": "Unknown",
+                },
             ],
             "descendants": {
                 "advisees": [
                     ["43262", "Plana, Giovanni Antonio Amedeo"],
-                    ["17946", "Dirichlet, Gustav Peter Lejeune"]
+                    ["17946", "Dirichlet, Gustav Peter Lejeune"],
                 ],
-                "descendant_count": 93352
-            }
-        }
+                "descendant_count": 93352,
+            },
+        },
     };
 
     const studentNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=17981");
     const advisorNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=17864");
     const refreshNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/refresh/17981"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/refresh/17981",
     );
     const projectNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/17981-unknown"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/17981-unknown",
     );
     const schoolNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/school/42"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/school/42",
     );
 
     const triples = Array.from(processRecord(record, schoolIds));
@@ -237,7 +257,11 @@ Deno.test("process record with unknown degree date", () => {
         [studentNode, rdfns.type, foaf.Person],
         [studentNode, foaf.firstName, rdf.literal("Jean-Baptiste")],
         [studentNode, foaf.lastName, rdf.literal("Fourier")],
-        [studentNode, owl.sameAs, rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=249547")],
+        [
+            studentNode,
+            owl.sameAs,
+            rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=249547"),
+        ],
         [refreshNode, geniro.preferredUri, rdf.literal(studentNode.value)],
         [projectNode, geniro.student, studentNode],
         [projectNode, rdfns.type, geniro.PhDProject],
@@ -266,16 +290,17 @@ Deno.test("process record with multiple years in degree field", () => {
                 {
                     "advised by": {
                         "129628": "Eglinger, Nikolaus",
-                        "54440": "Bernoulli, Jacob"
+                        "54440": "Bernoulli, Jacob",
                     },
                     "degree_msc": "92",
                     "degree_type": "Medicinae Dr.",
                     "degree_year": "1690, 1694",
                     "schools": [
-                        "Universität Basel, Switzerland"
+                        "Universität Basel, Switzerland",
                     ],
-                    "thesis_title": "Dissertatio de effervescentia et fermentatione; Dissertatio Inauguralis Physico-Anatomica de Motu Musculorum"
-                }
+                    "thesis_title":
+                        "Dissertatio de effervescentia et fermentatione; Dissertatio Inauguralis Physico-Anatomica de Motu Musculorum",
+                },
             ],
             "descendants": {
                 "advisees": [
@@ -285,33 +310,33 @@ Deno.test("process record with multiple years in degree field", () => {
                     ["38586", "Euler, Leonhard"],
                     ["108998", "Bernoulli, Daniel"],
                 ],
-                "descendant_count": 172869
-            }
-        }
+                "descendant_count": 172869,
+            },
+        },
     };
 
     const studentNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=53410");
     const advisor1Node = rdf.namedNode("http://mathgenealogy.org/id.php?id=54440");
     const advisor2Node = rdf.namedNode("http://mathgenealogy.org/id.php?id=129628");
     const refreshNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/refresh/53410"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/refresh/53410",
     );
     const projectNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/53410-1694"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/53410-1694",
     );
     const timeNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/53410-1694#timePeriod"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/53410-1694#timePeriod",
     );
     const timeEndNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/53410-1694#timePeriod/end"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/53410-1694#timePeriod/end",
     );
     const schoolNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/school/42"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/school/42",
     );
 
     const triples = Array.from(processRecord(record, schoolIds));
@@ -319,11 +344,21 @@ Deno.test("process record with multiple years in degree field", () => {
         [studentNode, rdfns.type, foaf.Person],
         [studentNode, foaf.firstName, rdf.literal("Johann")],
         [studentNode, foaf.lastName, rdf.literal("Bernoulli")],
-        [studentNode, owl.sameAs, rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=35690")],
+        [
+            studentNode,
+            owl.sameAs,
+            rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=35690"),
+        ],
         [refreshNode, geniro.preferredUri, rdf.literal(studentNode.value)],
         [projectNode, geniro.student, studentNode],
         [projectNode, rdfns.type, geniro.PhDProject],
-        [projectNode, dcterms.title, rdf.literal("Dissertatio de effervescentia et fermentatione; Dissertatio Inauguralis Physico-Anatomica de Motu Musculorum")],
+        [
+            projectNode,
+            dcterms.title,
+            rdf.literal(
+                "Dissertatio de effervescentia et fermentatione; Dissertatio Inauguralis Physico-Anatomica de Motu Musculorum",
+            ),
+        ],
         [projectNode, geniro.grantedBy, schoolNode],
         [schoolNode, rdfns.type, org.Organization],
         [schoolNode, skos.prefLabel, rdf.literal("Universität Basel")],
@@ -353,52 +388,55 @@ Deno.test("process record with multiple years in degree field", () => {
             "degrees": [
                 {
                     "advised by": {
-                        "125886": "Hamberger, Georg Erhard"
+                        "125886": "Hamberger, Georg Erhard",
                     },
                     "degree_msc": "92",
                     "degree_type": "Medicinae Dr.",
                     "degree_year": "1726",
                     "schools": [
-                        "Friedrich-Schiller-Universität Jena, Germany"
+                        "Friedrich-Schiller-Universität Jena, Germany",
                     ],
-                    "thesis_title": "Dissertationem chimicam penetrationem salis alcali in interstitia salis acidi per experimenta demonstrantem"
+                    "thesis_title":
+                        "Dissertationem chimicam penetrationem salis alcali in interstitia salis acidi per experimenta demonstrantem",
                 },
                 {
                     "advised by": {
-                        "125971": "Hilscher, Simon Paul"
+                        "125971": "Hilscher, Simon Paul",
                     },
                     "degree_msc": "92",
                     "degree_type": "Medicinae Dr.",
                     "degree_year": "1734",
                     "schools": [
-                        "Friedrich-Schiller-Universität Jena, Germany"
+                        "Friedrich-Schiller-Universität Jena, Germany",
                     ],
-                    "thesis_title": "Dissertatio inauguralis medica de principum militiam sequentium tuenda valetudine"
+                    "thesis_title":
+                        "Dissertatio inauguralis medica de principum militiam sequentium tuenda valetudine",
                 },
                 {
                     "advised by": {
-                        "125886": "Hamberger, Georg Erhard"
+                        "125886": "Hamberger, Georg Erhard",
                     },
                     "degree_msc": "26",
                     "degree_type": "D.Phil.",
                     "degree_year": "1725",
                     "schools": [
-                        "Friedrich-Schiller-Universität Jena, Germany"
+                        "Friedrich-Schiller-Universität Jena, Germany",
                     ],
-                    "thesis_title": "Dissertatio epistolica qua regulam Harrioti de modo ex aequationum signis numerum radicum tam verarum quam spuriarum eas componentium, cognoscendi, demonstrare, simulque rationem structurae instrumenti novi, sectionibus conicis secundi generis plerisque, ac omnibus primi, describendis apti"
+                    "thesis_title":
+                        "Dissertatio epistolica qua regulam Harrioti de modo ex aequationum signis numerum radicum tam verarum quam spuriarum eas componentium, cognoscendi, demonstrare, simulque rationem structurae instrumenti novi, sectionibus conicis secundi generis plerisque, ac omnibus primi, describendis apti",
                 },
                 {
                     "advised by": {
-                        "125971": "Hilscher, Simon Paul"
+                        "125971": "Hilscher, Simon Paul",
                     },
                     "degree_msc": "92",
                     "degree_type": "Medicinae Dr.",
                     "degree_year": "1730",
                     "schools": [
-                        "Friedrich-Schiller-Universität Jena, Germany"
+                        "Friedrich-Schiller-Universität Jena, Germany",
                     ],
-                    "thesis_title": "De natura ac principiis medicinae"
-                }
+                    "thesis_title": "De natura ac principiis medicinae",
+                },
             ],
             "descendants": {
                 "advisees": [
@@ -407,69 +445,69 @@ Deno.test("process record with multiple years in degree field", () => {
                     ["60816", "Garve, Christian"],
                     ["60817", "Scheibel, Johann Ephraim"],
                 ],
-                "descendant_count": 142176
-            }
-        }
+                "descendant_count": 142176,
+            },
+        },
     };
 
     const studentNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=60782");
     const advisor1Node = rdf.namedNode("http://mathgenealogy.org/id.php?id=125886");
     const advisor2Node = rdf.namedNode("http://mathgenealogy.org/id.php?id=125971");
     const refreshNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/refresh/60782"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/refresh/60782",
     );
     const project1Node = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1726"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1726",
     );
     const time1Node = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1726#timePeriod"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1726#timePeriod",
     );
     const time1EndNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1726#timePeriod/end"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1726#timePeriod/end",
     );
     const project2Node = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1734"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1734",
     );
     const time2Node = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1734#timePeriod"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1734#timePeriod",
     );
     const time2EndNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1734#timePeriod/end"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1734#timePeriod/end",
     );
     const project3Node = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1725"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1725",
     );
     const time3Node = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1725#timePeriod"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1725#timePeriod",
     );
     const time3EndNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1725#timePeriod/end"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1725#timePeriod/end",
     );
     const project4Node = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1730"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1730",
     );
     const time4Node = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1730#timePeriod"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1730#timePeriod",
     );
     const time4EndNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/60782-1730#timePeriod/end"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/60782-1730#timePeriod/end",
     );
     const schoolNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/school/42"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/school/42",
     );
 
     const triples = Array.from(processRecord(record, schoolIds));
@@ -477,12 +515,22 @@ Deno.test("process record with multiple years in degree field", () => {
         [studentNode, rdfns.type, foaf.Person],
         [studentNode, foaf.firstName, rdf.literal("Johann")],
         [studentNode, foaf.lastName, rdf.literal("Segner")],
-        [studentNode, owl.sameAs, rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=158085")],
+        [
+            studentNode,
+            owl.sameAs,
+            rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=158085"),
+        ],
         [refreshNode, geniro.preferredUri, rdf.literal(studentNode.value)],
 
         [project1Node, geniro.student, studentNode],
         [project1Node, rdfns.type, geniro.PhDProject],
-        [project1Node, dcterms.title, rdf.literal("Dissertationem chimicam penetrationem salis alcali in interstitia salis acidi per experimenta demonstrantem")],
+        [
+            project1Node,
+            dcterms.title,
+            rdf.literal(
+                "Dissertationem chimicam penetrationem salis alcali in interstitia salis acidi per experimenta demonstrantem",
+            ),
+        ],
         [project1Node, geniro.grantedBy, schoolNode],
         [schoolNode, rdfns.type, org.Organization],
         [schoolNode, skos.prefLabel, rdf.literal("Friedrich-Schiller-Universität Jena")],
@@ -494,7 +542,13 @@ Deno.test("process record with multiple years in degree field", () => {
 
         [project2Node, geniro.student, studentNode],
         [project2Node, rdfns.type, geniro.PhDProject],
-        [project2Node, dcterms.title, rdf.literal("Dissertatio inauguralis medica de principum militiam sequentium tuenda valetudine")],
+        [
+            project2Node,
+            dcterms.title,
+            rdf.literal(
+                "Dissertatio inauguralis medica de principum militiam sequentium tuenda valetudine",
+            ),
+        ],
         [project2Node, geniro.grantedBy, schoolNode],
         [schoolNode, rdfns.type, org.Organization],
         [schoolNode, skos.prefLabel, rdf.literal("Friedrich-Schiller-Universität Jena")],
@@ -506,7 +560,13 @@ Deno.test("process record with multiple years in degree field", () => {
 
         [project3Node, geniro.student, studentNode],
         [project3Node, rdfns.type, geniro.PhDProject],
-        [project3Node, dcterms.title, rdf.literal("Dissertatio epistolica qua regulam Harrioti de modo ex aequationum signis numerum radicum tam verarum quam spuriarum eas componentium, cognoscendi, demonstrare, simulque rationem structurae instrumenti novi, sectionibus conicis secundi generis plerisque, ac omnibus primi, describendis apti")],
+        [
+            project3Node,
+            dcterms.title,
+            rdf.literal(
+                "Dissertatio epistolica qua regulam Harrioti de modo ex aequationum signis numerum radicum tam verarum quam spuriarum eas componentium, cognoscendi, demonstrare, simulque rationem structurae instrumenti novi, sectionibus conicis secundi generis plerisque, ac omnibus primi, describendis apti",
+            ),
+        ],
         [project3Node, geniro.grantedBy, schoolNode],
         [schoolNode, rdfns.type, org.Organization],
         [schoolNode, skos.prefLabel, rdf.literal("Friedrich-Schiller-Universität Jena")],
@@ -542,42 +602,43 @@ Deno.test("process record without a real degree", () => {
             "degrees": [
                 {
                     "advised by": {
-                        "60985": "Leibniz, Gottfried Wilhelm"
+                        "60985": "Leibniz, Gottfried Wilhelm",
                     },
                     "degree_msc": "Unknown",
                     "degree_type": "no degree",
                     "degree_year": "Unknown",
                     "schools": [
-                        ""
+                        "",
                     ],
-                    "thesis_title": "We show a link to Leibniz to show a connection in our intellectual heritage."
-                }
+                    "thesis_title":
+                        "We show a link to Leibniz to show a connection in our intellectual heritage.",
+                },
             ],
             "descendants": {
                 "advisees": [
                     [
                         "112689",
-                        "Varignon, Pierre"
+                        "Varignon, Pierre",
                     ],
                     [
                         "54440",
-                        "Bernoulli, Jacob"
-                    ]
+                        "Bernoulli, Jacob",
+                    ],
                 ],
-                "descendant_count": 173246
-            }
-        }
+                "descendant_count": 173246,
+            },
+        },
     };
 
     const studentNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=143011");
     const advisorNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=60985");
     const refreshNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/refresh/143011"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/refresh/143011",
     );
     const projectNode = rdf.namedNode(
-        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org"
-        + "/project/143011-unknown"
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/project/143011-unknown",
     );
 
     const triples = Array.from(processRecord(record, schoolIds));
@@ -585,11 +646,21 @@ Deno.test("process record without a real degree", () => {
         [studentNode, rdfns.type, foaf.Person],
         [studentNode, foaf.firstName, rdf.literal("Nicolas")],
         [studentNode, foaf.lastName, rdf.literal("Malebranche")],
-        [studentNode, owl.sameAs, rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=493746")],
+        [
+            studentNode,
+            owl.sameAs,
+            rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=493746"),
+        ],
         [refreshNode, geniro.preferredUri, rdf.literal(studentNode.value)],
         [projectNode, geniro.student, studentNode],
         [projectNode, rdfns.type, geniro.PhDProject],
-        [projectNode, dcterms.title, rdf.literal("We show a link to Leibniz to show a connection in our intellectual heritage.")],
+        [
+            projectNode,
+            dcterms.title,
+            rdf.literal(
+                "We show a link to Leibniz to show a connection in our intellectual heritage.",
+            ),
+        ],
         [projectNode, geniro.advisor, advisorNode],
         [advisorNode, rdfns.type, foaf.Person],
     ]);

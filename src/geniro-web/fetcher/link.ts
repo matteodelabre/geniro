@@ -116,7 +116,7 @@ const makeProjectId = async (item, index) => {
 
     const year = "dateEnd" in row
         ? new Date(row.dateEnd.value).getUTCFullYear().toString()
-        : "unknown"
+        : "unknown";
 
     const stem = `${names.normalize(studentName)}-${year}`;
 

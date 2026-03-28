@@ -81,7 +81,7 @@ ul.tree, ul.tree ul {
 }
 
 ul.tree ul {
-    padding-left: .8em;
-    margin-left: .2em;
+    padding-left: 0.8em;
+    margin-left: 0.2em;
     border-left: 1px solid black;
 }

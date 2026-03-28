@@ -96,9 +96,10 @@ export const getObjects = async (
     subject: Node,
     predicate: Node,
 ): Promise<any[]> => {
-    console.log("getting object:", toNT(subject), toNT(predicate));
-
+    console.info("[get objects]", toNT(subject), toNT(predicate));
     const url = new URL(endpoint + "/statements");
+
+    // @ts-ignore Assignment is supported even though `url.search` is a string
     url.search = new URLSearchParams({
         "subj": toNT(subject),
         "pred": toNT(predicate),

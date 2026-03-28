@@ -30,7 +30,7 @@ const makeDate = (repr: string) => {
 const queryPaged = async function* (
     url: URL,
     verb: string,
-    args: any,
+    args,
     maxResults: number = Infinity,
 ) {
     let totalResults = 0;
@@ -71,7 +71,7 @@ const queryPaged = async function* (
 };
 
 export const processRecord = function* (
-    tree: any,
+    tree,
     origin: string,
     grantor: NamedNode,
 ) {

@@ -101,7 +101,7 @@ export const geniroOrganization = namespace(`${mainRdfNamespace}/org/`);
 export const getOrganizationURI = (id: string) =>
     sanitizeNamedNode(geniroOrganization(id));
 
-export const geniroAffiliationRoleLabel = (role) => {
+export const geniroAffiliationRoleLabel = (role: string) => {
     if (!role) {
         return "Rôle inconnu";
     }
@@ -118,7 +118,7 @@ export const geniroAffiliationRoleLabel = (role) => {
     }
 };
 
-export const geniroProjectTypeLabel = (type) => {
+export const geniroProjectTypeLabel = (type: string) => {
     if (!type) {
         return "Grade inconnu";
     }

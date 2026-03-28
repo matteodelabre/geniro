@@ -44,7 +44,9 @@ const fixUnidentified = async () => {
 
 const main = async () => {
     if (Deno.args.length < 1) {
-        console.error("available commands: fetch-oai-pmh, fetch-mathgen, fix-unidentified");
+        console.error(
+            "available commands: fetch-oai-pmh, fetch-mathgen, fix-unidentified",
+        );
         return;
     }
 

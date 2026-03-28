@@ -1,4 +1,4 @@
-import { adminEmail, adminName, minRequestDelay, maxRequestAttempts } from "../config.ts";
+import { adminEmail, adminName, maxRequestAttempts, minRequestDelay } from "../config.ts";
 import { setTimeout } from "node:timers/promises";
 
 const lastRequestTime: Record<string, number> = {};

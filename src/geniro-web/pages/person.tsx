@@ -37,7 +37,11 @@ const renderPerson = (id, personData, advisedProjects, studentProjects) => ({
         <>
             <h2>{personData.firstName} {personData.lastName}</h2>
             <p>
-                <a href={`${webRoot}/person/${id}/edit`}>Éditer les informations</a> · <a href={`${webRoot}/person/${id}/desc`}>Voir l’arbre de descendance</a> · <a href={`${webRoot}/person/${id}/asc`}>Voir l’arbre d’ascendance</a>
+                <a href={`${webRoot}/person/${id}/edit`}>Éditer les informations</a> ·
+                {" "}
+                <a href={`${webRoot}/person/${id}/desc`}>Voir l’arbre de descendance</a> ·
+                {" "}
+                <a href={`${webRoot}/person/${id}/asc`}>Voir l’arbre d’ascendance</a>
             </p>
 
             <h3>Affiliations</h3>
@@ -208,15 +212,7 @@ person.all("/:id/edit", async (ctx) => {
     });
 });
 
-const renderTree = (
-    root,
-    tree,
-    projects,
-    persons,
-    visited,
-    degree = null,
-    date = null,
-) => {
+const renderTree = (root, tree, projects, persons, visited) => {
     const badges = [];
 
     for (const affil of persons[root].affiliations) {
@@ -239,36 +235,42 @@ const renderTree = (
         }
     }
 
-    for (const {type: degree, dateEnd: date} of projects[root]) {
+    for (const { type: degree, dateEnd: date } of projects[root]) {
         badges.push(`(${geniroProjectTypeLabel(degree)} ${date?.split("-")?.[0]})`);
     }
 
     let subtree;
 
     if (!visited.has(root) && tree[root].length > 0) {
-        subtree = <ul>
-            {tree[root].map(child => 
-                renderTree(child, tree, projects, persons, visited, null, null)
-            )}
-        </ul>;
+        subtree = (
+            <ul>
+                {tree[root].map((child) =>
+                    renderTree(child, tree, projects, persons, visited, null, null)
+                )}
+            </ul>
+        );
     }
 
-    const head = <>
-        <a href={uriToUrl(root)}>
-            {persons[root].firstName} {persons[root].lastName}
-        </a>
-        {" " + badges.join(" ")}
-    </>;
+    const head = (
+        <>
+            <a href={uriToUrl(root)}>
+                {persons[root].firstName} {persons[root].lastName}
+            </a>
+            {" " + badges.join(" ")}
+        </>
+    );
 
     visited.add(root);
 
     if (subtree) {
-        return <li>
-            <details open>
-                <summary>{head}</summary>
-                {subtree}
-            </details>
-        </li>;
+        return (
+            <li>
+                <details open>
+                    <summary>{head}</summary>
+                    {subtree}
+                </details>
+            </li>
+        );
     }
 
     return <li>{head}</li>;
@@ -324,18 +326,25 @@ person.get("/:id/desc", async (ctx) => {
     }
 
     render(ctx, {
-        title: <>{persons[uri.value].firstName} {persons[uri.value].lastName} · Descendance</>,
-        content: <>
-            <h2>
-                Arbre de descendance de <a href={`${webRoot}/person/${id}`}>
-                    {persons[uri.value].firstName} {persons[uri.value].lastName}
-                </a>
-            </h2>
+        title: (
+            <>
+                {persons[uri.value].firstName} {persons[uri.value].lastName} · Descendance
+            </>
+        ),
+        content: (
+            <>
+                <h2>
+                    Arbre de descendance de{" "}
+                    <a href={`${webRoot}/person/${id}`}>
+                        {persons[uri.value].firstName} {persons[uri.value].lastName}
+                    </a>
+                </h2>
 
-            <ul class="tree">
-                {renderTree(uri.value, tree, projectsByStudent, persons, new Set())}
-            </ul>
-        </>,
+                <ul class="tree">
+                    {renderTree(uri.value, tree, projectsByStudent, persons, new Set())}
+                </ul>
+            </>
+        ),
     });
 });
 
@@ -363,17 +372,22 @@ person.get("/:id/asc", async (ctx) => {
     }
 
     render(ctx, {
-        title: <>{persons[uri.value].firstName} {persons[uri.value].lastName} · Ascendance</>,
-        content: <>
-            <h2>
-                Arbre d’ascendance de <a href={`${webRoot}/person/${id}`}>
-                    {persons[uri.value].firstName} {persons[uri.value].lastName}
-                </a>
-            </h2>
+        title: (
+            <>{persons[uri.value].firstName} {persons[uri.value].lastName} · Ascendance</>
+        ),
+        content: (
+            <>
+                <h2>
+                    Arbre d’ascendance de{" "}
+                    <a href={`${webRoot}/person/${id}`}>
+                        {persons[uri.value].firstName} {persons[uri.value].lastName}
+                    </a>
+                </h2>
 
-            <ul class="tree">
-                {renderTree(uri.value, tree, projectsByStudent, persons, new Set())}
-            </ul>
-        </>,
+                <ul class="tree">
+                    {renderTree(uri.value, tree, projectsByStudent, persons, new Set())}
+                </ul>
+            </>
+        ),
     });
 });
