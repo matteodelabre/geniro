@@ -13,6 +13,13 @@ export const onto = makeClosedNamespace(
     ],
 );
 
+export const ofn = makeClosedNamespace(
+    namespace("http://www.ontotext.com/sparql/functions/"),
+    [
+        "secondsBetween",
+    ],
+);
+
 const iriDisallowedChars = /[<>\"{}|^`\\\][\x00-\x20]/g;
 const iriPattern = /^.+:.*$/;
 

@@ -21,6 +21,7 @@ export const xsd = makeClosedNamespace(
     namespace("http://www.w3.org/2001/XMLSchema#"),
     [
         "date",
+        "dateTime",
     ],
 );
 
@@ -61,6 +62,7 @@ export const geniro = makeClosedNamespace(
         "PhDProject",
         "Project",
         "advisor",
+        "expires",
         "grantedBy",
         "preferredUri",
         "student",
