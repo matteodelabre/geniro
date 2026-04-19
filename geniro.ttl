@@ -8,6 +8,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix time: <http://www.w3.org/2006/time#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 geniro: a owl:Ontology ;
     dcterms:title "Academic genealogy ontology"@en ;
@@ -86,9 +87,39 @@ geniro:PhDProject a owl:Class ;
 #  - the role through org:role
 #  - the affiliation period through org:memberDuring
 
-geniro:directorRole a org:Role .
-geniro:professorRole a org:Role .
-geniro:studentRole a org:Role .
+geniro:roleDirector a org:Role ;
+    skos:prefLabel "Directeur·ice"@fr ;
+    skos:prefLabel "Head"@en .
+
+geniro:roleProfessor a org:Role ;
+    skos:prefLabel "Professeur·e"@fr ;
+    skos:prefLabel "Professor"@en .
+
+geniro:roleProfessorEmeritus a org:Role ;
+    skos:broader geniro:professorRole ;
+    skos:prefLabel "Professeur·e émérite"@fr-ca ;
+    skos:prefLabel "Professor emeritus"@en .
+
+geniro:roleProfessorFull a org:Role ;
+    skos:broader geniro:professorRole ;
+    skos:prefLabel "Professeur·e titulaire"@fr-ca ;
+    skos:prefLabel "Full professor"@en ;
+    skos:prefLabel "Professeur·e des universités"@fr-fr .
+
+geniro:roleProfessorAssociate a org:Role ;
+    skos:broader geniro:professorRole ;
+    skos:prefLabel "Professeur·e agrégé·e"@fr-ca ;
+    skos:prefLabel "Associate professor"@en ;
+    skos:prefLabel "Maître.sse de conférences"@fr-fr .
+
+geniro:roleProfessorAssistant a org:Role ;
+    skos:broader geniro:professorRole ;
+    skos:prefLabel "Professeur·e adjoint·e"@fr-ca ;
+    skos:prefLabel "Assistant professor"@en .
+
+geniro:roleStudent a org:Role ;
+    skos:prefLabel "Étudiant·e"@fr ;
+    skos:prefLabel "Student"@en .
 
 # Preferred URI
 

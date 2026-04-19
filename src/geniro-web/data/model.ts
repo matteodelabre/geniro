@@ -71,8 +71,13 @@ export const geniro = makeClosedNamespace(
         "student",
         "thesis",
         "timePeriod",
-        "professorRole",
-        "directorRole",
+        "roleDirector",
+        "roleProfessor",
+        "roleProfessorEmeritus",
+        "roleProfessorFull",
+        "roleProfessorAssociate",
+        "roleProfessorAssistant",
+        "roleStudent",
     ],
 );
 
@@ -110,11 +115,26 @@ export const geniroAffiliationRoleLabel = (role: string) => {
     }
 
     switch (role) {
-        case geniro.professorRole.value:
+        case geniro.roleProfessor.value:
             return "Professeur·e";
 
-        case geniro.directorRole.value:
+        case geniro.roleProfessorEmeritus.value:
+            return "Professeur·e émérite";
+
+        case geniro.roleProfessorFull.value:
+            return "Professeur·e titulaire";
+
+        case geniro.roleProfessorAssociate.value:
+            return "Professeur·e agrégé·e";
+
+        case geniro.roleProfessorAssistant.value:
+            return "Professeur·e adjoint·e";
+
+        case geniro.roleDirector.value:
             return "Directeur·ice";
+
+        case geniro.roleStudent.value:
+            return "Étudiant·e";
 
         default:
             return role.substring(geniro.$().value.length);
