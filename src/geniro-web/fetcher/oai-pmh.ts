@@ -48,7 +48,12 @@ const queryPaged = async function* (
             };
 
         const data = await requests.query("GET", url, localArgs);
-        const tree = xml.parse(await data.text());
+
+        // workaround: XML is sent double-encoded
+        let text = await data.text();
+        text = text.replaceAll("&amp;", "&");
+
+        const tree = xml.parse(text);
         const error = xml.findOne(tree, namespaces.oai, "error")?.textContent;
 
         if (error) {
@@ -123,9 +128,11 @@ export const processRecord = function* (
     const descLangs = ["fr", "en"];
 
     for (const [i, desc] of Object.entries(descs)) {
-        // workaround: descriptions are double-encoded
-        const parsedDesc = xml.decode(desc.textContent);
-        yield [projectNode, dcterms.description, rdf.literal(parsedDesc, descLangs[i])];
+        yield [
+            projectNode,
+            dcterms.description,
+            rdf.literal(desc.textContent, descLangs[i]),
+        ];
     }
 
     // Extract end date
