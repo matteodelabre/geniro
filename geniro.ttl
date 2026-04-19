@@ -22,22 +22,6 @@ geniro: a owl:Ontology ;
     vann:preferredNamespacePrefix "geniro" ;
     vann:preferredNamespaceUri "http://diro.umontreal.ca/geniro#" .
 
-# Preferred URI
-
-geniro:preferredUri a owl:DatatypeProperty, owl:FunctionalProperty ;
-    rdfs:isDefinedBy geniro: ;
-    rdfs:label "Preferred URI"@en ;
-    rdfs:comment "Canonical URI used for referring to an entity obtained by merging information from several sources (must be provided as a literal)"@en ;
-    rdfs:range xsd:string .
-
-# Expiration time
-
-geniro:expires a owl:DatatypeProperty ;
-    rdfs:isDefinedBy geniro: ;
-    rdfs:label "Expiration time"@en ;
-    rdfs:comment "For automatically-harvested data, indicates the date and time at which the information expires and should be refreshed"@en ;
-    rdfs:range xsd:dateTime .
-
 # geniro:Project
 #
 # - Use dcterms:title for the full title of the thesis or dissertation associated to
@@ -105,3 +89,36 @@ geniro:PhDProject a owl:Class ;
 geniro:directorRole a org:Role .
 geniro:professorRole a org:Role .
 geniro:studentRole a org:Role .
+
+# Preferred URI
+
+geniro:preferredUri a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:isDefinedBy geniro: ;
+    rdfs:label "Preferred URI"@en ;
+    rdfs:comment "Canonical URI used for referring to an entity obtained by merging information from several sources (must be provided as a literal)"@en ;
+    rdfs:range xsd:string .
+
+# geniro:Mirror
+
+geniro:Mirror a owl:Class ;
+    rdfs:isDefinedBy geniro: ;
+    rdfs:label "Data mirror"@en ;
+    rdfs:comment "Keep track of data harvested automatically from an external source"@en .
+
+geniro:entity a owl:DatatypeProperty ;
+    rdfs:isDefinedBy geniro: ;
+    rdfs:label "Mirrored entity"@en ;
+    rdfs:comment "Entity, designated as a literal URI, that is created by a data mirror. All triples of which this entity is a subject or an object represent data mirrored from an external source"@en ;
+    rdfs:range xsd:dateTime .
+
+geniro:updated a owl:DatatypeProperty ;
+    rdfs:isDefinedBy geniro: ;
+    rdfs:label "Last update time"@en ;
+    rdfs:comment "Date and time at which the external information was last updated"@en ;
+    rdfs:range xsd:dateTime .
+
+geniro:expires a owl:DatatypeProperty ;
+    rdfs:isDefinedBy geniro: ;
+    rdfs:label "Expiration time"@en ;
+    rdfs:comment "Date and time at which the external information should be refreshed"@en ;
+    rdfs:range xsd:dateTime .

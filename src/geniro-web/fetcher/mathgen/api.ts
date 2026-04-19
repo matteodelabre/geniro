@@ -1,9 +1,13 @@
 import rdf from "@rdfjs/data-model";
+import { mathgenRefreshDelay, mathgenRefreshDelaySpread } from "../../config.ts";
 import {
-    mainRdfNamespace,
-    mathgenRefreshDelay,
-    mathgenRefreshDelaySpread,
-} from "../../config.ts";
+    extractPersonId,
+    makeMathscinetUri,
+    makeMirrorUri,
+    makePersonUri,
+    makeProjectUri,
+    makeSchoolUri,
+} from "./model.ts";
 import {
     dcterms,
     foaf,
@@ -18,48 +22,6 @@ import {
 import * as requests from "../requests.ts";
 
 const apiRoot = "https://mathgenealogy.org:8000/";
-
-export const mathscinetNamespace = "http://mathscinet.ams.org/mathscinet";
-
-export const mathgenNamespace = "http://mathgenealogy.org";
-
-export const externalMathgenNamespace = `${mainRdfNamespace}/external/mathgenealogy.org`;
-
-export const makePersonUri = (personId: string) => {
-    return rdf.namedNode(`${mathgenNamespace}/id.php?id=${personId}`);
-};
-
-export const extractPersonId = (person: rdf.NamedNode) => {
-    const prefix = `${mathgenNamespace}/id.php?id=`;
-
-    if (person.value.startsWith(prefix)) {
-        return person.value.slice(prefix.length);
-    }
-
-    throw new Error(`URI is not a valid MathGenealogy person: '${person.value}'`);
-};
-
-const makeMathscinetUri = (mrauthId: string) => {
-    return rdf.namedNode(`${mathscinetNamespace}/author?authorId=${mrauthId}`);
-};
-
-const makeRefreshUri = (personId: string) => {
-    return rdf.namedNode(`${externalMathgenNamespace}/refresh/${personId}`);
-};
-
-const makeProjectUri = (studentId: string, projectYear: string) => {
-    if (isNaN(projectYear)) {
-        projectYear = "unknown";
-    }
-
-    return rdf.namedNode(
-        `${externalMathgenNamespace}/project/${studentId}-${projectYear}`,
-    );
-};
-
-const makeSchoolUri = (schoolId: string) => {
-    return rdf.namedNode(`${externalMathgenNamespace}/school/${schoolId}`);
-};
 
 export const getToken = async (email: string, password: string): Promise<string> => {
     const res = await requests.query("POST", apiRoot + "login", { email, password });
@@ -111,35 +73,38 @@ export const querySchools = async (token: string) => {
     return [idToName, nameToId];
 };
 
-export const processRecord = function* (data, schoolIds) {
-    // Extract student data
+export const processRecord = function* (schoolIds, data) {
     const studentId = data.ID;
     const studentNode = makePersonUri(studentId);
-    const firstName = data.given_name;
-    const lastName = data.family_name;
-
     yield [studentNode, rdfns.type, foaf.Person];
-    yield [studentNode, foaf.firstName, rdf.literal(firstName)];
-    yield [studentNode, foaf.lastName, rdf.literal(lastName)];
-
-    if (data.mrauth_id) {
-        yield [studentNode, owl.sameAs, makeMathscinetUri(data.mrauth_id)];
-    }
 
     // Generate refresh time
-    const expires = Temporal.Now.instant()
+    const updated = Temporal.Now.instant();
+    const expires = updated
         .add(mathgenRefreshDelay)
         .add({
             seconds: Math.floor(
                 (Math.random() * 2 - 1) *
                     mathgenRefreshDelaySpread.total("seconds"),
             ),
-        })
-        .toString();
+        });
 
-    const refreshNode = makeRefreshUri(studentId);
-    yield [refreshNode, geniro.preferredUri, rdf.literal(studentNode.value)];
-    yield [refreshNode, geniro.expires, rdf.literal(expires, xsd.dateTime)];
+    const mirrorNode = makeMirrorUri(studentId);
+    yield [mirrorNode, rdfns.type, geniro.Mirror];
+    yield [mirrorNode, geniro.entity, rdf.literal(studentNode.value)];
+    yield [mirrorNode, geniro.updated, rdf.literal(updated.toString(), xsd.dateTime)];
+    yield [mirrorNode, geniro.expires, rdf.literal(expires.toString(), xsd.dateTime)];
+
+    // Extract student data
+    const firstName = data.given_name;
+    const lastName = data.family_name;
+
+    yield [studentNode, foaf.firstName, rdf.literal(firstName)];
+    yield [studentNode, foaf.lastName, rdf.literal(lastName)];
+
+    if (data.mrauth_id) {
+        yield [studentNode, owl.sameAs, makeMathscinetUri(data.mrauth_id)];
+    }
 
     for (const degree of data.student_data.degrees) {
         let projectYear = degree.degree_year;
@@ -151,6 +116,7 @@ export const processRecord = function* (data, schoolIds) {
 
         const projectNode = makeProjectUri(studentId, projectYear);
 
+        yield [mirrorNode, geniro.entity, rdf.literal(projectNode.value)];
         yield [projectNode, geniro.student, studentNode];
 
         // Degree type is always assumed to be doctoral in MathGenealogy
@@ -186,8 +152,11 @@ export const processRecord = function* (data, schoolIds) {
         for (const advisorId of Object.keys(degree["advised by"])) {
             if (advisorId !== "0") {
                 const advisorNode = makePersonUri(advisorId);
+                const advisorMirrorNode = makeMirrorUri(advisorId);
                 yield [projectNode, geniro.advisor, advisorNode];
                 yield [advisorNode, rdfns.type, foaf.Person];
+                yield [advisorMirrorNode, rdfns.type, geniro.Mirror];
+                yield [advisorMirrorNode, geniro.entity, rdf.literal(advisorNode.value)];
             }
         }
 
@@ -195,6 +164,8 @@ export const processRecord = function* (data, schoolIds) {
         if (!isNaN(projectYear)) {
             const interval = rdf.namedNode(projectNode.value + "#timePeriod");
             const end = rdf.namedNode(interval.value + "/end");
+            yield [mirrorNode, geniro.entity, rdf.literal(interval.value)];
+            yield [mirrorNode, geniro.entity, rdf.literal(end.value)];
             yield [projectNode, geniro.timePeriod, interval];
             yield [interval, time.hasEnd, end];
             yield [

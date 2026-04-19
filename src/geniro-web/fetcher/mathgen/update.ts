@@ -1,55 +1,55 @@
 import rdf from "@rdfjs/data-model";
-import { foaf, geniro, rdf as rdfns } from "../../data/model.ts";
-import { ofn, query, update } from "../../data/sparql.ts";
+import { databaseEndpoint } from "../../config.ts";
+import { clearExpiredMirrors, findExpiredMirrors, findUnmirrored } from "../mirrors.ts";
+import { extractMirrorId, makePersonUri, mathgenNamespace, mathgenMirrorNamespace } from "./model.ts";
+import { processRecord, queryPerson } from "./api.ts";
+import { update } from "../../data/sparql.ts";
 import * as builder from "../../data/builder.ts";
-import { databaseEndpoint, mathgenRefreshDelay } from "../../config.ts";
-import { mathgenNamespace, processRecord, queryPerson } from "./api.ts";
 
-const mergeTriples = async function* (token: string, schoolIds, persons: NamedNode[]) {
-    for (const person of persons) {
-        const data = await queryPerson(token, person);
-        yield* processRecord(schoolIds, data);
+export const refresh = async (token: string, schoolIds) => {
+    let updated = true;
+
+    // Repeat until stability since each data pull may create new unmirrored persons
+    while (updated) {
+        updated = false;
+
+        // Find entities that still lack a mirror.
+        const missing = await findUnmirrored(mathgenNamespace);
+
+        if (missing.length > 0) {
+            let allTriples = [];
+
+            for (const person of missing) {
+                const data = await queryPerson(token, person);
+                const triples = await Array.fromAsync(processRecord(schoolIds, data));
+                allTriples = allTriples.concat(triples);
+            }
+
+            await update(databaseEndpoint, builder.insertData(allTriples));
+            updated = true;
+        }
+
+        // Refresh existing mirrors
+        const pending = await findExpiredMirrors(mathgenMirrorNamespace);
+
+        if (pending.length > 0) {
+            // Retrieve updated triples first
+            let allTriples = [];
+
+            for (const mirror of pending) {
+                const id = extractMirrorId(mirror);
+                const person = makePersonUri(id);
+                const data = await queryPerson(token, person);
+                const triples = await Array.fromAsync(processRecord(schoolIds, data));
+                allTriples = allTriples.concat(triples);
+            }
+
+            // Clear out old triples only after the new triples have been retrieved
+            await clearExpiredMirrors(mathgenMirrorNamespace);
+
+            // Commit updated triples
+            await update(databaseEndpoint, builder.insertData(allTriples));
+            updated = true;
+        }
     }
-};
-
-// TODO: clear out old records for persons to refresh
-export const refresh = async (token: string, schoolIds, persons: NamedNode[]) => {
-    await update(
-        databaseEndpoint,
-        builder.insertData(
-            await Array.fromAsync(mergeTriples(token, schoolIds, persons)),
-        ),
-    );
-};
-
-export const findExpiredPersons = async () => {
-    const person = rdf.variable("person");
-    const lastUpdate = rdf.variable("lastUpdate");
-
-    const results = await query(
-        databaseEndpoint,
-        builder.select([person])
-            .where([
-                [person, rdfns.type, foaf.Person],
-                builder.filter([
-                    `strstarts(str(?${person.value}), "${mathgenNamespace}")`,
-                ]),
-                builder.optional([[
-                    person,
-                    geniro.lastUpdate,
-                    lastUpdate,
-                ]]),
-                builder.filter([
-                    `<${ofn.secondsBetween.value}>(
-                        coalesce(
-                            ?${lastUpdate.value},
-                            "1970-01-01T00:00:00Z"^^xsd:dateTime
-                        ),
-                        now()
-                    ) > ${mathgenRefreshDelay}`,
-                ]),
-            ]),
-    );
-
-    return results.map(({ person }) => person);
 };

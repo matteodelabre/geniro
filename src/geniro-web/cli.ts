@@ -1,6 +1,6 @@
 import * as builder from "./data/builder.ts";
 import * as oaiPmh from "./fetcher/oai-pmh.ts";
-import * as mathgenData from "./fetcher/mathgen/update.ts";
+import * as mathgenUpdate from "./fetcher/mathgen/update.ts";
 import * as mathgenApi from "./fetcher/mathgen/api.ts";
 import * as link from "./fetcher/link.ts";
 import * as sparql from "./data/sparql.ts";
@@ -21,16 +21,7 @@ const fetchOaiPmh = async (baseUrl, baseSet, grantorUri) => {
 const fetchMathgen = async () => {
     const schoolIds = JSON.parse(await Deno.readTextFile("mathgenschools.json"));
     const token = await mathgenApi.getToken(mathgenLogin, mathgenPassword);
-
-    while (true) {
-        const pending = await mathgenData.findExpiredPersons();
-
-        if (pending.length === 0) {
-            break;
-        }
-
-        await mathgenData.refresh(token, schoolIds, pending);
-    }
+    await mathgenUpdate.refresh(token, schoolIds);
 };
 
 const fixUnidentified = async () => {

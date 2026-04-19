@@ -59,10 +59,14 @@ Deno.test("should extract triples from record", () => {
     };
 
     const studentNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=73123");
-    const advisorNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=73697");
-    const refreshNode = rdf.namedNode(
+    const mirrorNode = rdf.namedNode(
         "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
-            "/refresh/73123",
+            "/mirror/73123",
+    );
+    const advisorNode = rdf.namedNode("http://mathgenealogy.org/id.php?id=73697");
+    const advisorMirrorNode = rdf.namedNode(
+        "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
+            "/mirror/73697",
     );
     const projectNode = rdf.namedNode(
         "http://diro.umontreal.ca/geniro/external/mathgenealogy.org" +
@@ -83,23 +87,34 @@ Deno.test("should extract triples from record", () => {
 
     const triples = Array.from(processRecord(record, schoolIds));
 
-    // Check that the expiration date is between the configured bounds
-    assertEquals(triples[5][0], refreshNode);
-    assertEquals(triples[5][1], geniro.expires);
-
-    const refreshDate = Temporal.Instant.from(triples[5][2].value);
+    // Check that the updated and expiration dates are valid
     const now = Temporal.Now.instant();
-    const minRefreshDate = now.add(mathgenRefreshDelay).subtract(
+
+    assertEquals(triples[3][0], mirrorNode);
+    assertEquals(triples[3][1], geniro.updated);
+    const actualNow = Temporal.Instant.from(triples[3][2].value);
+
+    assertEquals(Temporal.Instant.compare(now.subtract({ seconds: 5 }), actualNow), -1);
+    assertEquals(Temporal.Instant.compare(actualNow, now.add({ seconds: 5 })), -1);
+
+    assertEquals(triples[4][0], mirrorNode);
+    assertEquals(triples[4][1], geniro.expires);
+    const refreshDate = Temporal.Instant.from(triples[4][2].value);
+
+    const minRefreshDate = actualNow.add(mathgenRefreshDelay).subtract(
         mathgenRefreshDelaySpread,
     );
-    const maxRefreshDate = now.add(mathgenRefreshDelay).add(mathgenRefreshDelaySpread);
-
+    const maxRefreshDate = actualNow.add(mathgenRefreshDelay).add(
+        mathgenRefreshDelaySpread,
+    );
     assertEquals(Temporal.Instant.compare(minRefreshDate, refreshDate), -1);
     assertEquals(Temporal.Instant.compare(refreshDate, maxRefreshDate), -1);
 
     // Check other triples
-    assertEquals(triples.slice(0, 5).concat(triples.slice(6)), [
+    assertEquals(triples.slice(0, 3).concat(triples.slice(5)), [
         [studentNode, rdfns.type, foaf.Person],
+        [mirrorNode, rdfns.type, geniro.Mirror],
+        [mirrorNode, geniro.entity, rdf.literal(studentNode.value)],
         [studentNode, foaf.firstName, rdf.literal("Gilles")],
         [studentNode, foaf.lastName, rdf.literal("Brassard")],
         [
@@ -107,7 +122,7 @@ Deno.test("should extract triples from record", () => {
             owl.sameAs,
             rdf.namedNode("http://mathscinet.ams.org/mathscinet/author?authorId=41075"),
         ],
-        [refreshNode, geniro.preferredUri, rdf.literal(studentNode.value)],
+        [mirrorNode, geniro.entity, rdf.literal(projectNode.value)],
         [projectNode, geniro.student, studentNode],
         [projectNode, rdfns.type, geniro.PhDProject],
         [projectNode, dcterms.title, rdf.literal("Relativized Cryptography")],
@@ -116,6 +131,10 @@ Deno.test("should extract triples from record", () => {
         [schoolNode, skos.prefLabel, rdf.literal("Cornell University")],
         [projectNode, geniro.advisor, advisorNode],
         [advisorNode, rdfns.type, foaf.Person],
+        [advisorMirrorNode, rdfns.type, geniro.Mirror],
+        [advisorMirrorNode, geniro.entity, rdf.literal(advisorNode.value)],
+        [mirrorNode, geniro.entity, rdf.literal(timeNode.value)],
+        [mirrorNode, geniro.entity, rdf.literal(timeEndNode.value)],
         [projectNode, geniro.timePeriod, timeNode],
         [timeNode, time.hasEnd, timeEndNode],
         [timeEndNode, time.inXSDDate, rdf.literal("1979-01-01", xsd.date)],
