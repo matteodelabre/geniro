@@ -110,6 +110,71 @@ person.get("/:id", async (ctx) => {
     }
 });
 
+const knownSources = {
+    "Mathematics Genealogy Project": {
+        namespace: "http://mathgenealogy.org/id.php?id=",
+        link: part => `https://mathgenealogy.org/id.php?id=${part}`,
+    },
+    "Papyrus": {
+        namespace: "http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/",
+        link: part => `https://umontreal.scholaris.ca/search?query=${part}`,
+    },
+};
+
+const dateFormatter = new Intl.DateTimeFormat("fr-CA");
+const formatInstant = (instant) => (
+    <time datetime={instant.toString()}>
+        {dateFormatter.format(instant)}
+    </time>
+);
+
+const formatAlias = (alias, info) => {
+    let sourceId = <span class="source-id">Autre: {alias}</span>;
+
+    for (const [name, source] of Object.entries(knownSources)) {
+        if (alias.startsWith(source.namespace)) {
+            const suffix = alias.slice(source.namespace.length);
+            const link = source.link(suffix);
+            sourceId = <a class="source-id" href={link}>{name}: {suffix}</a>;
+        }
+    }
+
+    let updated = null;
+    let expires = null;
+    let noData = null;
+
+    if ("updated" in info) {
+        updated = (
+            <>
+                <br />
+                Dernière mise à jour: {formatInstant(info.updated)}
+            </>
+        );
+    }
+
+    if ("expires" in info) {
+        expires = (
+            <>
+                <br />
+                Prochaine mise à jour: {formatInstant(info.expires)}
+            </>
+        );
+    }
+
+    if (!updated && !expires) {
+        noData = (
+            <>
+                <br />
+                <span class="source-nodata">
+                    Aucune donnée provenant de cette source
+                </span>
+            </>
+        );
+    }
+
+    return <>{sourceId}{updated}{expires}{noData}</>;
+};
+
 person.all("/:id/edit", async (ctx) => {
     const { id } = ctx.params;
     const uri = getPersonURI(id);
@@ -146,6 +211,7 @@ person.all("/:id/edit", async (ctx) => {
 
     const { aliases } = await query.aliases(uri);
 
+
     render(ctx, {
         title: <>Édition</>,
         content: (
@@ -155,12 +221,9 @@ person.all("/:id/edit", async (ctx) => {
                 </p>
                 <h3>Sources</h3>
                 <table>
-                    <tr>
-                        <td>{uri.value}</td>
-                    </tr>
-                    {aliases.map((alias) => (
+                    {Object.entries(aliases).map(([alias, aliasInfo]) => (
                         <tr>
-                            <td>{alias}</td>
+                            <td>{formatAlias(alias, aliasInfo)}</td>
                             <td>
                                 <form method="POST">
                                     <button
@@ -177,6 +240,11 @@ person.all("/:id/edit", async (ctx) => {
                     <tr>
                         <form method="POST">
                             <td>
+                                <select name={formInputs.alias.addType}>
+                                    <option>Mathematics Genealogy Project</option>
+                                    <option>Papyrus</option>
+                                    <option>Autre</option>
+                                </select>
                                 <input
                                     type="url"
                                     required
@@ -224,11 +292,11 @@ const renderTree = (root, tree, projects, persons, visited) => {
             const range = `${yearStart}-${yearEnd}`;
 
             switch (affil.role) {
-                case geniro.professorRole.value:
+                case geniro.roleProfessor.value:
                     badges.push(`(professeur.e DIRO ${range})`);
                     break;
 
-                case geniro.directorRole.value:
+                case geniro.roleDirector.value:
                     badges.push(`(directeur.ice DIRO ${range})`);
                     break;
             }

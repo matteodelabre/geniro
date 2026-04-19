@@ -73,33 +73,60 @@ export const triplesByAlias = async (entity: rdf.NamedNode) => {
 };
 
 export const aliases = async (entity: rdf.NamedNode) => {
-    const preferredUri = rdf.variable("preferredUri");
+    const main = rdf.variable("main");
+    const alias = rdf.variable("alias");
+    const updated = rdf.variable("updated");
+    const expires = rdf.variable("expires");
     const sameAs = rdf.variable("sameAs");
+    const mirror = rdf.variable("mirror");
 
     const rows = await query(
         databaseEndpoint,
-        builder.select([preferredUri, sameAs])
+        builder.select([main, alias, updated, expires])
             .where([
-                [entity, geniro.preferredUri, preferredUri],
-                builder.optional([[entity, owl.sameAs, sameAs]]),
+                builder.union([
+                    [
+                        [entity, geniro.preferredUri, main],
+                    ],
+                    [
+                        [entity, owl.sameAs, sameAs],
+                        builder.bind(alias, "STR(?sameAs)"),
+                        builder.optional([
+                            [mirror, geniro.entity, alias],
+                            [mirror, geniro.updated, updated],
+                            [mirror, geniro.expires, expires],
+                        ]),
+                    ],
+                ]),
             ]),
     );
 
-    if (rows.length === 0) {
-        return { uri: null, aliases: [] };
-    }
-
-    const uri = rows[0][preferredUri.value].value;
-    const aliases = new Set();
+    const result = { uri: null, aliases: {} };
 
     for (const row of rows) {
-        if (sameAs.value in row) {
-            aliases.add(row[sameAs.value].value);
+        if ("main" in row) {
+            result.uri = row.main.value;
+        }
+
+        if ("alias" in row) {
+            result.aliases[row.alias.value] = {};
+
+            if ("updated" in row) {
+                result.aliases[row.alias.value].updated = Temporal.Instant.from(
+                    row.updated.value,
+                );
+            }
+
+            if ("expires" in row) {
+                result.aliases[row.alias.value].expires = Temporal.Instant.from(
+                    row.expires.value,
+                );
+            }
         }
     }
 
-    aliases.delete(uri);
-    return { uri, aliases: Array.from(aliases) };
+    delete result.aliases[result.uri];
+    return result;
 };
 
 /**
