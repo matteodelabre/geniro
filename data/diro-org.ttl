@@ -1619,6 +1619,27 @@
 <http://diro.umontreal.ca/geniro/project/max-mignotte-1998#timePeriod/end>
     time:inXSDDate "1998-01-01"^^xsd:date .
 
+## Ioannis Mitliagkas
+
+<http://diro.umontreal.ca/geniro/person/ioannis-mitliagkas> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/ioannis-mitliagkas" ;
+    foaf:firstName "Ioannis" ;
+    foaf:lastName "Mitliagkas" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/ioannis-mitliagkas> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=302112> .
+
+<http://diro.umontreal.ca/geniro/person/ioannis-mitliagkas#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/ioannis-mitliagkas> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/ioannis-mitliagkas#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/ioannis-mitliagkas#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/ioannis-mitliagkas#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/ioannis-mitliagkas#membership-start>
+    time:inXSDDate "2017-09-01"^^xsd:date .
+
 ## Stefan Monnier
 
 <http://diro.umontreal.ca/geniro/person/stefan-monnier> a foaf:Person ;
@@ -1995,9 +2016,6 @@
     foaf:firstName "Sébastien" ;
     foaf:lastName "Roy" ;
     owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/sebastien-roy> .
-    # MISSING EXTERNAL PROFILE
-    # Sébastien Roy <-[1999]- Jean Meunier (in Papyrus)
-    # (https://umontreal.on.worldcat.org/oclc/868972550)
 
 <http://diro.umontreal.ca/geniro/person/sebastien-roy#membership> a org:Membership ;
     org:member <http://diro.umontreal.ca/geniro/person/sebastien-roy> ;
@@ -2018,8 +2036,6 @@
     foaf:firstName "Utsav" ;
     foaf:lastName "Sadana" ;
     owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/utsav-sadana> .
-    # MISSING EXTERNAL PROFILE
-    # Utsav Sadana <-[2021]- Georges Zaccour (MathGenealogy #134396)
 
 <http://diro.umontreal.ca/geniro/person/utsav-sadana#membership> a org:Membership ;
     org:member <http://diro.umontreal.ca/geniro/person/utsav-sadana> ;
