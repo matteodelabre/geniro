@@ -82,6 +82,10 @@
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-of-waterloo" ;
     skos:prefLabel "University of Waterloo" .
 
+<http://diro.umontreal.ca/geniro/org/universite-de-bretagne-occidentale> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-de-bretagne-occidentale" ;
+    skos:prefLabel "Université de Bretagne-Occidentale" .
+
 # Templates
 
 ## For professors
@@ -1572,6 +1576,48 @@
 
 <http://diro.umontreal.ca/geniro/person/jean-meunier#director-end>
     time:inXSDDate "2009-01-01"^^xsd:date .
+
+## Max Mignotte
+
+<http://diro.umontreal.ca/geniro/person/max-mignotte> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/max-mignotte" ;
+    foaf:firstName "Max" ;
+    foaf:lastName "Mignotte" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/max-mignotte> .
+
+<http://diro.umontreal.ca/geniro/person/max-mignotte#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/max-mignotte> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/max-mignotte#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/max-mignotte#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/max-mignotte#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/max-mignotte#membership-start>
+    time:inXSDDate "2000-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/patrick-bouthemy> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/patrick-bouthemy" ;
+    foaf:firstName "Patrick" ;
+    foaf:lastName "Bouthémy" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=95576> .
+
+<http://diro.umontreal.ca/geniro/project/max-mignotte-1998> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/max-mignotte-1998" ;
+    dcterms:title "Segmentation d'images sonar par approche markovienne hiérarchique non supervisée et classification d'ombres portées par modèles statistiques" ;
+    dcterms:description """Ces dernieres annees, de nombreuses ameliorations ont rendu les sonar haute resolution de plus en plus performants ; zones explorees plus vastes et visualisation des fonds marins et des objets reposant sur ceux-ci sous forme d'images etc en contre partie, la quantite d'informations a sensiblement augmentee et rend aujourd'hui necessaire d'automatiser la detection et la classification de ces objets. Celle-ci est realisee grace a une analyse de la forme de l'ombre qu'ils produisent sur les images sonar. L'automatisation de la phase de classification requiert donc une premiere etape de segmentation. A cette fin, un modele hierarchique markovien utilisant un systeme de voisinage spatial et causal en echelle ainsi qu'une strategie de minimisation multigrille ont ete definis. Le probleme de l'estimation automatique des parametres de ce modele a ete developpe dans le but de definir une segmentation non supervisee. Il comporte l'identification du melange de lois relatif au terme d'attache aux donnees et des parametres de regularisation contextuelle. Nous avons ensuite propose une methode de classification des ombres portees. L'approche adoptee utilise les modeles statistiques et repose sur une formulation bayesienne du probleme. Elle comprend la definition d'une forme prototype a laquelle est appliquees une combinaison de deformations geometriques lineaires. Dans ce cadre, le probleme de la classification d'un objet est equivalent a un probleme d'estimation bayesienne des parametres de deformation du modele. Cette estimation conduit a la minimisation d'une fonction d'energie, realisee par une procedure d'optimisation genetique. Afin d'ameliorer cette classification, un modele statistique pour la classification des fonds en imagerie sonar, utilisant une analyse des formes d'ombres que produit chaque type de fond et un module decision floue, a ete parallelement propose. Des validations importantes sur images sonar synthetiques et reelles sont enfin presentees."""@fr ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/patrick-bouthemy> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/max-mignotte> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-de-bretagne-occidentale> ;
+    geniro:thesis <http://www.sudoc.fr/049565761> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/max-mignotte-1998#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/max-mignotte-1998#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/max-mignotte-1998#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/max-mignotte-1998#timePeriod/end>
+    time:inXSDDate "1998-01-01"^^xsd:date .
 
 ## Stefan Monnier
 
