@@ -5,7 +5,7 @@ import { org } from "./pages/org.tsx";
 import { person } from "./pages/person.tsx";
 import { project } from "./pages/project.tsx";
 import { search } from "./pages/search.tsx";
-import { tree } from "./pages/tree.tsx";
+import { graph } from "./pages/graph.tsx";
 
 export const app = new Application();
 
@@ -50,6 +50,6 @@ router.use("/org", org.routes());
 router.use("/person", person.routes());
 router.use("/project", project.routes());
 router.use("/search", search.routes());
-router.use("/tree", tree.routes());
+router.use("/graph", graph.routes());
 
 app.use(router.routes());

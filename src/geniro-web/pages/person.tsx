@@ -13,6 +13,7 @@ import {
     getPersonURI,
 } from "../data/model.ts";
 import { dateShowYear, renderTable, uriToUrl } from "./util.tsx";
+import { retrieveGraph, renderTree } from "./graph.tsx";
 
 export const person = new Router();
 
@@ -280,115 +281,21 @@ person.all("/:id/edit", async (ctx) => {
     });
 });
 
-const renderTree = (root, tree, projects, persons, visited) => {
-    const badges = [];
-
-    for (const affil of persons[root].affiliations) {
-        if (affil.organization === "http://diro.umontreal.ca/geniro/org/diro") {
-            const yearStart = affil.dateStart
-                ? new Date(affil.dateStart).getUTCFullYear()
-                : "";
-            const yearEnd = affil.dateEnd ? new Date(affil.dateEnd).getUTCFullYear() : "";
-            const range = `${yearStart}-${yearEnd}`;
-
-            switch (affil.role) {
-                case geniro.roleProfessor.value:
-                    badges.push(`(professeur.e DIRO ${range})`);
-                    break;
-
-                case geniro.roleDirector.value:
-                    badges.push(`(directeur.ice DIRO ${range})`);
-                    break;
-            }
-        }
-    }
-
-    for (const { type: degree, dateEnd: date } of projects[root]) {
-        badges.push(`(${geniroProjectTypeLabel(degree)} ${date?.split("-")?.[0]})`);
-    }
-
-    let subtree;
-
-    if (!visited.has(root) && tree[root].length > 0) {
-        subtree = (
-            <ul>
-                {tree[root].map((child) =>
-                    renderTree(child, tree, projects, persons, visited, null, null)
-                )}
-            </ul>
-        );
-    }
-
-    const head = (
-        <>
-            <a href={uriToUrl(root)}>
-                {persons[root].firstName} {persons[root].lastName}
-            </a>
-            {" " + badges.join(" ")}
-        </>
-    );
-
-    visited.add(root);
-
-    if (subtree) {
-        return (
-            <li>
-                <details open>
-                    <summary>{head}</summary>
-                    {subtree}
-                </details>
-            </li>
-        );
-    }
-
-    return <li>{head}</li>;
-};
-
-const processProjectsForTree = async (root, projects) => {
-    // Retrieve persons information
-    let personsUris = new Set();
-    personsUris.add(root.value);
-
-    for (const project of Object.values(projects)) {
-        personsUris.add(project.student.uri);
-        personsUris = personsUris.union(new Set(Object.keys(project.advisors)));
-    }
-
-    const persons = await query.persons(Array.from(personsUris).map(rdf.namedNode));
-
-    // Collect projects by student
-    const projectsByStudent = {};
-
-    for (const person of personsUris) {
-        projectsByStudent[person] = [];
-    }
-
-    for (const project of Object.values(projects)) {
-        projectsByStudent[project.student.uri].push(project);
-    }
-
-    return [persons, projectsByStudent];
-};
-
 person.get("/:id/desc", async (ctx) => {
     const { id } = ctx.params;
     const uri = getPersonURI(id);
+    const graphData = await retrieveGraph({ ancestors: [uri] });
 
-    // Retrieve project and persons information
-    const projects = await query.projects({ ancestors: [uri] });
-    const [persons, projectsByStudent] = await processProjectsForTree(uri, projects);
+    const edges = {};
 
-    // Create tree
-    const tree = {};
-
-    for (const person of Object.keys(persons)) {
-        tree[person] = [];
+    for (const person of Object.keys(graphData.persons)) {
+        edges[person] = [];
     }
 
-    for (const project of Object.values(projects)) {
+    for (const project of Object.values(graphData.projects)) {
         for (const advisor of Object.values(project.advisors)) {
-            if (tree[advisor.uri].indexOf(project.student.uri) === -1) {
-                tree[advisor.uri].push(project.student.uri);
+            if (edges[advisor.uri].indexOf(project.student.uri) === -1) {
+                edges[advisor.uri].push(project.student.uri);
             }
         }
     }
@@ -396,7 +303,7 @@ person.get("/:id/desc", async (ctx) => {
     render(ctx, {
         title: (
             <>
-                {persons[uri.value].firstName} {persons[uri.value].lastName} · Descendance
+                {graphData.persons[uri.value].firstName} {graphData.persons[uri.value].lastName} · Descendance
             </>
         ),
         content: (
@@ -404,12 +311,12 @@ person.get("/:id/desc", async (ctx) => {
                 <h2>
                     Arbre de descendance de{" "}
                     <a href={`${webRoot}/person/${id}`}>
-                        {persons[uri.value].firstName} {persons[uri.value].lastName}
+                        {graphData.persons[uri.value].firstName} {graphData.persons[uri.value].lastName}
                     </a>
                 </h2>
 
                 <ul class="tree">
-                    {renderTree(uri.value, tree, projectsByStudent, persons, new Set())}
+                    {renderTree(uri.value, graphData, edges)}
                 </ul>
             </>
         ),
@@ -419,41 +326,37 @@ person.get("/:id/desc", async (ctx) => {
 person.get("/:id/asc", async (ctx) => {
     const { id } = ctx.params;
     const uri = getPersonURI(id);
+    const graphData = await retrieveGraph({ descendants: [uri] });
 
-    // Retrieve project and persons information
-    const projects = await query.projects({ descendants: [uri] });
-    const [persons, projectsByStudent] = await processProjectsForTree(uri, projects);
+    const edges = {};
 
-    // Create tree
-    const tree = {};
-
-    for (const person of Object.keys(persons)) {
-        tree[person] = [];
+    for (const person of Object.keys(graphData.persons)) {
+        edges[person] = [];
     }
 
-    for (const project of Object.values(projects)) {
+    for (const project of Object.values(graphData.projects)) {
         for (const advisor of Object.values(project.advisors)) {
-            if (tree[project.student.uri].indexOf(advisor.uri) === -1) {
-                tree[project.student.uri].push(advisor.uri);
+            if (edges[project.student.uri].indexOf(advisor.uri) === -1) {
+                edges[project.student.uri].push(advisor.uri);
             }
         }
     }
 
     render(ctx, {
         title: (
-            <>{persons[uri.value].firstName} {persons[uri.value].lastName} · Ascendance</>
+            <>{graphData.persons[uri.value].firstName} {graphData.persons[uri.value].lastName} · Ascendance</>
         ),
         content: (
             <>
                 <h2>
                     Arbre d’ascendance de{" "}
                     <a href={`${webRoot}/person/${id}`}>
-                        {persons[uri.value].firstName} {persons[uri.value].lastName}
+                        {graphData.persons[uri.value].firstName} {graphData.persons[uri.value].lastName}
                     </a>
                 </h2>
 
                 <ul class="tree">
-                    {renderTree(uri.value, tree, projectsByStudent, persons, new Set())}
+                    {renderTree(uri.value, graphData, edges)}
                 </ul>
             </>
         ),

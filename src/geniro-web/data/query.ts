@@ -130,109 +130,6 @@ export const aliases = async (entity: rdf.NamedNode) => {
 };
 
 /**
- * Retrieve edges of the genealogy graph, optionally starting from a root person.
- *
- * A child of a person A is a person B who was a student in at least one project that A
- * advised. The descendance relation is the reflexive transitive closure of this child
- * relation, i.e., the descendants of A are A, the children of A, the children of its
- * children, etc.
- *
- * @param fromRoot - URI for the person whose descendance is to be retrieved, or null to
- * retrieve edges for the entire graph.
- */
-export const graph = async (fromRoot?: rdf.NamedNode = null): Promise<> => {
-    const project = rdf.variable("project");
-    const projectUri = rdf.variable("projectUri");
-    const type = rdf.variable("projectType");
-    const dateStart = rdf.variable("dateStart");
-    const dateEnd = rdf.variable("dateEnd");
-    const student = rdf.variable("student");
-    const studentUri = rdf.variable("studentUri");
-    const advisor = rdf.variable("advisor");
-    const advisorUri = rdf.variable("advisorUri");
-
-    const conditions = [
-        [project, geniro.student, student],
-        [project, geniro.advisor, advisor],
-        [project, rdfns.type, geniro.Project],
-        builder.optional([
-            [project, rdfns.type, type],
-            builder.filter([
-                builder.in(
-                    type,
-                    [geniro.PhDProject, geniro.MScProject],
-                ),
-            ]),
-        ]),
-        builder.optional([
-            [project, [
-                geniro.timePeriod,
-                time.hasBeginning,
-                time.inXSDDate,
-            ], dateStart],
-        ]),
-        builder.optional([
-            [project, [
-                geniro.timePeriod,
-                time.hasEnd,
-                time.inXSDDate,
-            ], dateEnd],
-        ]),
-        [project, geniro.preferredUri, projectUri],
-        [advisor, geniro.preferredUri, advisorUri],
-        [student, geniro.preferredUri, studentUri],
-    ];
-
-    if (fromRoot !== null) {
-        conditions.unshift([
-            fromRoot,
-            `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
-            student,
-        ]);
-    }
-
-    const edges = await query(
-        databaseEndpoint,
-        builder.select([
-            projectUri,
-            builder.sample(type, type),
-            builder.sample(dateStart, dateStart),
-            builder.sample(dateEnd, dateEnd),
-            advisorUri,
-            studentUri,
-        ])
-            .where(conditions)
-            .groupBy([projectUri, advisorUri, studentUri])
-            .orderBy([dateEnd]),
-    );
-
-    const index = {};
-
-    for (const edge of edges) {
-        const projectKey = edge[projectUri.value].value;
-        const studentKey = edge[studentUri.value].value;
-        const advisorKey = edge[advisorUri.value].value;
-
-        if (!(studentKey in index)) {
-            index[studentKey] = {};
-        }
-
-        if (!(projectKey in index[studentKey])) {
-            index[studentKey][projectKey] = {
-                "type": edge[type.value]?.value,
-                "dateStart": edge[dateStart.value]?.value,
-                "dateEnd": edge[dateEnd.value]?.value,
-                "advisors": [],
-            };
-        }
-
-        index[studentKey][projectKey].advisors.push(advisorKey);
-    }
-
-    return index;
-};
-
-/**
  * Retrieve information about a set of persons.
  *
  * @param persons - Array of URIs for the persons to query.
@@ -354,32 +251,32 @@ export const projects = async (criteria): Promise<> => {
     const advisorFirstName = rdf.variable("advisorFirstName");
     const advisorLastName = rdf.variable("advisorLastName");
 
-    const projectsConditions = criteria.projects !== undefined
-        ? [builder.filter([builder.in(project, criteria.projects)])]
+    const projectsConditions = criteria?.projects !== undefined
+        ? [builder.filter([builder.in(project, criteria?.projects)])]
         : [];
 
-    const advisorsConditions = criteria.advisors !== undefined
-        ? criteria.advisors.map((item) => [project, geniro.advisor, item])
+    const advisorsConditions = criteria?.advisors !== undefined
+        ? criteria?.advisors.map((item) => [project, geniro.advisor, item])
         : [];
 
-    const studentConditions = criteria.student !== undefined
-        ? [[project, geniro.student, criteria.student]]
+    const studentConditions = criteria?.student !== undefined
+        ? [[project, geniro.student, criteria?.student]]
         : [];
 
-    const grantorsConditions = criteria.grantors !== undefined
-        ? [builder.filter([builder.in(grantedBy, criteria.grantors)])]
+    const grantorsConditions = criteria?.grantors !== undefined
+        ? [builder.filter([builder.in(grantedBy, criteria?.grantors)])]
         : [];
 
-    const ancestorsConditions = criteria.ancestors !== undefined
-        ? criteria.ancestors.map((ancestor) => [
+    const ancestorsConditions = criteria?.ancestors !== undefined
+        ? criteria?.ancestors.map((ancestor) => [
             ancestor,
             `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
             student,
         ])
         : [];
 
-    const descendantsConditions = criteria.descendants !== undefined
-        ? criteria.descendants.map((descendant) => [
+    const descendantsConditions = criteria?.descendants !== undefined
+        ? criteria?.descendants.map((descendant) => [
             student,
             `(^<${geniro.advisor.value}>/<${geniro.student.value}>)*`,
             descendant,
