@@ -1997,16 +1997,16 @@
     org:member <http://diro.umontreal.ca/geniro/person/jean-marc-rousseau> ;
     org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
     org:role geniro:roleProfessorFull ;
-    org:memberDuring <http://diro.umontreal.ca/geniro/person/jean-meunier#membership-duration> .
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jean-marc-rousseau#membership-duration> .
 
-<http://diro.umontreal.ca/geniro/person/jean-meunier#membership-duration>
-    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jean-meunier#membership-start> ;
-    time:hasEnd <http://diro.umontreal.ca/geniro/person/jean-meunier#membership-end> .
+<http://diro.umontreal.ca/geniro/person/jean-marc-rousseau#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jean-marc-rousseau#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jean-marc-rousseau#membership-end> .
 
-<http://diro.umontreal.ca/geniro/person/jean-meunier#membership-start>
+<http://diro.umontreal.ca/geniro/person/jean-marc-rousseau#membership-start>
     time:inXSDDate "1973-01-01"^^xsd:date .
 
-<http://diro.umontreal.ca/geniro/person/jean-meunier#membership-end>
+<http://diro.umontreal.ca/geniro/person/jean-marc-rousseau#membership-end>
     time:inXSDDate "1992-01-01"^^xsd:date .
 
 ## Sébastien Roy
