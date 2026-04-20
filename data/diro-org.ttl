@@ -1,0 +1,2298 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geniro: <http://diro.umontreal.ca/geniro#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Universities
+
+<http://diro.umontreal.ca/geniro/org/diro> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/diro" ;
+    skos:prefLabel "Département d’informatique et de recherche opérationnelle" ;
+    skos:altLabel "DIRO" .
+
+<http://diro.umontreal.ca/geniro/org/cornell> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/cornell" ;
+    skos:prefLabel "Cornell University" .
+
+<http://diro.umontreal.ca/geniro/org/mcgill> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/mcgill" ;
+    skos:prefLabel "McGill University" .
+
+<http://diro.umontreal.ca/geniro/org/universite-rennes-1> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-rennes-1" ;
+    skos:prefLabel "Université de Rennes 1" .
+
+<http://diro.umontreal.ca/geniro/org/university-british-columbia> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-british-columbia" ;
+    skos:prefLabel "University of British Columbia" .
+
+<http://diro.umontreal.ca/geniro/org/universidade-do-porto> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universidade-do-porto" ;
+    skos:prefLabel "Universidade do Porto" .
+
+<http://diro.umontreal.ca/geniro/org/university-of-toronto> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-of-toronto" ;
+    skos:prefLabel "University of Toronto" .
+
+<http://diro.umontreal.ca/geniro/org/universite-de-nice-sophia-antipolis> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-de-nice" ;
+    skos:prefLabel "Université Nice-Sophia-Antipolis" .
+
+<http://diro.umontreal.ca/geniro/org/aix-marseille-universite> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/aix-marseille-universite" ;
+    skos:prefLabel "Université d'Aix-Marseille" .
+
+<http://diro.umontreal.ca/geniro/org/university-of-california-irvine> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-of-california-irvine" ;
+    skos:prefLabel "University of California, Irvine" .
+
+<http://diro.umontreal.ca/geniro/org/university-of-california-santa-cruz> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-of-california-santa-cruz" ;
+    skos:prefLabel "University of California, Santa Cruz" .
+
+<http://diro.umontreal.ca/geniro/org/hec-montreal> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/hec-montreal" ;
+    skos:prefLabel "HEC Montréal" .
+
+<http://diro.umontreal.ca/geniro/org/ecole-polytechnique-federale-de-lausanne> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/ecole-polytechnique-federale-de-lausanne" ;
+    skos:prefLabel "École Polytechnique Fédérale de Lausanne" .
+
+<http://diro.umontreal.ca/geniro/org/universite-joseph-fourier> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-joseph-fourier" ;
+    skos:prefLabel "Université Joseph-Fourier" .
+
+<http://diro.umontreal.ca/geniro/org/georgia-tech> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/georgia-tech" ;
+    skos:prefLabel "Georgia Tech" .
+
+<http://diro.umontreal.ca/geniro/org/carnegie-mellon-university> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/carnegie-mellon-university" ;
+    skos:prefLabel "Carnegie Mellon University" .
+
+<http://diro.umontreal.ca/geniro/org/columbia-university> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/columbia-university" ;
+    skos:prefLabel "Columbia University" .
+
+# Templates
+
+## For professors
+
+# <http://diro.umontreal.ca/geniro/person/XXX> a foaf:Person ;
+#     geniro:preferredUri "http://diro.umontreal.ca/geniro/person/XXX" ;
+#     foaf:firstName "YYY" ;
+#     foaf:lastName "YYY" ;
+#     owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/XXX> ;
+#     owl:sameAs <http://mathgenealogy.org/id.php?id=000> .
+# 
+# <http://diro.umontreal.ca/geniro/person/XXX#membership> a org:Membership ;
+#     org:member <http://diro.umontreal.ca/geniro/person/XXX> ;
+#     org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+#     org:role geniro:roleProfessorZZZ ;
+#     org:memberDuring <http://diro.umontreal.ca/geniro/person/XXX#membership-duration> .
+# 
+# <http://diro.umontreal.ca/geniro/person/XXX#membership-duration>
+#     time:hasBeginning <http://diro.umontreal.ca/geniro/person/XXX#membership-start> ;
+#     time:hasEnd <http://diro.umontreal.ca/geniro/person/XXX#membership-end> .
+# 
+# <http://diro.umontreal.ca/geniro/person/XXX#membership-start>
+#     time:inXSDDate "0000-01-01"^^xsd:date .
+# 
+# <http://diro.umontreal.ca/geniro/person/XXX#membership-end>
+#     time:inXSDDate "0000-01-01"^^xsd:date .
+
+## For manually-recorded projects
+
+# <http://diro.umontreal.ca/geniro/person/XXX> a foaf:Person ;
+#     geniro:preferredUri "http://diro.umontreal.ca/geniro/person/XXX" ;
+#     foaf:firstName "YYY" ;
+#     foaf:lastName "ZZZ" ;
+#     owl:sameAs <http://mathgenealogy.org/id.php?id=000> .
+# 
+# <http://diro.umontreal.ca/geniro/project/WWW> a geniro:PhDProject ;
+#     geniro:preferredUri "http://diro.umontreal.ca/geniro/project/WWW" ;
+#     dcterms:title "TTT" ;
+#     dcterms:description """DDD""" ;
+#     geniro:advisor <http://diro.umontreal.ca/geniro/person/XXX> ;
+#     geniro:student <http://diro.umontreal.ca/geniro/person/SSS> ;
+#     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/OOO> ;
+#     geniro:thesis <LLL> ;
+#     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/WWW#timePeriod> .
+# 
+# <http://diro.umontreal.ca/geniro/project/WWW#timePeriod>
+#     time:hasEnd <http://diro.umontreal.ca/geniro/project/WWW#timePeriod/end> .
+# 
+# <http://diro.umontreal.ca/geniro/project/WWW#timePeriod/end>
+#     time:inXSDDate "0000-01-01"^^xsd:date .
+
+# Professors
+
+## El Mostapha Aboulhamid
+
+<http://diro.umontreal.ca/geniro/person/el-mostapha-aboulhamid> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/el-mostapha-aboulhamid" ;
+    foaf:firstName "El Mostapha" ;
+    foaf:lastName "Aboulhamid" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/el-mostapha-aboulhamid> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73103> .
+    # INCOMPLETE PROFILE, MISSING ADVISOR
+
+<http://diro.umontreal.ca/geniro/person/el-mostapha-aboulhamid#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/el-mostapha-aboulhamid> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/el-mostapha-aboulhamid#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/el-mostapha-aboulhamid#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/el-mostapha-aboulhamid#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/el-mostapha-aboulhamid#membership-start>
+    time:inXSDDate "1985-01-01"^^xsd:date .
+
+## Aishwarya Agrawal
+
+<http://diro.umontreal.ca/geniro/person/aishwarya-agrawal> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/aishwarya-agrawal" ;
+    foaf:firstName "Aishwarya" ;
+    foaf:lastName "Agrawal" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/aishwarya-agrawal> .
+
+<http://diro.umontreal.ca/geniro/person/aishwarya-agrawal#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/aishwarya-agrawal> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant .
+
+<http://diro.umontreal.ca/geniro/person/dhruv-batra> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/dhruv-batra" ;
+    foaf:firstName "Dhruv" ;
+    foaf:lastName "Batra" .
+
+<http://diro.umontreal.ca/geniro/project/aishwarya-agrawal-2019> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/aishwarya-agrawal-2019" ;
+    dcterms:title "Visual question answering and beyond" ;
+    dcterms:description """In this dissertation, I propose and study a multi-modal Artificial Intelligence (AI) task called Visual Question Answering (VQA) -- given an image and a natural language question about the image (e.g., "What kind of store is this?", "Is it safe to cross the street?"), the machine's task is to automatically produce an accurate natural language answer ("bakery", "yes"). Applications of VQA include -- aiding visually impaired users in understanding their surroundings, aiding analysts in examining large quantities of surveillance data, teaching children through interactive demos, interacting with personal AI assistants, and making visual social media content more accessible. Specifically, I study the following -- 1) how to create a large-scale dataset and define evaluation metrics for free-form and open-ended VQA, 2) how to develop techniques for characterizing the behavior of VQA models, and 3) how to build VQA models that are less driven by language biases in training data and are more visually grounded, by proposing -- a) a new evaluation protocol, b) a new model architecture, and c) a novel objective function. Most of my past work has been towards building agents that can "see" and "talk". However, for a lot of practical applications (e.g., physical agents navigating inside our houses executing natural language commands) we need agents that can not only "see" and "talk" but can also take actions. In chapter 6, I present future directions towards generalizing vision and language agents to be able to take actions."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/dhruv-batra> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/aishwarya-agrawal> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/georgia-tech> ;
+    geniro:thesis <http://hdl.handle.net/1853/62277> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/aishwarya-agrawal-2019#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/aishwarya-agrawal-2019#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/aishwarya-agrawal-2019#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/aishwarya-agrawal-2019#timePeriod/end>
+    time:inXSDDate "2019-09-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/tsuhan-chen> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/tsuhan-chen" ;
+    foaf:firstName "Tsuhan" ;
+    foaf:lastName "Chen" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=239437> .
+
+<http://diro.umontreal.ca/geniro/project/tsuhan-chen-2010> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/tsuhan-chen-2010" ;
+    dcterms:title "On Graph-Structured Discrete Labelling Problems in Computer Vision: Learning, Inference and Applications" ;
+    dcterms:description """A number of problems in computer vision (e.g., image segmentation, gender classification of faces, etc) can be formulated as graph-structured discrete labelling problems, where the goal is to predict labels (e.g. foreground/background, male/female) for a set of variables (e.g. pixels, faces in an image, etc) that have some known underlying structure (e.g., neighbouring pixels in an image often have related labels). This task of inferring optimal labels of structured variables is typically posed as the minimization of a discrete energy function over a graph, and is NP-hard for general graphs. This thesis is composed of three parts. In the first part, we present algorithms for learning the parameters of these energy functions from fully-labelled and partially-labelled training data. In the second part, we present a new approximate inference algorithm called Outer-Planar Decomposition (OPD). OPD decomposes the given intractable energy-minimization problem over a graph into tractable subproblems over outerplanar subgraphs and then employs message passing over these subgraphs to get an approximate global solution for the original graph. OPD outperforms current state-of-art inference methods on bard synthetic problems and is competitive on real computer-vision applications. Finally, in the third part, we demonstrate our work and apply this structured prediction paradigm to interactive co-segmentation of groups of related images and interactive 3D reconstruction of objects and scenes."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/tsuhan-chen> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/dhruv-batra> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/carnegie-mellon-university> ;
+    geniro:thesis <https://www.proquest.com/docview/758055263> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/tsuhan-chen-2010#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/tsuhan-chen-2010#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/tsuhan-chen-2010#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/tsuhan-chen-2010#timePeriod/end>
+    time:inXSDDate "2010-05-01"^^xsd:date .
+
+## Noam Aigerman
+
+<http://diro.umontreal.ca/geniro/person/noam-aigerman> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/noam-aigerman" ;
+    foaf:firstName "Noam" ;
+    foaf:lastName "Aigerman" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/noam-aigerman> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=263395> .
+
+<http://diro.umontreal.ca/geniro/person/noam-aigerman#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/noam-aigerman> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
+## Esma Aïmeur
+
+<http://diro.umontreal.ca/geniro/person/esma-aimeur> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/esma-aimeur" ;
+    foaf:firstName "Esma" ;
+    foaf:lastName "Aïmeur" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/esma-aimeur> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73126> .
+
+<http://diro.umontreal.ca/geniro/person/esma-aimeur#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/esma-aimeur> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
+
+## Ian Arawjo
+
+<http://diro.umontreal.ca/geniro/person/ian-arawjo> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/ian-arawjo" ;
+    foaf:firstName "Ian" ;
+    foaf:lastName "Arawjo" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/ian-arawjo> .
+
+<http://diro.umontreal.ca/geniro/person/ian-arawjo#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/ian-arawjo> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant .
+
+<http://diro.umontreal.ca/geniro/person/tapan-parikh> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/tapan-parikh" ;
+    foaf:firstName "Tapan" ;
+    foaf:lastName "Parikh" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=118420> .
+
+<http://diro.umontreal.ca/geniro/project/ian-arawjo-2023> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/ian-arawjo-2023" ;
+    dcterms:title "Programming and Culture" ;
+    dcterms:description """I situate computer programming as a cultural practice. I develop this perspective in two ways: exploring how programming practices can support intercultural learning, and examining how programming tools themselves embed cultural assumptions and values. For the former, I study how relationships across difference are formed over computing activities in K-12 classrooms in Kenya and the U.S. Asking how programming concepts may serve people's intercultural development, I develop a new type of activity, "cultural algorithms," which uses algorithmic concepts to teach about the social construction of societies. Turning to the material means through which we 'write' code, I then trace the earliest history of programming and reveal epistemological tendencies and biases in the field. From the resulting insights, I develop a new AI-powered paradigm, notational programming, as one critical design that seeks to disrupt dominant norms around typing code. Throughout, I aim to muddle the boundaries between 'programming' and 'culture,' exploring programming both as a tool for making change (changing the programming in culture), and as a tool to be changed (changing the culture in programming). Ultimately, I argue that intercultural approaches to computing are focused on ontological change; that is, changing the boundaries and categories that people deploy to divide themselves from others and diminish the complexity of the world."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/tapan-parikh> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/ian-arawjo> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/cornell> ;
+    geniro:thesis <http://hdl.handle.net/1813/113983> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/ian-arawjo-2023#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/ian-arawjo-2023#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/ian-arawjo-2023#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/ian-arawjo-2023#timePeriod/end>
+    time:inXSDDate "2023-05-01"^^xsd:date .
+
+## William W. Armstrong
+
+<http://diro.umontreal.ca/geniro/person/william-w-armstrong> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/william-w-armstrong" ;
+    foaf:firstName "William W." ;
+    foaf:lastName "Armstrong" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=17719> .
+
+<http://diro.umontreal.ca/geniro/person/william-w-armstrong#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/william-w-armstrong> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/william-w-armstrong#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/william-w-armstrong#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/william-w-armstrong#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/william-w-armstrong#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/william-w-armstrong#membership-start>
+    time:inXSDDate "1968-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/william-w-armstrong#membership-end>
+    time:inXSDDate "1982-01-01"^^xsd:date .
+
+## Pierre-Luc Bacon
+
+<http://diro.umontreal.ca/geniro/person/pierre-luc-bacon> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/pierre-luc-bacon" ;
+    foaf:firstName "Pierre-Luc" ;
+    foaf:lastName "Bacon" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/pierre-luc-bacon> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-luc-bacon#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/pierre-luc-bacon> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
+<http://diro.umontreal.ca/geniro/person/doina-precup> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/doina-precup" ;
+    foaf:firstName "Doina" ;
+    foaf:lastName "Precup" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=122264> .
+
+<http://diro.umontreal.ca/geniro/project/pierre-luc-bacon-2018> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/pierre-luc-bacon-2018" ;
+    dcterms:title "Temporal representation learning" ;
+    dcterms:description """Dans cette thèse, je propose l'idée que le problème d'apprentissage de bonnes abstractions temporelles est intimement lié à un problème d'apprentissage de représentation que j'appelle "apprentissage temporel de représentation". Ce choix de terminologie vise à rappeler le fait que le temps est un aspect indissociable d'un système d'apprentissage plongé dans son expérience d'apprentissage avec son environnement. La réconciliation de la notion du temps avec celle de l'apprentissage mène à des solutions qui s'intègrent mieux dans un paradigme d'apprentissage continuel (Ring, 1991). Basé sur ce principe, je propose l'architecture option-critic pour construire des abstractions temporelles bout-en-bout (end-to-end) dans le cadre théorique des options (Sutton et al., 1999a). De plus, reconnaître l'importance du temps rend inévitable le fait que l'apprentissage doit être le plus efficace possible lorsque soumis à des limites en resources. Je développe cette idée dans le cadre de la notion de rationalité limitée (Simon, 1957) et montre comment elle peut être intégrée dans l'architecture option-critic pour apprendre de meilleures options. Je montre également qu'apprendre des options du point de vue de la rationalité limitée est lié au problème de construction de bons préconditionneurs de matrices en algèbre numérique linéaire. Je démontre cette idée formellement en établissant que les méthodes à pas multiples (multi-step) en apprentissage par renforcement ainsi que les options ont en commun une structure mathématique dont les origines proviennent du concept de matrix splitting de Varga (1962)."""@fr ;
+    dcterms:description """Throughout this thesis, I develop the idea that the problem of learning good temporal abstractions in reinforcement learning is intimately tied to a kind of representation learning problem that I call "temporal representation learning". This choice of terminology is meant to highlight the fact that time is an indissociable aspect of learning systems experiencing their environment. Reconciling the notion of time with learning leads us to solution methods that better fit into a continual learning paradigm (Ring, 1991). Based on this principle, I propose the option-critic architecture for constructing temporal abstractions end-to-end, in the options framework (Sutton et al., 1999a). Furthermore, acknowledging the importance of time renders inevitable the fact that learning should be as efficient as possible when facing limited resources. I express this idea in the bounded rationality framework of Simon (1957) and extend the option-critic architecture accordingly to learn better options. I also establish a connection between the bounded rationality perspective on options discovery and the problem of finding good matrix preconditioners in numerical linear algebra. I show this point formally by exposing a common mathematical structure between multi-step RL methods and options using matrix splitting theory (Varga, 1962)."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/doina-precup> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/pierre-luc-bacon> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/mcgill> ;
+    geniro:thesis <https://escholarship.mcgill.ca/concern/theses/vh53wz12w> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/pierre-luc-bacon-2018#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/pierre-luc-bacon-2018#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/pierre-luc-bacon-2018#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/pierre-luc-bacon-2018#timePeriod/end>
+    time:inXSDDate "2018-01-01"^^xsd:date .
+
+## Fabian Bastin
+
+<http://diro.umontreal.ca/geniro/person/fabian-bastin> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/fabian-bastin" ;
+    foaf:firstName "Fabian" ;
+    foaf:lastName "Bastin" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/fabian-bastin> ;
+    owl:sameAs <http://orcid.org/0000-0003-1323-6787> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=99211> .
+
+<http://diro.umontreal.ca/geniro/person/fabian-bastin#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/fabian-bastin> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/fabian-bastin#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/fabian-bastin#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/fabian-bastin#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/fabian-bastin#membership-start>
+    time:inXSDDate "2007-01-01"^^xsd:date .
+
+## Benoit Baudry
+
+<http://diro.umontreal.ca/geniro/person/benoit-baudry> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/benoit-baudry" ;
+    foaf:firstName "Benoit" ;
+    foaf:lastName "Baudry" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/benoit-baudry> .
+
+<http://diro.umontreal.ca/geniro/person/benoit-baudry#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/benoit-baudry> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
+
+<http://diro.umontreal.ca/geniro/person/jean-marc-jezequel> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jean-marc-jezequel" ;
+    foaf:firstName "Jean-Marc" ;
+    foaf:lastName "Jézéquel" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=299146> .
+
+<http://diro.umontreal.ca/geniro/project/benoit-baudry-2003> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/benoit-baudry-2003" ;
+    dcterms:title "Assemblage testable et validation de composants" ;
+    dcterms:description """Le test de logiciel apparaît aujourd'hui comme le moyen principal pour la validation du fonctionnement d'un programme. Les travaux présentés au cours de cette thèse s'articulent autour de trois contributions qui se concentrent sur certaines spécificités de la programmation et de la conception orientée objet pour l'étude de solutions particulières pour le test d'un composant. La qualité des cas de test étant un facteur important pour une validation efficace, le premier point concerne l'étude d'algorithmes évolutionnistes pour la génération automatique de cas de test pour un composant. Nous nous intéressons ensuite à l'impact de la conception par contrat sur deux aspects du test d'un assemblage de composants : la détection et la localisation d'erreur. Enfin, certaines configurations sont identifiées sur un diagramme de classes, comme difficiles à tester, et des solutions sont proposées pour résoudre ces problèmes dés la conception et éviter ainsi d'implanter un programme peu testable."""@fr ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/jean-marc-jezequel> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/benoit-baudry> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-rennes-1> ;
+    geniro:thesis <http://www.sudoc.fr/073553948> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/benoit-baudry-2003#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/benoit-baudry-2003#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/benoit-baudry-2003#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/benoit-baudry-2003#timePeriod/end>
+    time:inXSDDate "2003-01-01"^^xsd:date .
+
+## Yoshua Bengio
+
+<http://diro.umontreal.ca/geniro/person/yoshua-bengio> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/yoshua-bengio" ;
+    foaf:firstName "Yoshua" ;
+    foaf:lastName "Bengio" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/yoshua-bengio> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73102> .
+
+<http://diro.umontreal.ca/geniro/person/yoshua-bengio#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/yoshua-bengio> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
+
+## Glen Berseth
+
+<http://diro.umontreal.ca/geniro/person/glen-berseth> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/glen-berseth" ;
+    foaf:firstName "Glen" ;
+    foaf:lastName "Berseth" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/glen-berseth> .
+
+<http://diro.umontreal.ca/geniro/person/glen-berseth#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/glen-berseth> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant .
+
+<http://diro.umontreal.ca/geniro/person/michiel-van-de-panne> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/michiel-van-de-panne" ;
+    foaf:firstName "Michiel" ;
+    foaf:lastName "van de Panne" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=67134> .
+
+<http://diro.umontreal.ca/geniro/project/glen-berseth-2019> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/WWW" ;
+    dcterms:title "Scalable deep reinforcement learning for physics-based motion control" ;
+    dcterms:description """This thesis studies the broad problem of learning robust control policies for difficult physics-based motion control tasks such as locomotion and navigation. A number of avenues are explored to assist in learning such control. In particular, are there underlying structures in the motor-learning system that enable learning solutions to complex tasks? How are animals able to learn new skills so efficiently? Animals may be learning and using implicit models of their environment to assist in planning and exploration. These potential structures motivate the design of learning systems and in this thesis, we study their effectiveness on physically simulated and robotic motor-control tasks. Five contributions that build on motion control using deep reinforcement learning are presented. First, a case study on the motion control problem of brachiation, the movement of gibbons through trees is presented. This work compares parametric and non-parametric models for reinforcement learning. The difficulty of this motion control problem motivates separating the control problem into multiple levels. Second, a hierarchical decomposition is presented that enables efficient learning by operating across multiple time scales for a complex locomotion and navigation task. First, reinforcement learning is used to acquire a low-level, high-frequency policy for joint actuation, used for bipedal footstep-directed walking. Subsequently, an additional policy is learned that provides directed footstep plans to the first level of control in order to navigate through the environment. Third, improved action exploration methods are investigated. An explicit action valued function is constructed using the learned model. Using this action-valued function we can compute actions that increase the value of future states. Fourth, a new algorithm is designed to progressively learn and integrate new skills producing a robust and multi-skilled physics-based controller. This algorithm combines the skills of experts and then applies transfer learning methods to initialize and accelerate the learning of new skills. In the last chapter, the importance of good benchmarks for improving reinforcement learning research is discussed. The computer vision community has benefited from large carefully processed collections of data, and, similarly, reinforcement learning needs well constructed and interesting environments to drive progress."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/michiel-van-de-panne> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/glen-berseth> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/university-british-columbia> ;
+    geniro:thesis <http://hdl.handle.net/2429/69572> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/glen-berseth-2019#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/glen-berseth-2019#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/glen-berseth-2019#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/glen-berseth-2019#timePeriod/end>
+    time:inXSDDate "2019-05-01"^^xsd:date .
+
+## Mikhail Bessmeltsev
+
+<http://diro.umontreal.ca/geniro/person/mikhail-bessmeltsev> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/mikhail-bessmeltsev" ;
+    foaf:firstName "Mikhail" ;
+    foaf:lastName "Bessmeltsev" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/mikhail-bessmeltsev> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=274452> .
+
+<http://diro.umontreal.ca/geniro/person/mikhail-bessmeltsev#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/mikhail-bessmeltsev> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
+## Michel Boyer
+
+<http://diro.umontreal.ca/geniro/person/michel-boyer> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/michel-boyer" ;
+    foaf:firstName "Michel" ;
+    foaf:lastName "Boyer" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/michel-boyer> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73173> .
+
+<http://diro.umontreal.ca/geniro/person/michel-boyer#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/michel-boyer> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/michel-boyer#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/michel-boyer#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/michel-boyer#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/michel-boyer#membership-start>
+    time:inXSDDate "1984-01-01"^^xsd:date .
+
+## Gilles Brassard
+
+<http://diro.umontreal.ca/geniro/person/gilles-brassard> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/gilles-brassard" ;
+    foaf:firstName "Gilles" ;
+    foaf:lastName "Brassard" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/gilles-brassard> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73123> .
+
+<http://diro.umontreal.ca/geniro/person/gilles-brassard#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/gilles-brassard> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/gilles-brassard#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/gilles-brassard#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/gilles-brassard#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/gilles-brassard#membership-start>
+    time:inXSDDate "1979-01-01"^^xsd:date .
+        
+## Paul Bratley
+
+<http://diro.umontreal.ca/geniro/person/paul-bratley> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/paul-bratley" ;
+    foaf:firstName "Paul" ;
+    foaf:lastName "Bratley" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/paul-bratley> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73156> .
+    # NB: Did not have a PhD, no advisor
+
+<http://diro.umontreal.ca/geniro/person/paul-bratley#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/paul-bratley> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/paul-bratley#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/paul-bratley#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/paul-bratley#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/paul-bratley#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/paul-bratley#membership-start>
+    time:inXSDDate "1968-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/paul-bratley#membership-end>
+    time:inXSDDate "2000-06-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/paul-bratley#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/paul-bratley> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/paul-bratley#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/paul-bratley#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/paul-bratley#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/paul-bratley#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/paul-bratley#director-start>
+    time:inXSDDate "1973-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/paul-bratley#director-end>
+    time:inXSDDate "1977-01-01"^^xsd:date .
+
+## Margarida Carvalho
+
+<http://diro.umontreal.ca/geniro/person/margarida-carvalho> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/margarida-carvalho" ;
+    foaf:firstName "Margarida" ;
+    foaf:lastName "Carvalho" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/margarida-carvalho> .
+    # Note: Different from MathGenealogy #193191
+
+<http://diro.umontreal.ca/geniro/person/margarida-carvalho#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/margarida-carvalho> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
+<http://diro.umontreal.ca/geniro/person/joao-pedro-pedroso> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/joao-pedro-pedroso" ;
+    foaf:firstName "João" ;
+    foaf:lastName "Pedro Pedroso" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=135629> .
+
+<http://diro.umontreal.ca/geniro/person/andrea-lodi> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/andrea-lodi" ;
+    foaf:firstName "Andrea" ;
+    foaf:lastName "Lodi" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=177176> .
+
+<http://diro.umontreal.ca/geniro/project/margarida-carvalho-2016> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/margarida-carvalho-2016" ;
+    dcterms:title "Computation of equilibria on integer programming games" ;
+    dcterms:description """The knapsack problem, the maximum matching problem and the lot-sizing problem are classical examples of combinatorial optimization models that have been broadly studied in the literature. In recent years, more intricate variants of these problems have been investigated, resulting in better approximations of real-world problems and in improve- ments in solution techniques. The goal of this Ph.D. thesis is to extend the algorithmic tools for solving these (single) decision-maker combinatorial problems to games, that is, to combinatorial problems with several decision makers. It is frequent for a decision process to depend on parameters that are controlled by external decision makers. Therefore, combinatorial games are a crucial line of research since they reflect the reality of these problems. We focus in understanding the computational complexity and in designing algorithms to find equilibria to integer programming games with quadratic utilities. In an integer programming game, a player’s goal is formulated by using the mathematical programming framework. Each player aims at maximizing her utility, a function of her and other players’ decision variables (strategies). We will concentrate in games with quadratic utilities on each player’s decision variables. In order to make this thesis self-contained, we start by covering the essential background in computational complexity, mathematical programming and game theory. It is followed by the presentation of our contributions, which are fleshed out in two parts: Stackelberg competition and simultaneous games. The first part concerns Stackelberg competitions (also known as bilevel programming), where players play sequentially. We study the most simple to model combinatorial Stackelberg competitions, which are based on the knapsack problem. We characterize the complexity of computing equilibria and we design a novel algorithm to tackle a bilevel interdiction problem, the knapsack problem with interdiction constraints, a special class of problems which have recently received significant attention in the research community. The second part deals with simultaneous games, i.e., games in which players select their strategies at the same time. This definition already gives a hint of the obstacles involved in finding players’ rational strategies, since the opponents strategies have to be predicted. In this context, we investigate the structure of three particular games: the coordination knapsack game (based on the knapsack problem), the kidney-exchange game (based on the maximum matching problem) and the lot-sizing game (based on the lot-sizing problem). To conclude, after investigating these particular games, we move on to the more complex case: general simultaneous games. We establish the connection of simultaneous games with Stackelberg competitions, and prove that finding a solution to a simultaneous game is at least as hard as solving a Stackelberg competition; finally, we devise an algorithm to approximate an equilibrium for simultaneous games."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/joao-pedro-pedroso> ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/andrea-lodi> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/margarida-carvalho> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universidade-do-porto> ;
+    geniro:thesis <https://hdl.handle.net/10216/83362> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/margarida-carvalho-2016#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/margarida-carvalho-2016#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/margarida-carvalho-2016#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/margarida-carvalho-2016#timePeriod/end>
+    time:inXSDDate "2016-04-18"^^xsd:date .
+
+## Eduard Cerny
+
+<http://diro.umontreal.ca/geniro/person/eduard-cerny> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/eduard-cerny" ;
+    foaf:firstName "Eduard" ;
+    foaf:lastName "Cerny" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/eduard-cerny> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73099> .
+
+<http://diro.umontreal.ca/geniro/person/eduard-cerny#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/eduard-cerny> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/eduard-cerny#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/eduard-cerny#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/eduard-cerny#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/eduard-cerny#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/eduard-cerny#membership-start>
+    time:inXSDDate "1978-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/eduard-cerny#membership-end>
+    time:inXSDDate "2000-01-01"^^xsd:date .
+
+## Robert Cléroux
+
+<http://diro.umontreal.ca/geniro/person/robert-cleroux> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/robert-cleroux" ;
+    foaf:firstName "Robert" ;
+    foaf:lastName "Cléroux" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/robert-cleroux> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=63819> .
+    # INCOMPLETE PROFILE, MISSING ADVISOR
+
+<http://diro.umontreal.ca/geniro/person/robert-cleroux#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/robert-cleroux> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorEmeritus ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-start>
+    time:inXSDDate "1968-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/robert-cleroux#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/robert-cleroux> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/robert-cleroux#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/robert-cleroux#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/robert-cleroux#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/robert-cleroux#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/robert-cleroux#director-start>
+    time:inXSDDate "1977-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/robert-cleroux#director-end>
+    time:inXSDDate "1981-01-01"^^xsd:date .
+
+## Alain Colmerauer
+
+<http://diro.umontreal.ca/geniro/person/alain-colmerauer> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/alain-colmerauer" ;
+    foaf:firstName "Alain" ;
+    foaf:lastName "Colmerauer" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=67183> .
+
+<http://diro.umontreal.ca/geniro/person/alain-colmerauer#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/alain-colmerauer> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/alain-colmerauer#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/alain-colmerauer#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/alain-colmerauer#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/alain-colmerauer#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/alain-colmerauer#membership-start>
+    time:inXSDDate "1967-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/alain-colmerauer#membership-end>
+    time:inXSDDate "1970-06-01"^^xsd:date .
+
+## Aaron Courville
+
+<http://diro.umontreal.ca/geniro/person/aaron-courville> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/aaron-courville" ;
+    foaf:firstName "Aaron" ;
+    foaf:lastName "Courville" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/aaron-courville> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=252136> .
+
+<http://diro.umontreal.ca/geniro/person/aaron-courville#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/aaron-courville> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
+
+## Miklós Csűrös
+
+<http://diro.umontreal.ca/geniro/person/miklos-csuros> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/miklos-csuros" ;
+    foaf:firstName "Miklós" ;
+    foaf:lastName "Csűrös" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/miklos-csuros> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=69459> .
+
+<http://diro.umontreal.ca/geniro/person/miklos-csuros#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/miklos-csuros> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
+## Jean-Pierre David
+
+<http://diro.umontreal.ca/geniro/person/jean-pierre-david> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jean-pierre-david" ;
+    foaf:firstName "Jean-Pierre" ;
+    foaf:lastName "David" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/jean-pierre-david> .
+    # MISSING EXTERNAL PROFILE
+    # Jean-Pierre David <-[2002]- Jean-Didier Legat
+    # (https://dial.uclouvain.be/pr/boreal/fr/object/boreal%3A206140)
+    # Jean-Didier Legat <-[1987]- ???
+    # (https://dial.uclouvain.be/pr/boreal/fr/object/boreal%3A206630)
+
+<http://diro.umontreal.ca/geniro/person/jean-pierre-david#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jean-pierre-david> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jean-pierre-david#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jean-pierre-david#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jean-pierre-david#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/jean-pierre-david#membership-start>
+    time:inXSDDate "2002-01-01"^^xsd:date .
+
+## Yvo Desmedt
+
+<http://diro.umontreal.ca/geniro/person/yvo-desmedt> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/yvo-desmedt" ;
+    foaf:firstName "Yvo" ;
+    foaf:lastName "Desmedt" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=97309> .
+
+<http://diro.umontreal.ca/geniro/person/yvo-desmedt#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/yvo-desmedt> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/yvo-desmedt#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/yvo-desmedt#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/yvo-desmedt#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/yvo-desmedt#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/yvo-desmedt#membership-start>
+    time:inXSDDate "1986-09-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/yvo-desmedt#membership-end>
+    time:inXSDDate "1987-08-01"^^xsd:date .
+
+## Rachida Dssouli
+
+<http://diro.umontreal.ca/geniro/person/rachida-dssouli> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/rachida-dssouli" ;
+    foaf:firstName "Rachida" ;
+    foaf:lastName "Dssouli" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/rachida-dssouli> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73096> .
+
+<http://diro.umontreal.ca/geniro/person/rachida-dssouli#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/rachida-dssouli> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/rachida-dssouli#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/rachida-dssouli#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/rachida-dssouli#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/rachida-dssouli#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/rachida-dssouli#membership-start>
+    time:inXSDDate "1991-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/rachida-dssouli#membership-end>
+    time:inXSDDate "2001-01-01"^^xsd:date .
+
+## Frédéric Dupont-Dupuis
+
+<http://diro.umontreal.ca/geniro/person/frederic-dupont-dupuis> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/frederic-dupont-dupuis" ;
+    foaf:firstName "Frédéric" ;
+    foaf:lastName "Dupont-Dupuis" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/frederic-dupont-dupuis> ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/frederic-dupuis> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=198788> .
+
+<http://diro.umontreal.ca/geniro/person/frederic-dupont-dupuis#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/frederic-dupont-dupuis> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
+## Douglas Eck
+
+<http://diro.umontreal.ca/geniro/person/douglas-eck> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/douglas-eck" ;
+    foaf:firstName "Douglas" ;
+    foaf:lastName "Eck" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/douglas-eck> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=171007> .
+
+<http://diro.umontreal.ca/geniro/person/douglas-eck#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/douglas-eck> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/douglas-eck#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/douglas-eck#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/douglas-eck#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/douglas-eck#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/douglas-eck#membership-start>
+    time:inXSDDate "2003-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/douglas-eck#membership-end>
+    time:inXSDDate "2010-01-01"^^xsd:date .
+
+## Nadia El-Mabrouk
+
+<http://diro.umontreal.ca/geniro/person/nadia-el-mabrouk> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/nadia-el-mabrouk" ;
+    foaf:firstName "Nadia" ;
+    foaf:lastName "El-Mabrouk" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/nadia-el-mabrouk> ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/nadia-ei-mabrouk> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=172684> .
+
+<http://diro.umontreal.ca/geniro/person/nadia-el-mabrouk#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/nadia-el-mabrouk> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/nadia-el-mabrouk#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/nadia-el-mabrouk#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/nadia-el-mabrouk#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/nadia-el-mabrouk#membership-start>
+    time:inXSDDate "1998-08-01"^^xsd:date .
+
+## Michalis Famelis
+
+<http://diro.umontreal.ca/geniro/person/michalis-famelis> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/michalis-famelis" ;
+    foaf:firstName "Michalis" ;
+    foaf:lastName "Famelis" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/michalis-famelis> ;
+    owl:sameAs <http://orcid.org/0000-0003-3545-0274> .
+
+<http://diro.umontreal.ca/geniro/person/michalis-famelis#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/michalis-famelis> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/michalis-famelis#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/michalis-famelis#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/michalis-famelis#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/michalis-famelis#membership-start>
+    time:inXSDDate "2017-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/marsha-chechik> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/marsha-chechik" ;
+    foaf:firstName "Marsha" ;
+    foaf:lastName "Chechik" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=103314> .
+
+<http://diro.umontreal.ca/geniro/project/michalis-famelis-2016> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/michalis-famelis-2016" ;
+    dcterms:title "Managing Design-Time Uncertainty in Software Models" ;
+    dcterms:description """The concern for handling uncertainty in software pervades contemporary software engineering. A particular form of uncertainty is that which can exist at multiple stages of the development process, where developers are uncertain about the content of their artifacts. However, existing tools and methodologies do not support working in the presence of design-time uncertainty, i.e., uncertainty that developers have about the content of their artifacts in various stages of the development process, therefore having to mentally keep track of multitude of possible alternative designs. Because of this uncertainty, developers are forced to either refrain from using their tools until uncertainty is resolved, or to make provisional decisions and attempt to keep track of them in case they prove premature and need to be undone. These options lead to either under-utilization of resources or potentially costly re-engineering. This thesis presents a way to avoid these pitfalls by managing uncertainty in a systematic way. We propose to to work in the presence of uncertainty and to only resolve it when enough information is available. Development can therefore continue while avoiding premature design commitments. In a pilot user study we found that, when asked to articulate design-time uncertainty in a free-form modelling scenario, people tend to explicate it within the software artifact itself, staying close to the existing notation. This lead us to adopt "partial models", a formalism for representing sets of possible design alternatives while staying faithful to the underlying language. This way, the problem of managing uncertainty in software artifacts is turned into a problem of doing management of software artifacts that contain uncertainty. To manage partial models, we have thus leveraged several software engineering sub-disciplines to develop techniques for: (a) articulating uncertainty, (b) checking and enforcing properties, as well as generating appropriate user feedback, (c) applying transformations, and (d) systematically making decisions, as new information becomes available. The resulting partial model management framework utilizes novel abstraction and automation approaches and enables a principled and systematic approach to managing design-time uncertainty in the software development process."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/marsha-chechik> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/michalis-famelis> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/university-of-toronto> ;
+    geniro:thesis <http://hdl.handle.net/1807/72997> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/michalis-famelis-2016#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/michalis-famelis-2016#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/michalis-famelis-2016#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/michalis-famelis-2016#timePeriod/end>
+    time:inXSDDate "2016-06-01"^^xsd:date .
+
+## Marc Feeley
+
+<http://diro.umontreal.ca/geniro/person/marc-feeley> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/marc-feeley" ;
+    foaf:firstName "Marc" ;
+    foaf:lastName "Feeley" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/marc-feeley> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=62754> .
+
+<http://diro.umontreal.ca/geniro/person/marc-feeley#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/marc-feeley> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
+
+## Jacques Ferland
+
+<http://diro.umontreal.ca/geniro/person/jacques-ferland> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jacques-ferland" ;
+    foaf:firstName "Jacques" ;
+    foaf:lastName "Ferland" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/jacques-ferland> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=64478> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-ferland#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jacques-ferland> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jacques-ferland#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-ferland#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jacques-ferland#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-ferland#membership-start>
+    time:inXSDDate "1975-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jacques-ferland#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jacques-ferland> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jacques-ferland#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-ferland#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jacques-ferland#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jacques-ferland#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-ferland#director-start>
+    time:inXSDDate "1989-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jacques-ferland#director-end>
+    time:inXSDDate "1993-01-01"^^xsd:date .
+
+## Claude Frasson
+
+<http://diro.umontreal.ca/geniro/person/claude-frasson> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/claude-frasson" ;
+    foaf:firstName "Claude" ;
+    foaf:lastName "Frasson" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/claude-frasson> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73130> .
+
+<http://diro.umontreal.ca/geniro/person/claude-frasson#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/claude-frasson> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/claude-frasson#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/claude-frasson#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/claude-frasson#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/claude-frasson#membership-start>
+    time:inXSDDate "1983-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jean-claude-boussard> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jean-claude-boussard" ;
+    foaf:firstName "Jean-Claude" ;
+    foaf:lastName "Boussard" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=294026> .
+
+<http://diro.umontreal.ca/geniro/person/jean-le-bihan> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jean-le-bihan" ;
+    foaf:firstName "Jean" ;
+    foaf:lastName "Le Bihan" ;
+    owl:sameAs <http://www.wikidata.org/wiki/Q23926170> .
+
+<http://diro.umontreal.ca/geniro/project/claude-frasson-1981> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/claude-frasson-1981" ;
+    dcterms:title "Contribution au contrôle des performances et de l'exploitation dans un système de gestion de base de données" ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/jean-claude-boussard> ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/jean-le-bihan> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/claude-frasson> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-de-nice-sophia-antipolis> ;
+    geniro:thesis <https://www.sudoc.fr/185201083> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/claude-frasson-1981#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/claude-frasson-1981#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/claude-frasson-1981#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/claude-frasson-1981#timePeriod/end>
+    time:inXSDDate "1981-01-01"^^xsd:date .
+
+## Emma Frejinger
+
+<http://diro.umontreal.ca/geniro/person/emma-frejinger> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/emma-frejinger" ;
+    foaf:firstName "Emma" ;
+    foaf:lastName "Frejinger" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/emma-frejinger> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=126918> .
+
+<http://diro.umontreal.ca/geniro/person/emma-frejinger#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/emma-frejinger> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
+
+## Jan Gecsei
+
+<http://diro.umontreal.ca/geniro/person/jan-gecsei> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jan-gecsei" ;
+    foaf:firstName "Jan" ;
+    foaf:lastName "Gecsei" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/jan-gecsei> .
+    # MISSING EXTERNAL PROFILE
+
+<http://diro.umontreal.ca/geniro/person/jan-gecsei#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jan-gecsei> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jan-gecsei#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jan-gecsei#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jan-gecsei#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jan-gecsei#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/jan-gecsei#membership-start>
+    time:inXSDDate "1973-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jan-gecsei#membership-end>
+    time:inXSDDate "2000-01-01"^^xsd:date .
+
+## Bernard Gendron
+
+<http://diro.umontreal.ca/geniro/person/bernard-gendron> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/bernard-gendron" ;
+    foaf:firstName "Bernard" ;
+    foaf:lastName "Gendron" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/bernard-gendron> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=190983> .
+
+<http://diro.umontreal.ca/geniro/person/bernard-gendron#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/bernard-gendron> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/bernard-gendron#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/bernard-gendron#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/bernard-gendron#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/bernard-gendron#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/bernard-gendron#membership-start>
+    time:inXSDDate "1994-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/bernard-gendron#membership-end>
+    time:inXSDDate "2022-01-01"^^xsd:date .
+
+## Yann-Gaël Guéheneuc
+
+<http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc" ;
+    foaf:firstName "Yann-Gaël" ;
+    foaf:lastName "Guéheneuc" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/yann-gael-gueheneuc> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=188826> .
+    # INCOMPLETE PROFILE, MISSING ADVISOR
+    # Yann-Gaël Guéheneuc <-[2003]- Pierre Cointe
+    # (http://www.yann-gael.gueheneuc.net/Work/PhDThesis/)
+    # (https://theses.fr/073410969)
+    # Pierre Cointe <-- ???
+    # (https://umontreal.on.worldcat.org/oclc/41431050)
+    # Copie demandée PEB
+
+<http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc#membership-start>
+    time:inXSDDate "2003-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc#membership-end>
+    time:inXSDDate "2008-01-01"^^xsd:date .
+
+## Gauthier Gidel
+
+<http://diro.umontreal.ca/geniro/person/gauthier-gidel> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/gauthier-gidel" ;
+    foaf:firstName "Gauthier" ;
+    foaf:lastName "Gidel" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/gauthier-gidel> .
+    # MISSING EXTERNAl PROFILE
+    # Gauthier Gidel <-[2020]- Simon Lacoste-Julien (in Papyrus)
+
+<http://diro.umontreal.ca/geniro/person/gauthier-gidel#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/gauthier-gidel> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
+## Abdelhakim Hafid
+
+<http://diro.umontreal.ca/geniro/person/abdelhakim-hafid> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/abdelhakim-hafid" ;
+    foaf:firstName "Abdelhakim" ;
+    foaf:lastName "Hafid" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/abdelhakim-hafid> .
+    # MISSING EXTERNAL PROFILE
+
+<http://diro.umontreal.ca/geniro/person/abdelhakim-hafid#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/abdelhakim-hafid> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/abdelhakim-hafid#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/abdelhakim-hafid#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/abdelhakim-hafid#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/abdelhakim-hafid#membership-start>
+    time:inXSDDate "2003-01-01"^^xsd:date .
+
+## Gena Hahn
+
+<http://diro.umontreal.ca/geniro/person/gena-hahn> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/gena-hahn" ;
+    foaf:firstName "Gena" ;
+    foaf:lastName "Hahn" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/gena-hahn> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=37873> .
+
+<http://diro.umontreal.ca/geniro/person/gena-hahn#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/gena-hahn> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
+
+## Sylvie Hamel
+
+<http://diro.umontreal.ca/geniro/person/sylvie-hamel> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/sylvie-hamel" ;
+    foaf:firstName "Sylvie" ;
+    foaf:lastName "Hamel" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/sylvie-hamel> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=187558> .
+
+<http://diro.umontreal.ca/geniro/person/sylvie-hamel#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/sylvie-hamel> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/sylvie-hamel#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/sylvie-hamel#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/sylvie-hamel#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/sylvie-hamel#membership-start>
+    time:inXSDDate "2003-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/sylvie-hamel#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/sylvie-hamel> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/sylvie-hamel#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/sylvie-hamel#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/sylvie-hamel#director-start> .
+
+<http://diro.umontreal.ca/geniro/person/sylvie-hamel#director-start>
+    time:inXSDDate "2021-01-01"^^xsd:date .
+
+## Alex Hernandez-Garcia
+
+<http://diro.umontreal.ca/geniro/person/alex-hernandez-garcia> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/alex-hernandez-garcia" ;
+    foaf:firstName "Alex" ;
+    foaf:lastName "Hernandez-Garcia" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/alex-hernandez-garcia> .
+    # MISSING EXTERNAL PROFILE
+    # Alex Hernandez-Garcia <-[2020]- Peter König (doctorate in medicine)
+
+<http://diro.umontreal.ca/geniro/person/alex-hernandez-garcia#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/alex-hernandez-garcia> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant .
+
+## Hlér Kristjánsson
+
+<http://diro.umontreal.ca/geniro/person/hler-kristjansson> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/hler-kristjansson" ;
+    foaf:firstName "Hlér" ;
+    foaf:lastName "Kristjánsson" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/hler-kristjansson> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=285073> .
+    # MISSING ADVISOR IN PROFILE: Giulio Chiribella
+    # EXTRA ADVISOR: Bob Coecke
+
+<http://diro.umontreal.ca/geniro/person/hler-kristjansson#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/hler-kristjansson> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant .
+
+## David Krueger
+
+<http://diro.umontreal.ca/geniro/person/david-krueger> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/david-krueger" ;
+    foaf:firstName "David" ;
+    foaf:lastName "Krueger" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/david-krueger> .
+    # MISSING EXTERNAL PROFILE
+    # David Krueger <-[2022]- Aaron Courville (in Papyrus)
+
+<http://diro.umontreal.ca/geniro/person/david-krueger#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/david-krueger> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant .
+
+## Simon Lacoste-Julien
+
+<http://diro.umontreal.ca/geniro/person/simon-lacoste-julien> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/simon-lacoste-julien" ;
+    foaf:firstName "Simon" ;
+    foaf:lastName "Lacoste-Julien" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/simon-lacoste-julien> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=146093> .
+
+<http://diro.umontreal.ca/geniro/person/simon-lacoste-julien#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/simon-lacoste-julien> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
+
+## Philippe Langlais
+
+<http://diro.umontreal.ca/geniro/person/philippe-langlais> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/philippe-langlais" ;
+    foaf:firstName "Philippe" ;
+    foaf:lastName "Langlais" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/philippe-langlais> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=288976> .
+
+<http://diro.umontreal.ca/geniro/person/philippe-langlais#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/philippe-langlais> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/philippe-langlais#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/philippe-langlais#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/philippe-langlais#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/philippe-langlais#membership-start>
+    time:inXSDDate "2001-01-01"^^xsd:date .
+
+## Guy Lapalme
+
+<http://diro.umontreal.ca/geniro/person/guy-lapalme> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/guy-lapalme" ;
+    foaf:firstName "Guy" ;
+    foaf:lastName "Lapalme" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/guy-lapalme> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73098> .
+
+<http://diro.umontreal.ca/geniro/person/guy-lapalme#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/guy-lapalme> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorEmeritus ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/guy-lapalme#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/guy-lapalme#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/guy-lapalme#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/guy-lapalme#membership-start>
+    time:inXSDDate "1980-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/guy-lapalme#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/guy-lapalme> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/guy-lapalme#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/guy-lapalme#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/guy-lapalme#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/guy-lapalme#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/guy-lapalme#director-start>
+    time:inXSDDate "1993-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/guy-lapalme#director-end>
+    time:inXSDDate "1997-01-01"^^xsd:date .
+
+## Bang Liu
+
+<http://diro.umontreal.ca/geniro/person/bang-liu> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/bang-liu" ;
+    foaf:firstName "Bang" ;
+    foaf:lastName "Liu" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/bang-liu> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=261662> .
+
+<http://diro.umontreal.ca/geniro/person/bang-liu#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/bang-liu> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
+## François Lustman
+
+<http://diro.umontreal.ca/geniro/person/francois-lustman> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/francois-lustman" ;
+    foaf:firstName "François" ;
+    foaf:lastName "Lustman" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/francois-lustman> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73131> .
+    # INCOMPLETE PROFILE, MISSING ADVISOR
+
+<http://diro.umontreal.ca/geniro/person/francois-lustman#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/francois-lustman> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/francois-lustman#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/francois-lustman#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/francois-lustman#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/francois-lustman#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/francois-lustman#membership-start>
+    time:inXSDDate "1981-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/francois-lustman#membership-end>
+    time:inXSDDate "2001-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/francois-lustman#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/francois-lustman> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/francois-lustman#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/francois-lustman#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/francois-lustman#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/francois-lustman#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/francois-lustman#director-start>
+    time:inXSDDate "1985-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/francois-lustman#director-end>
+    time:inXSDDate "1989-01-01"^^xsd:date .
+
+## François Major
+
+<http://diro.umontreal.ca/geniro/person/francois-major> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/francois-major" ;
+    foaf:firstName "François" ;
+    foaf:lastName "Major" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/francois-major> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=271017> .
+
+<http://diro.umontreal.ca/geniro/person/francois-major#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/francois-major> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/francois-major#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/francois-major#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/francois-major#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/francois-major#membership-start>
+    time:inXSDDate "1994-01-01"^^xsd:date .
+
+## Patrice Marcotte
+
+<http://diro.umontreal.ca/geniro/person/patrice-marcotte> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/patrice-marcotte" ;
+    foaf:firstName "Patrice" ;
+    foaf:lastName "Marcotte" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/patrice-marcotte> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=131815> .
+
+<http://diro.umontreal.ca/geniro/person/patrice-marcotte#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/patrice-marcotte> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/patrice-marcotte#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/patrice-marcotte#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/patrice-marcotte#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/patrice-marcotte#membership-start>
+    time:inXSDDate "1993-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/patrice-marcotte#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/patrice-marcotte> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/patrice-marcotte#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/patrice-marcotte#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/patrice-marcotte#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/patrice-marcotte#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/patrice-marcotte#director-start>
+    time:inXSDDate "2009-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/patrice-marcotte#director-end>
+    time:inXSDDate "2013-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/michael-florian> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/michael-florian" ;
+    foaf:firstName "Michael" ;
+    foaf:lastName "Florian" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/michael-florian> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=72554> .
+
+<http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982" ;
+    dcterms:title "Design optimal d'un réseau de transport en présence d'effets de congestion" ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/michael-florian> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/patrice-marcotte> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/diro> ;
+    geniro:thesis <https://umontreal.on.worldcat.org/oclc/53719124> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982#timePeriod/end>
+    time:inXSDDate "1982-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/morton-klein> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/morton-klein" ;
+    foaf:firstName "Morton" ;
+    foaf:lastName "Klein" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=156179> .
+
+<http://diro.umontreal.ca/geniro/project/michael-florian-1969> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/michael-florian-1969" ;
+    dcterms:title "Deterministic production planning models with capacity constraints and concave costs" ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/morton-klein> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/michael-florian> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/columbia-university> ;
+    geniro:thesis <https://clio.columbia.edu/catalog/1939297> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod/end>
+    time:inXSDDate "1969-01-01"^^xsd:date .
+
+## Pierre McKenzie
+
+<http://diro.umontreal.ca/geniro/person/pierre-mckenzie> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/pierre-mckenzie" ;
+    foaf:firstName "Pierre" ;
+    foaf:lastName "McKenzie" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/pierre-mckenzie> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73172> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-mckenzie#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/pierre-mckenzie> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/pierre-mckenzie#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-mckenzie#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/pierre-mckenzie#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/pierre-mckenzie#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-mckenzie#membership-start>
+    time:inXSDDate "1984-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-mckenzie#membership-end>
+    time:inXSDDate "2025-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-mckenzie#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/pierre-mckenzie> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/pierre-mckenzie#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-mckenzie#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/pierre-mckenzie#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/pierre-mckenzie#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-mckenzie#director-start>
+    time:inXSDDate "2001-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-mckenzie#director-end>
+    time:inXSDDate "2005-01-01"^^xsd:date .
+
+## Jean Meunier
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jean-meunier" ;
+    foaf:firstName "Jean" ;
+    foaf:lastName "Meunier" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/jean-meunier> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73124> .
+    # INCOMPLETE PROFILE, MISSING ADVISOR
+    # Jean Meunier <-[1989]- Michel Bertrand (département de chimie UdeM ou Polytechnique?), Guy Mailloux (???)
+    # Bertrand?: https://www.linkedin.com/in/michel-bertrand-6023b6147/
+    # thèse: (https://polymtl.on.worldcat.org/search/detail/1131730046?queryString=jean%20meunier%20%28%28se%3ATh%C3%A8se%20de%20doctorat%29%20OU%20%28se%3AM%C3%A9moire%20de%20ma%C3%AEtrise%29%29%20ET%20%28se%3Apolytechnique%29&databaseList=638%2C283&idDetect=true&clusterResults=false&groupVariantRecords=true&bookReviews=off)
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jean-meunier> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jean-meunier#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jean-meunier#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier#membership-start>
+    time:inXSDDate "1989-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jean-meunier> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jean-meunier#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jean-meunier#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jean-meunier#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier#director-start>
+    time:inXSDDate "2005-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier#director-end>
+    time:inXSDDate "2009-01-01"^^xsd:date .
+
+## Stefan Monnier
+
+<http://diro.umontreal.ca/geniro/person/stefan-monnier> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/stefan-monnier" ;
+    foaf:firstName "Stefan" ;
+    foaf:lastName "Monnier" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/stefan-monnier> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=88396> .
+
+<http://diro.umontreal.ca/geniro/person/stefan-monnier#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/stefan-monnier> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/stefan-monnier#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/stefan-monnier#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/stefan-monnier#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/stefan-monnier#membership-start>
+    time:inXSDDate "2003-01-01"^^xsd:date .
+
+## Sang Nguyen
+
+<http://diro.umontreal.ca/geniro/person/sang-nguyen> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/sang-nguyen" ;
+    foaf:firstName "Sang" ;
+    foaf:lastName "Nguyen" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/sang-nguyen> .
+    # MISSING EXTERNAL PROFILE
+
+<http://diro.umontreal.ca/geniro/person/sang-nguyen#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/sang-nguyen> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/sang-nguyen#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/sang-nguyen#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/sang-nguyen#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/sang-nguyen#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/sang-nguyen#director-start>
+    time:inXSDDate "1997-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/sang-nguyen#director-end>
+    time:inXSDDate "2001-01-01"^^xsd:date .
+
+## Jian-Yun Nie
+
+<http://diro.umontreal.ca/geniro/person/jian-yun-nie> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jian-yun-nie" ;
+    foaf:firstName "Jian-Yun" ;
+    foaf:lastName "Nie" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/jian-yun-nie> .
+    # MISSING EXTERNAL PROFILE
+    # Jian-Yun Nie <-[1990]- Yves Chiaramella
+    # (https://theses.hal.science/UGA-SPAO-TEST/tel-00337441v1)
+    # Yves Chiaramella <-[1981]- Gérard Veillon (MathGenealogy #208035)
+    # (https://theses.hal.science/tel-00011733/file/Chiaramella.Yves.pdf)
+
+<http://diro.umontreal.ca/geniro/person/jian-yun-nie#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jian-yun-nie> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jian-yun-nie#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jian-yun-nie#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jian-yun-nie#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/jian-yun-nie#membership-start>
+    time:inXSDDate "1991-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/yves-chiaramella> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/yves-chiaramella" ;
+    foaf:firstName "Yves" ;
+    foaf:lastName "Chiaramella" .
+
+<http://diro.umontreal.ca/geniro/project/jian-yun-nie-1990> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/jian-yun-nie-1990" ;
+    dcterms:title "Un modèle logique général pour les systèmes de recherche d'informations : application au prototype RIME" ;
+    dcterms:description """La définition d'un modèle d'évaluation est le problème clé d'un système de recherche d'informations. De nombreux modelés existent, qui sont généralement spécifiques a un type d'application particulier et avec lesquels la prise en compte de la sémantique est difficile. Dans la première partie de cette thèse, nous dégageons d'abord deux critères pour la valuation de la correspondance entre un document et une requête: l'exhaustivité et la spécificité du document pour la requête. Nous définissons ensuite un modèle général fonde sur la logique modale floue pour la valuation des deux critères. Ce modèle est compare avec quelques modèles existants pour démontrer sa généralité. Dans la seconde partie de la thèse, le modèle propose est applique au processus d'interrogation du prototype rime pour la recherche d'informations médicales. Ce prototype possède une interface en langue quasi naturelle (un sous-ensemble du français). Un processus d'interrogation se décompose en deux parties: l'interprétation des requêtes en langue quasi naturelle et l'évaluation des requêtes en utilisant le modèle général précédemment défini. Ces deux parties sont étudiées en détail. Une réalisation est finalement présentée, ainsi que son expérimentation sur un corpus médical."""@fr ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/yves-chiaramella> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/jian-yun-nie> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-joseph-fourier> ;
+    geniro:thesis <https://theses.hal.science/tel-00337441v1> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/jian-yun-nie-1990#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/jian-yun-nie-1990#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/jian-yun-nie-1990#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/jian-yun-nie-1990#timePeriod/end>
+    time:inXSDDate "1990-07-13"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/gerard-veillon> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/gerard-veillon" ;
+    foaf:firstName "Gérard" ;
+    foaf:lastName "Veillon" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=208035> .
+
+<http://diro.umontreal.ca/geniro/project/yves-chiaramella-1981> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/yves-chiaramella-1981" ;
+    dcterms:title "Traitement de données ambigües dans un système de base de données. Application aux bases de données démographiques" ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/gerard-veillon> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/yves-chiaramella> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-joseph-fourier> ;
+    geniro:thesis <https://theses.hal.science/tel-00011733> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/yves-chiaramella-1981#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/yves-chiaramella-1981#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/yves-chiaramella-1981#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/yves-chiaramella-1981#timePeriod/end>
+    time:inXSDDate "1981-06-26"^^xsd:date .
+
+## Victor Ostromoukov
+
+<http://diro.umontreal.ca/geniro/person/victor-ostromoukhov> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/victor-ostromoukhov" ;
+    foaf:firstName "Victor" ;
+    foaf:lastName "Ostromoukhov" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/victor-ostromoukhov> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=208547> .
+    # INCOMPLETE PROFILE, MISSING ADVISOR
+    # Victor Ostromoukov <-[1995]- Roger-David Hersch
+    # (https://infoscience.epfl.ch/entities/publication/744c11e6-31fd-4561-9752-20a4a13238fd)
+    # Hersch, Roger-David <-- ???
+
+<http://diro.umontreal.ca/geniro/person/victor-ostromoukhov#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/victor-ostromoukhov> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/victor-ostromoukhov#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/victor-ostromoukhov#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/victor-ostromoukhov#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/victor-ostromoukhov#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/victor-ostromoukhov#membership-start>
+    time:inXSDDate "2000-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/victor-ostromoukhov#membership-end>
+    time:inXSDDate "2009-01-01"^^xsd:date .
+
+## Liam Paull
+
+<http://diro.umontreal.ca/geniro/person/liam-paull> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/liam-paull" ;
+    foaf:firstName "Liam" ;
+    foaf:lastName "Paull" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/liam-paull> .
+    # MISSING EXTERNAL PROFILE
+    # Liam Paull <-[2013]- Mae Seto (???), Howard Li (???)
+    #   Mae Seto <-[1996]- Vinod J. Modi (MathGenealogy #25194 ??)
+    #   (https://open.library.ubc.ca/soa/cIRcle/collections/ubctheses/831/items/1.0080841)
+    #     Vinod J. Modi <--- ???
+    #     (https://www.wind.arch.t-kougei.ac.jp/info_center/modi_hall.html)
+    #   Howard Li <-[2008]- Fakhri Karray (???), Otman Basir (MathGenealogy #76442 ??)
+    #   (https://uwspace.uwaterloo.ca/items/9ef44e2b-72a4-4d9d-b04a-841996b8439b)
+    #     Otman Basir <--- ???
+    #     (https://umontreal.on.worldcat.org/oclc/1087078155)
+    #     Fakhreddine (Fakhri) Karray <--- ???
+    #     (https://en.wikipedia.org/wiki/Fakhreddine_Karray)
+    #     (https://umontreal.on.worldcat.org/oclc/21415166)
+
+<http://diro.umontreal.ca/geniro/person/liam-paull#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/liam-paull> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
+## Jean-Yves Potvin
+
+<http://diro.umontreal.ca/geniro/person/jean-yves-potvin> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jean-yves-potvin" ;
+    foaf:firstName "Jean-Yves" ;
+    foaf:lastName "Potvin" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/jean-yves-potvin> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=271013> .
+
+<http://diro.umontreal.ca/geniro/person/jean-yves-potvin#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jean-yves-potvin> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
+
+## Pierre Poulin
+
+<http://diro.umontreal.ca/geniro/person/pierre-poulin> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/pierre-poulin" ;
+    foaf:firstName "Pierre" ;
+    foaf:lastName "Poulin" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/pierre-poulin> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=72160> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-poulin#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/pierre-poulin> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/pierre-poulin#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-poulin#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/pierre-poulin#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-poulin#membership-start>
+    time:inXSDDate "1993-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-poulin#membership-end>
+    time:inXSDDate "2024-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-poulin#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/pierre-poulin> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/pierre-poulin#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-poulin#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/pierre-poulin#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/pierre-poulin#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-poulin#director-start>
+    time:inXSDDate "2017-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-poulin#director-end>
+    time:inXSDDate "2021-01-01"^^xsd:date .
+
+## Guillaume Rabusseau
+
+<http://diro.umontreal.ca/geniro/person/guillaume-rabusseau> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/guillaume-rabusseau" ;
+    foaf:firstName "Guillaume" ;
+    foaf:lastName "Rabusseau" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/guillaume-rabusseau> .
+
+<http://diro.umontreal.ca/geniro/person/guillaume-rabusseau#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/guillaume-rabusseau> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
+<http://diro.umontreal.ca/geniro/person/francois-denis> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/francois-denis" ;
+    foaf:firstName "François" ;
+    foaf:lastName "Denis" .
+    # Missing details
+    # https://web.archive.org/web/20011118054724/https://www.cmi.univ-mrs.fr/~fdenis/
+
+<http://diro.umontreal.ca/geniro/person/hachem-kadri> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/hachem-kadri" ;
+    foaf:firstName "Hachem" ;
+    foaf:lastName "Kadri" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=343952> .
+
+<http://diro.umontreal.ca/geniro/project/guillaume-rabusseau-2016> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/guillaume-rabusseau-2016" ;
+    dcterms:title "A tensor perspective on weighted automata, low-rank regression and algebraic mixtures" ;
+    dcterms:description """Ce manuscrit regroupe différents travaux explorant les interactions entre les tenseurs et l'apprentissage automatique. Le premier chapitre est consacré à l'extension des modèles de séries reconnaissables de chaînes et d'arbres aux graphes. Nous y montrons que les modèles d'automates pondérés de chaînes et d'arbres peuvent être interprétés d'une manière simple et unifiée à l'aide de réseaux de tenseurs, et que cette interprétation s'étend naturellement aux graphes ; nous étudions certaines propriétés de ce modèle et présentons des résultats préliminaires sur leur apprentissage. Le second chapitre porte sur la minimisation approximée d'automates pondérés d'arbres et propose une approche théoriquement fondée à la problématique suivante : étant donné un automate pondéré d'arbres à n états, comment trouver un automate à m<n états calculant une fonction proche de l'originale. Le troisième chapitre traite de la régression de faible rang pour sorties à structure tensorielle. Nous y proposons un algorithme d'apprentissage rapide et efficace pour traiter un problème de régression dans lequel les sorties des tenseurs. Nous montrons que l'algorithme proposé est un algorithme d'approximation pour ce problème NP-difficile et nous donnons une analyse théorique de ses propriétés statistiques et de généralisation. Enfin, le quatrième chapitre introduit le modèle de mélanges algébriques de distributions. Ce modèle considère des combinaisons affines de distributions (où les coefficients somment à un mais ne sont pas nécessairement positifs). Nous proposons une approche pour l'apprentissage de mélanges algébriques qui étend la méthode tensorielle des moments introduite récemment."""@fr ;
+    dcterms:description """This thesis tackles several problems exploring connections between tensors and machine learning. In the first chapter, we propose an extension of the classical notion of recognizable function on strings and trees to graphs. We first show that the computations of weighted automata on strings and trees can be interpreted in a natural and unifying way using tensor networks, which naturally leads us to define a computational model on graphs: graph weighted models; we then study fundamental properties of this model and present preliminary learning results. The second chapter tackles a model reduction problem for weighted tree automata. We propose a principled approach to the following problem: given a weighted tree automaton with n states, how can we find an automaton with m<n states that is a good approximation of the original one? In the third chapter, we consider a problem of low rank regression for tensor structured outputs. We design a fast and efficient algorithm to address a regression task where the outputs are tensors. We show that this algorithm generalizes the reduced rank regression method and that it offers good approximation, statistical and generalization guarantees. Lastly in the fourth chapter, we introduce the algebraic mixture model. This model considers affine combinations of probability distributions (where the weights sum to one but may be negative). We extend the recently proposed tensor method of moments to algebraic mixtures, which allows us in particular to design a learning algorithm for algebraic mixtures of spherical Gaussian distributions."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/francois-denis> ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/hachem-kadri> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/guillaume-rabusseau> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/aix-marseille-universite> ;
+    geniro:thesis <https://theses.fr/2016AIXM4062> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/guillaume-rabusseau-2016#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/guillaume-rabusseau-2016#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/guillaume-rabusseau-2016#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/guillaume-rabusseau-2016#timePeriod/end>
+    time:inXSDDate "2016-10-01"^^xsd:date .
+
+## Irina Rish
+
+<http://diro.umontreal.ca/geniro/person/irina-rish> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/irina-rish" ;
+    foaf:firstName "Irina" ;
+    foaf:lastName "Rish" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/irina-rish> .
+
+<http://diro.umontreal.ca/geniro/person/irina-rish#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/irina-rish> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
+
+<http://diro.umontreal.ca/geniro/person/rina-dechter> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/rina-dechter" ;
+    foaf:firstName "Rina" ;
+    foaf:lastName "Dechter" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=70641> .
+
+<http://diro.umontreal.ca/geniro/project/irina-rish-1999> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/irina-rish-1999" ;
+    dcterms:title "Efficient reasoning in graphical models" ;
+    dcterms:description """Most artificial intelligence problems are computationally hard (NP-hard). However, in practice, the pessimistic worst-case performance can be improved by exploiting problem structure and by using approximations that trade accuracy for efficiency. Theoretical studies identify tractable problem classes while empirical evaluations shed light on average performance. This thesis is concerned with efficient algorithms for automated inference in graphical models, such as constraint networks and belief networks. We use a general graph-based algorithmic framework that combines a dynamic-programming approach called variable elimination with conditioning techniques, such as backtracking search. We investigate the effects of certain problem structures, identify new tractable classes, and propose several structure-exploiting algorithms. The central idea of this thesis is that efficiency can be gained by reducing the induced width, a graph parameter that bounds the complexity of variable elimination. We approach this problem by combining elimination with conditioning, which reduces the graph connectivity; by exploiting hidden structure such as causal independence in belief networks, which allows decomposition of large dependencies into smaller ones; and by using approximation algorithms that bound the size of recorded dependencies. Our empirical studies demonstrate promising results obtained both on randomly generated problems and on realistic domains such as medical diagnosis and probabilistic decoding."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/rina-dechter> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/irina-rish> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/university-of-california-irvine> ;
+    geniro:thesis <https://www.proquest.com/docview/304498809> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/irina-rish-1999#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/irina-rish-1999#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/irina-rish-1999#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/irina-rish-1999#timePeriod/end>
+    time:inXSDDate "1999-01-01"^^xsd:date .
+
+## Pierre Robert
+
+<http://diro.umontreal.ca/geniro/person/pierre-robert> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/pierre-robert" ;
+    foaf:firstName "Pierre" ;
+    foaf:lastName "Robert" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=17721> .
+    # DIFFERENT NAME IN EXTERNAL PROFILE!
+    # <http://www.125.umontreal.ca/Pionniers/Robert.html>
+    # Joseph Pierre Robert <-[1965]- Charles A. Swanson (MathGenealogy #11744)
+
+<http://diro.umontreal.ca/geniro/person/pierre-robert#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/pierre-robert> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorEmeritus ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/pierre-robert#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robert#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/pierre-robert#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/pierre-robert#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robert#membership-start>
+    time:inXSDDate "1966-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robert#membership-end>
+    time:inXSDDate "1996-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robert#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/pierre-robert> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/pierre-robert#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robert#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/pierre-robert#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/pierre-robert#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robert#director-start>
+    time:inXSDDate "1969-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robert#director-end>
+    time:inXSDDate "1973-01-01"^^xsd:date .
+
+## Jean-Marc Rousseau
+
+<http://diro.umontreal.ca/geniro/person/jean-marc-rousseau> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jean-marc-rousseau" ;
+    foaf:firstName "Jean-Marc" ;
+    foaf:lastName "Rousseau" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/jean-marc-rousseau> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73176> .
+
+<http://diro.umontreal.ca/geniro/person/jean-marc-rousseau#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jean-marc-rousseau> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jean-meunier#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jean-meunier#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jean-meunier#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier#membership-start>
+    time:inXSDDate "1973-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jean-meunier#membership-end>
+    time:inXSDDate "1992-01-01"^^xsd:date .
+
+## Sébastien Roy
+
+<http://diro.umontreal.ca/geniro/person/sebastien-roy> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/sebastien-roy" ;
+    foaf:firstName "Sébastien" ;
+    foaf:lastName "Roy" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/sebastien-roy> .
+    # MISSING EXTERNAL PROFILE
+    # Sébastien Roy <-[1999]- Jean Meunier (in Papyrus)
+    # (https://umontreal.on.worldcat.org/oclc/868972550)
+
+<http://diro.umontreal.ca/geniro/person/sebastien-roy#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/sebastien-roy> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/sebastien-roy#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/sebastien-roy#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/sebastien-roy#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/sebastien-roy#membership-start>
+    time:inXSDDate "1999-01-01"^^xsd:date .
+
+## Utsav Sadana
+
+<http://diro.umontreal.ca/geniro/person/utsav-sadana> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/utsav-sadana" ;
+    foaf:firstName "Utsav" ;
+    foaf:lastName "Sadana" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/utsav-sadana> .
+    # MISSING EXTERNAL PROFILE
+    # Utsav Sadana <-[2021]- Georges Zaccour (MathGenealogy #134396)
+
+<http://diro.umontreal.ca/geniro/person/utsav-sadana#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/utsav-sadana> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant .
+
+<http://diro.umontreal.ca/geniro/person/georges-zaccour> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/georges-zaccour" ;
+    foaf:firstName "Georges" ;
+    foaf:lastName "Zaccour" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=134396> .
+
+<http://diro.umontreal.ca/geniro/project/utsav-sadana-2021> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/utsav-sadana-2021" ;
+    dcterms:title "Essays on differential games with impulse control" ;
+    dcterms:description """This thesis consists of four essays on deterministic finite-horizon two-player nonzero-sum differential games where one player continuously controls the state while the other player strategically intervenes at certain (discrete) time instants to shift the state from one level to another. In contrast to classical differential games where all players take actions continuously, the impulse player also decides when to intervene during the game in addition to determining the level of the interventions. Impulse control models constitute a natural approach for analyzing strategic behavior of agents in many contexts such as investment in product quality, environmental regulation and cybersecurity. However, to solve practical problems, we need to address a series of theoretical and computational challenges that are due to the endogeneity of the timing of actions. This is the general topic of this work. In this thesis, we characterize the Nash equilibria under all the three information structures that have been considered in the differential game theory literature, namely, open-loop, feedback and sampled-data information structures. Further, we show that the timing of impulses can be obtained as a solution of a constrained non-linear optimization problem in the case of linear-quadratic differential games with impulse controls. To analytically characterize the equilibrium number, timing, and magnitude of impulses, we introduce canonical linear-state game models and compare the equilibrium behavior of players across different information structures. In each essay, we also illustrate the theoretical results using a game problem between two players, one of whom prefers a higher state value while the other aims to lower the state, a situation that arises in many regulation and cybersecurity applications."""@en ;
+    dcterms:description """Cette thèse consiste en quatre essais sur des jeux différentiels déterministes à deux joueurs, à horizon fini et à somme non nulle, où un joueur implémente un contrôle continu pour influencer l’état, tandis que l’autre intervient à certains instants choisis stratégiquement. Le choix ne porte pas uniquement sur les moments d’interventions, mais aussi sur leurs niveaux. Les jeux dynamiques avec contrôles impulsionnels constituent une approche naturelle pour analyser le comportement stratégique des agents dans de nombreux contextes tels que l’investissement dans la qualité des produits, la réglementation environnementale et la cybersécurité. Cependant, la résolution de problèmes pratiques se heurte à une série de défis théoriques et computationnels, qui sont essentiellement dus à l’endogénéité des dates du contrôle impulsionnel. Ce travail relève certains de ces défis. Dans cette thèse, nous caractérisons les équilibres de Nash sous les trois structures d’information qui ont été considérées dans la littérature sur la théorie des jeux différentiels, à savoir les structures d’information en boucle ouverte, en rétroaction et en données échantillonnées. De plus, nous montrons que la détermination des contrôles impulsionnels dans des jeux différentiels linéaires-quadratiques peut être obtenue comme solution d’un problème d’optimisation non linéaire sous contraintes. Dans le cas des jeux différentiels linéaires dans l’état, nous obtenons une caractérisation complètement analytique du nombre d’équilibres, le moment et l’amplitude des contrôles impulsionnels. Nous comparons aussi les résultats sous différentes structures d’information. Dans chaque essai, nous illustrons également les résultats théoriques en utilisant un jeu à deux joueurs, dont l’un préfère une valeur plus élevée de la variable d’état, tandis que l’autre vise à l’abaisser, une situation fréquente dans de nombreuses applications, en particulier en réglementation et en cybersécurité."""@fr ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/georges-zaccour> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/utsav-sadana> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/hec-montreal> ;
+    geniro:thesis <https://hecmontreal.on.worldcat.org/oclc/1292556529> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/utsav-sadana-2021#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/utsav-sadana-2021#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/utsav-sadana-2021#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/utsav-sadana-2021#timePeriod/end>
+    time:inXSDDate "2021-03-01"^^xsd:date .
+
+## Houari Sahraoui
+
+<http://diro.umontreal.ca/geniro/person/houari-sahraoui> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/houari-sahraoui" ;
+    foaf:firstName "Houari" ;
+    foaf:lastName "Sahraoui" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/houari-sahraoui> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=156659> .
+
+<http://diro.umontreal.ca/geniro/person/houari-sahraoui#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/houari-sahraoui> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/houari-sahraoui#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/houari-sahraoui#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/houari-sahraoui#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/houari-sahraoui#membership-start>
+    time:inXSDDate "1999-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/houari-sahraoui#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/houari-sahraoui> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/houari-sahraoui#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/houari-sahraoui#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/houari-sahraoui#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/houari-sahraoui#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/houari-sahraoui#director-start>
+    time:inXSDDate "2013-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/houari-sahraoui#director-end>
+    time:inXSDDate "2017-01-01"^^xsd:date .
+
+## Louis Salvail
+
+<http://diro.umontreal.ca/geniro/person/louis-salvail> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/louis-salvail" ;
+    foaf:firstName "Louis" ;
+    foaf:lastName "Salvail" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/louis-salvail> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=124702> .
+
+<http://diro.umontreal.ca/geniro/person/louis-salvail#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/louis-salvail> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/louis-salvail#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/louis-salvail#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/louis-salvail#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/louis-salvail#membership-start>
+    time:inXSDDate "2008-06-01"^^xsd:date .
+
+## Dmitry Sokolov
+
+<http://diro.umontreal.ca/geniro/person/dmitry-sokolov> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/dmitry-sokolov" ;
+    foaf:firstName "Dmitry" ;
+    foaf:lastName "Sokolov" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/dmitry-sokolov> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=196906> .
+
+<http://diro.umontreal.ca/geniro/person/dmitry-sokolov#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/dmitry-sokolov> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant .
+
+## Dhanya Sridhar
+
+<http://diro.umontreal.ca/geniro/person/dhanya-sridhar> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/dhanya-sridhar" ;
+    foaf:firstName "Dhanya" ;
+    foaf:lastName "Sridhar" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/dhanya-sridhar> .
+
+<http://diro.umontreal.ca/geniro/person/dhanya-sridhar#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/dhanya-sridhar> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant .
+
+<http://diro.umontreal.ca/geniro/person/lise-getoor> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/lise-getoor" ;
+    foaf:firstName "Lise" ;
+    foaf:lastName "Getoor" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=69308> .
+
+<http://diro.umontreal.ca/geniro/project/dhanya-sridhar-2018> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/dhanya-sridhar-2018" ;
+    dcterms:title "Learning Structured and Causal Probabilistic Models for Computational Science" ;
+    dcterms:description """The drive to understand human phenomena such as our behavior and biology guides scientific discovery in the social and biological sciences. Today's wealth of observational and experimental data presents both opportunities and challenges for machine learning methods to facilitate these discoveries around human behavior and biology.  Social media sites provide observational data, capturing snapshots of how users feel towards current events, engage in discourse with one another, and reflect on behavioral factors that affect their mood. These rich textual data support socio-behavioral modeling and understanding.  In biology, large-scale experimental datasets are available, coupled with extensive efforts to extract and curate scientific ontologies and knowledge bases.  Such empirical data enables inferences in pharmaceutical sciences and genetics.  While standard machine learning methods build probabilistic models using social media posts or gene expression levels, they fall short on handling three important challenges in these problems. First, in socio-behavioral and biological domains, inferences are interrelated and require collective reasoning.  Second, prior knowledge from multiple sources such as textual or experiment evidence are abundant and probabilistic methods must fuse these signals of varying fidelity. Third, to advance discoveries in social and biological sciences, computational methods must go beyond predictive performance. In both domains, experts seek new insights and knowledge, requiring techniques to discover patterns and causal relationships directly from data.
+
+My dissertation addresses the challenges of computational science domains by developing a unified probabilistic framework that: 1) exploits useful structure in the domain to make collective inferences; 2) fuses several sources of signals; 2) discovers causal structure; 4) enables learning of complex, structured models directly from data. I validate this framework on important scientific modeling problems such as online debate and dialogue, mood and behavioral choices, interactions between drug treatments, and gene regulation.  In this thesis, I first develop structural patterns for collective inference by evaluating several modeling choices for online debates. My findings illustrate the harms of naive collective reasoning while showing the benefits of jointly modeling debate interactions and users' stances. I extend these collective patterns to fuse several sources of biological information which lead to state-of-the-art performance in drug-drug interaction prediction. To go beyond predictive performance, I combine multiple statistical signals to infer causal networks of gene regulation from measurements of gene expression and estimate causal effects in dialogue. Finally, I develop algorithms that learn these modeling patterns directly from data, showing the benefits of discovering complex dependencies in the drug-drug interaction prediction domain. The technical contributions highlighted in my thesis lay the foundation for applying structured and causal models to computational science. I conclude by outlining promising areas of future research that stem from my work and further bolster probabilistic methods for scientific domains."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/lise-getoor> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/dhanya-sridhar> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/university-of-california-santa-cruz> ;
+    geniro:thesis <https://escholarship.org/uc/item/0xf1t2zr> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/dhanya-sridhar-2018#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/dhanya-sridhar-2018#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/dhanya-sridhar-2018#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/dhanya-sridhar-2018#timePeriod/end>
+    time:inXSDDate "2018-01-01"^^xsd:date .
+
+## Jacques St-Pierre
+
+<http://diro.umontreal.ca/geniro/person/jacques-st-pierre> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jacques-st-pierre" ;
+    foaf:firstName "Jacques" ;
+    foaf:lastName "St-Pierre" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=47282> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-st-pierre#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jacques-st-pierre> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorEmeritus ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jacques-st-pierre#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-st-pierre#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jacques-st-pierre#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jacques-st-pierre#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-st-pierre#membership-start>
+    time:inXSDDate "1966-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jacques-st-pierre#membership-end>
+    time:inXSDDate "1985-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jacques-st-pierre#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jacques-st-pierre> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jacques-st-pierre#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-st-pierre#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jacques-st-pierre#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jacques-st-pierre#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-st-pierre#director-start>
+    time:inXSDDate "1966-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jacques-st-pierre#director-end>
+    time:inXSDDate "1969-01-01"^^xsd:date .
+
+## Neil Stewart
+
+<http://diro.umontreal.ca/geniro/person/neil-stewart> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/neil-stewart" ;
+    foaf:firstName "Neil" ;
+    foaf:lastName "Stewart" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/neil-frederick-stewart> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73106> .
+    # INCOMPLETE PROFILE, MISSING ADVISOR
+    # Neil Stewart <-[1968]- ???
+    # (thesis: https://umontreal.on.worldcat.org/oclc/16971545)
+
+<http://diro.umontreal.ca/geniro/person/neil-stewart#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/neil-stewart> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/neil-stewart#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/neil-stewart#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/neil-stewart#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/neil-stewart#membership-start>
+    time:inXSDDate "1971-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/neil-stewart#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/neil-stewart> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/neil-stewart#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/neil-stewart#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/neil-stewart#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/neil-stewart#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/neil-stewart#director-start>
+    time:inXSDDate "1983-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/neil-stewart#director-end>
+    time:inXSDDate "1985-01-01"^^xsd:date .
+
+## Eugene Syriani
+
+<http://diro.umontreal.ca/geniro/person/eugene-syriani> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/eugene-syriani" ;
+    foaf:firstName "Eugene" ;
+    foaf:lastName "Syriani" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/eugene-syriani> ;
+    owl:sameAs <http://orcid.org/0000-0001-6527-1651> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=158592> .
+
+<http://diro.umontreal.ca/geniro/person/eugene-syriani#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/eugene-syriani> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/eugene-syriani#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/eugene-syriani#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/eugene-syriani#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/eugene-syriani#membership-start>
+    time:inXSDDate "2014-06-01"^^xsd:date .
+
+## Alain Tapp
+
+<http://diro.umontreal.ca/geniro/person/alain-tapp> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/alain-tapp" ;
+    foaf:firstName "Alain" ;
+    foaf:lastName "Tapp" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/alain-tapp> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73138> .
+
+<http://diro.umontreal.ca/geniro/person/alain-tapp#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/alain-tapp> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/alain-tapp#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/alain-tapp#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/alain-tapp#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/alain-tapp#membership-start>
+    time:inXSDDate "2001-01-01"^^xsd:date .
+
+## Julie Vachon
+
+<http://diro.umontreal.ca/geniro/person/julie-vachon> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/julie-vachon" ;
+    foaf:firstName "Julie" ;
+    foaf:lastName "Vachon" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/julie-vachon> .
+
+<http://diro.umontreal.ca/geniro/person/julie-vachon#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/julie-vachon> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/julie-vachon#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/julie-vachon#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/julie-vachon#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/julie-vachon#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/julie-vachon#membership-start>
+    time:inXSDDate "2001-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/julie-vachon#membership-end>
+    time:inXSDDate "2009-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/martin-odersky> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/martin-odersky" ;
+    foaf:firstName "Martin" ;
+    foaf:lastName "Odersky" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=142873> .
+
+<http://diro.umontreal.ca/geniro/project/julie-vachon-2000> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/julie-vachon-2000" ;
+    dcterms:title "COALA : a design language for reliable distributed systems" ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/martin-odersky> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/julie-vachon> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/ecole-polytechnique-federale-de-lausanne> ;
+    geniro:thesis <https://epfl.swisscovery.ch/permalink/41SLSP_EPF/1e5tnok/alma990040719120205516> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/julie-vachon-2000#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/julie-vachon-2000#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/julie-vachon-2000#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/julie-vachon-2000#timePeriod/end>
+    time:inXSDDate "2000-12-13"^^xsd:date .
+
+## Jean Vaucher
+
+<http://diro.umontreal.ca/geniro/person/jean-vaucher> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jean-vaucher" ;
+    foaf:firstName "Jean" ;
+    foaf:lastName "Vaucher" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/jean-vaucher> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73169> .
+    # INCOMPLETE PROFILE, MISSING ADVISOR
+    # Jean Vaucher <-[1968]- G. R. Hoffman (???)
+    # (thesis: https://www.librarysearch.manchester.ac.uk/permalink/44MAN_INST/g2i3e/alma992992870339601631)
+
+<http://diro.umontreal.ca/geniro/person/jean-vaucher#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jean-vaucher> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jean-vaucher#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jean-vaucher#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jean-vaucher#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jean-vaucher#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/jean-vaucher#membership-start>
+    time:inXSDDate "1970-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jean-vaucher#membership-end>
+    time:inXSDDate "2007-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jean-vaucher#director> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jean-vaucher> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleDirector ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jean-vaucher#director-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jean-vaucher#director-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jean-vaucher#director-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jean-vaucher#director-end> .
+
+<http://diro.umontreal.ca/geniro/person/jean-vaucher#director-start>
+    time:inXSDDate "1981-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jean-vaucher#director-end>
+    time:inXSDDate "1983-01-01"^^xsd:date .
+
+## Pascal Vincent
+
+<http://diro.umontreal.ca/geniro/person/pascal-vincent> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/pascal-vincent" ;
+    foaf:firstName "Pascal" ;
+    foaf:lastName "Vincent" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/pascal-vincent> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=125663> .
+
+<http://diro.umontreal.ca/geniro/person/pascal-vincent#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/pascal-vincent> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/pascal-vincent#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/pascal-vincent#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/pascal-vincent#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/pascal-vincent#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/pascal-vincent#membership-start>
+    time:inXSDDate "2006-01-01"^^xsd:date .
+
+## Kimberly Yu
+
+<http://diro.umontreal.ca/geniro/person/kimberly-yu> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/kimberly-yu" ;
+    foaf:firstName "Kimberly" ;
+    foaf:lastName "Yu" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/kimberly-yu> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=303647> .
+    # Under the name: Qimeng Yu
+
+<http://diro.umontreal.ca/geniro/person/kimberly-yu#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/kimberly-yu> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant .
