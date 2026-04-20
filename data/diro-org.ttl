@@ -78,6 +78,10 @@
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/columbia-university" ;
     skos:prefLabel "Columbia University" .
 
+<http://diro.umontreal.ca/geniro/org/university-of-waterloo> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-of-waterloo" ;
+    skos:prefLabel "University of Waterloo" .
+
 # Templates
 
 ## For professors
@@ -1426,6 +1430,66 @@
 
 <http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod/end>
     time:inXSDDate "1969-01-01"^^xsd:date .
+
+## Damien Masson
+
+<http://diro.umontreal.ca/geniro/person/damien-masson> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/damien-masson" ;
+    foaf:firstName "Damien" ;
+    foaf:lastName "Masson" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/damien-masson> .
+
+<http://diro.umontreal.ca/geniro/person/damien-masson#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/damien-masson> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/damien-masson#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/damien-masson#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/damien-masson#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/damien-masson#membership-start>
+    time:inXSDDate "2024-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/daniel-vogel> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/daniel-vogel" ;
+    foaf:firstName "Daniel" ;
+    foaf:lastName "Vogel" .
+
+<http://diro.umontreal.ca/geniro/person/edward-lank> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/edward-lank" ;
+    foaf:firstName "Edward" ;
+    foaf:lastName "Lank" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=79134> .
+
+<http://diro.umontreal.ca/geniro/person/gery-casiez> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/gery-casiez" ;
+    foaf:firstName "Géry" ;
+    foaf:lastName "Casiez" .
+
+<http://diro.umontreal.ca/geniro/person/sylvain-malacria> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/sylvain-malacria" ;
+    foaf:firstName "Sylvain" ;
+    foaf:lastName "Malacria" .
+
+<http://diro.umontreal.ca/geniro/project/damien-masson-2023> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/damien-masson-2023" ;
+    dcterms:title "Transforming the Reading Experience of Scientific Documents with Polymorphism" ;
+    dcterms:description """Despite the opportunities created by digital reading, documents remain mostly static and mimic paper. Any improvement in the shape or form of documents has to come from authors who contend with current digital formats, workflows, and software and who impose a presentation to readers. Instead, I propose the concept of polymorphic documents which are documents that can change in form to offer better representations of the information they contain. I believe that multiple representations of the same information can help readers, and that any document can be made polymorphic, with no intervention from the original author. This thesis presents four projects investigating what information can be obtained from existing documents, how this information can be better represented, and how these representations can be generated using only the source document. To do so, I draw upon theories showing the benefit of presenting information using multiple representations; the design of interactive systems to support morphing representations; and user studies to evaluate system usability and the benefits of the new representations on reader comprehension."""@en ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/daniel-vogel> ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/edward-lank> ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/gery-casiez> ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/sylvain-malacria> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/damien-masson> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/university-of-waterloo> ;
+    geniro:thesis <http://hdl.handle.net/10012/19844> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/damien-masson-2023#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/damien-masson-2023#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/damien-masson-2023#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/damien-masson-2023#timePeriod/end>
+    time:inXSDDate "2023-09-01"^^xsd:date .
 
 ## Pierre McKenzie
 
