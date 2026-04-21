@@ -2222,9 +2222,6 @@ My dissertation addresses the challenges of computational science domains by dev
     foaf:lastName "Stewart" ;
     owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/neil-frederick-stewart> ;
     owl:sameAs <http://mathgenealogy.org/id.php?id=73106> .
-    # INCOMPLETE PROFILE, MISSING ADVISOR
-    # Neil Stewart <-[1968]- ???
-    # (thesis: https://umontreal.on.worldcat.org/oclc/16971545)
 
 <http://diro.umontreal.ca/geniro/person/neil-stewart#membership> a org:Membership ;
     org:member <http://diro.umontreal.ca/geniro/person/neil-stewart> ;
@@ -2253,6 +2250,27 @@ My dissertation addresses the challenges of computational science domains by dev
 
 <http://diro.umontreal.ca/geniro/person/neil-stewart#director-end>
     time:inXSDDate "1985-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/thomas-hull> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/thomas-hull" ;
+    foaf:firstName "Thomas" ;
+    foaf:lastName "Hull" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=17245> .
+
+<http://diro.umontreal.ca/geniro/project/neil-stewart-1968> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/neil-stewart-1968" ;
+    dcterms:title "The comparison of numerical methods for ordinary differential equations" ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/thomas-hull> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/neil-stewart> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/university-of-toronto> ;
+    geniro:thesis <https://www.proquest.com/docview/302387349> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/neil-stewart-1968#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/neil-stewart-1968#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/neil-stewart-1968#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/neil-stewart-1968#timePeriod/end>
+    time:inXSDDate "1968-01-01"^^xsd:date .
 
 ## Eugene Syriani
 
