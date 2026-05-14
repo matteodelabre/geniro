@@ -460,6 +460,32 @@
     org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
     org:role geniro:roleProfessorAssociate .
 
+## Gregor von Bochmann
+
+<http://diro.umontreal.ca/geniro/person/gregor-von-bochmann> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/gregor-von-bochmann" ;
+    foaf:firstName "Gregor" ;
+    foaf:lastName "von Bochmann" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/gregor-v-bochmann> ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/gregor-von-bochmann> ;
+    owl:sameAs <https://mathgenealogy.org/id.php?id=73127> .
+
+<http://diro.umontreal.ca/geniro/person/gregor-von-bochmann#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/gregor-von-bochmann> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorEmeritus ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/gregor-von-bochmann#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/gregor-von-bochmann#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/gregor-von-bochmann#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/gregor-von-bochmann#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/gregor-von-bochmann#membership-start>
+    time:inXSDDate "1973-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/gregor-von-bochmann#membership-end>
+    time:inXSDDate "1998-01-01"^^xsd:date .
+
 ## Michel Boyer
 
 <http://diro.umontreal.ca/geniro/person/michel-boyer> a foaf:Person ;
