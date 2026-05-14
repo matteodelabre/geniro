@@ -2180,6 +2180,20 @@
 <http://diro.umontreal.ca/geniro/person/jean-marc-rousseau#membership-end>
     time:inXSDDate "1992-01-01"^^xsd:date .
 
+## Roch Roy
+
+<http://diro.umontreal.ca/geniro/person/roch-roy> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/roch-roy" ;
+    foaf:firstName "Roch" ;
+    foaf:lastName "Roy" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/roch-roy> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73091> .
+
+<http://diro.umontreal.ca/geniro/person/roch-roy#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/roch-roy> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAdjunct .
+
 ## Sébastien Roy
 
 <http://diro.umontreal.ca/geniro/person/sebastien-roy> a foaf:Person ;
