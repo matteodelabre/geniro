@@ -1165,6 +1165,21 @@
 <http://diro.umontreal.ca/geniro/person/bernard-gendron#membership-end>
     time:inXSDDate "2022-01-01"^^xsd:date .
 
+## Gauthier Gidel
+
+<http://diro.umontreal.ca/geniro/person/gauthier-gidel> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/gauthier-gidel" ;
+    foaf:firstName "Gauthier" ;
+    foaf:lastName "Gidel" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/gauthier-gidel> .
+    # MISSING EXTERNAl PROFILE
+    # Gauthier Gidel <-[2020]- Simon Lacoste-Julien (in Papyrus)
+
+<http://diro.umontreal.ca/geniro/person/gauthier-gidel#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/gauthier-gidel> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate .
+
 ## Yann-Gaël Guéheneuc
 
 <http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc> a foaf:Person ;
@@ -1196,21 +1211,6 @@
 
 <http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc#membership-end>
     time:inXSDDate "2008-01-01"^^xsd:date .
-
-## Gauthier Gidel
-
-<http://diro.umontreal.ca/geniro/person/gauthier-gidel> a foaf:Person ;
-    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/gauthier-gidel" ;
-    foaf:firstName "Gauthier" ;
-    foaf:lastName "Gidel" ;
-    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/gauthier-gidel> .
-    # MISSING EXTERNAl PROFILE
-    # Gauthier Gidel <-[2020]- Simon Lacoste-Julien (in Papyrus)
-
-<http://diro.umontreal.ca/geniro/person/gauthier-gidel#membership> a org:Membership ;
-    org:member <http://diro.umontreal.ca/geniro/person/gauthier-gidel> ;
-    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
-    org:role geniro:roleProfessorAssociate .
 
 ## Abdelhakim Hafid
 
