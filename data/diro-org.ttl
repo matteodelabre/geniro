@@ -661,6 +661,31 @@
 <http://diro.umontreal.ca/geniro/person/eduard-cerny#membership-end>
     time:inXSDDate "2000-01-01"^^xsd:date .
 
+## Claude-André Christen
+
+<http://diro.umontreal.ca/geniro/person/claude-andre-christen> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/claude-andre-christen" ;
+    foaf:firstName "Claude-André" ;
+    foaf:lastName "Christen" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/claude-andre-christen> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=86220> .
+
+<http://diro.umontreal.ca/geniro/person/claude-andre-christen#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/claude-andre-christen> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/claude-andre-christen#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/claude-andre-christen#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/claude-andre-christen#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/claude-andre-christen#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/claude-andre-christen#membership-start>
+    time:inXSDDate "1974-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/claude-andre-christen#membership-end>
+    time:inXSDDate "1994-01-01"^^xsd:date .
+
 ## Robert Cléroux
 
 <http://diro.umontreal.ca/geniro/person/robert-cleroux> a foaf:Person ;
