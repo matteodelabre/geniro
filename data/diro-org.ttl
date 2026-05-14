@@ -2130,6 +2130,31 @@
 <http://diro.umontreal.ca/geniro/person/pierre-robert#director-end>
     time:inXSDDate "1972-06-01"^^xsd:date .
 
+## Pierre Robillard
+
+<http://diro.umontreal.ca/geniro/person/pierre-robillard> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/pierre-robillard" ;
+    foaf:firstName "Pierre" ;
+    foaf:lastName "Robillard" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/pierre-robillard> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=47414> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robillard#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/pierre-robillard> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssociate ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/pierre-robillard#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robillard#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/pierre-robillard#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/pierre-robillard#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robillard#membership-start>
+    time:inXSDDate "1969-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-robillard#membership-end>
+    time:inXSDDate "1975-01-01"^^xsd:date .
+
 ## Jean-Marc Rousseau
 
 <http://diro.umontreal.ca/geniro/person/jean-marc-rousseau> a foaf:Person ;
