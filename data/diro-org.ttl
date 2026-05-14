@@ -231,7 +231,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/tsuhan-chen> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/dhruv-batra> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/carnegie-mellon-university> ;
-    geniro:thesis <https://www.proquest.com/docview/758055263> ;
+    geniro:thesis <http://www.proquest.com/docview/758055263> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/tsuhan-chen-2010#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/tsuhan-chen-2010#timePeriod>
@@ -354,7 +354,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/doina-precup> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/pierre-luc-bacon> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/mcgill> ;
-    geniro:thesis <https://escholarship.mcgill.ca/concern/theses/vh53wz12w> ;
+    geniro:thesis <http://escholarship.mcgill.ca/concern/theses/vh53wz12w> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/pierre-luc-bacon-2018#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/pierre-luc-bacon-2018#timePeriod>
@@ -491,7 +491,7 @@
     foaf:lastName "von Bochmann" ;
     owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/gregor-v-bochmann> ;
     owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/gregor-von-bochmann> ;
-    owl:sameAs <https://mathgenealogy.org/id.php?id=73127> .
+    owl:sameAs <http://mathgenealogy.org/id.php?id=73127> .
 
 <http://diro.umontreal.ca/geniro/person/gregor-von-bochmann#membership> a org:Membership ;
     org:member <http://diro.umontreal.ca/geniro/person/gregor-von-bochmann> ;
@@ -627,7 +627,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/andrea-lodi> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/margarida-carvalho> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universidade-do-porto> ;
-    geniro:thesis <https://hdl.handle.net/10216/83362> ;
+    geniro:thesis <http://hdl.handle.net/10216/83362> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/margarida-carvalho-2016#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/margarida-carvalho-2016#timePeriod>
@@ -1047,7 +1047,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/morton-klein> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/michael-florian> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/columbia-university> ;
-    geniro:thesis <https://clio.columbia.edu/catalog/1939297> ;
+    geniro:thesis <http://clio.columbia.edu/catalog/1939297> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod>
@@ -1096,7 +1096,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/jean-le-bihan> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/claude-frasson> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-de-nice-sophia-antipolis> ;
-    geniro:thesis <https://www.sudoc.fr/185201083> ;
+    geniro:thesis <http://www.sudoc.fr/185201083> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/claude-frasson-1981#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/claude-frasson-1981#timePeriod>
@@ -1572,7 +1572,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/michael-florian> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/patrice-marcotte> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/diro> ;
-    geniro:thesis <https://umontreal.on.worldcat.org/oclc/53719124> ;
+    geniro:thesis <http://umontreal.on.worldcat.org/oclc/53719124> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982#timePeriod>
@@ -1869,7 +1869,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/yves-chiaramella> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/jian-yun-nie> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-joseph-fourier> ;
-    geniro:thesis <https://theses.hal.science/tel-00337441v1> ;
+    geniro:thesis <http://theses.hal.science/tel-00337441v1> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/jian-yun-nie-1990#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/jian-yun-nie-1990#timePeriod>
@@ -1890,7 +1890,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/gerard-veillon> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/yves-chiaramella> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-joseph-fourier> ;
-    geniro:thesis <https://theses.hal.science/tel-00011733> ;
+    geniro:thesis <http://theses.hal.science/tel-00011733> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/yves-chiaramella-1981#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/yves-chiaramella-1981#timePeriod>
@@ -2043,7 +2043,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/hachem-kadri> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/guillaume-rabusseau> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/aix-marseille-universite> ;
-    geniro:thesis <https://theses.fr/2016AIXM4062> ;
+    geniro:thesis <http://theses.fr/2016AIXM4062> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/guillaume-rabusseau-2016#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/guillaume-rabusseau-2016#timePeriod>
@@ -2078,7 +2078,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/rina-dechter> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/irina-rish> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/university-of-california-irvine> ;
-    geniro:thesis <https://www.proquest.com/docview/304498809> ;
+    geniro:thesis <http://www.proquest.com/docview/304498809> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/irina-rish-1999#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/irina-rish-1999#timePeriod>
@@ -2227,7 +2227,7 @@
     geniro:advisor <http://diro.umontreal.ca/geniro/person/georges-zaccour> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/utsav-sadana> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/hec-montreal> ;
-    geniro:thesis <https://hecmontreal.on.worldcat.org/oclc/1292556529> ;
+    geniro:thesis <http://hecmontreal.on.worldcat.org/oclc/1292556529> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/utsav-sadana-2021#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/utsav-sadana-2021#timePeriod>
@@ -2336,7 +2336,7 @@ My dissertation addresses the challenges of computational science domains by dev
     geniro:advisor <http://diro.umontreal.ca/geniro/person/lise-getoor> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/dhanya-sridhar> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/university-of-california-santa-cruz> ;
-    geniro:thesis <https://escholarship.org/uc/item/0xf1t2zr> ;
+    geniro:thesis <http://escholarship.org/uc/item/0xf1t2zr> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/dhanya-sridhar-2018#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/dhanya-sridhar-2018#timePeriod>
@@ -2434,7 +2434,7 @@ My dissertation addresses the challenges of computational science domains by dev
     geniro:advisor <http://diro.umontreal.ca/geniro/person/thomas-hull> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/neil-stewart> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/university-of-toronto> ;
-    geniro:thesis <https://www.proquest.com/docview/302387349> ;
+    geniro:thesis <http://www.proquest.com/docview/302387349> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/neil-stewart-1968#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/neil-stewart-1968#timePeriod>
@@ -2522,7 +2522,7 @@ My dissertation addresses the challenges of computational science domains by dev
     geniro:advisor <http://diro.umontreal.ca/geniro/person/martin-odersky> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/julie-vachon> ;
     geniro:grantedBy <http://diro.umontreal.ca/geniro/org/ecole-polytechnique-federale-de-lausanne> ;
-    geniro:thesis <https://epfl.swisscovery.ch/permalink/41SLSP_EPF/1e5tnok/alma990040719120205516> ;
+    geniro:thesis <http://epfl.swisscovery.ch/permalink/41SLSP_EPF/1e5tnok/alma990040719120205516> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/julie-vachon-2000#timePeriod> .
 
 <http://diro.umontreal.ca/geniro/project/julie-vachon-2000#timePeriod>
