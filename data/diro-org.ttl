@@ -703,10 +703,14 @@
     org:memberDuring <http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-duration> .
 
 <http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-duration>
-    time:hasBeginning <http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-start> .
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-end> .
 
 <http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-start>
     time:inXSDDate "1968-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/robert-cleroux#membership-end>
+    time:inXSDDate "1995-01-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/robert-cleroux#director> a org:Membership ;
     org:member <http://diro.umontreal.ca/geniro/person/robert-cleroux> ;
@@ -1478,6 +1482,31 @@
 
 <http://diro.umontreal.ca/geniro/person/francois-lustman#director-end>
     time:inXSDDate "1989-06-01"^^xsd:date .
+
+## Urs Maag
+
+<http://diro.umontreal.ca/geniro/person/urs-maag> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/urs-maag" ;
+    foaf:firstName "Urs" ;
+    foaf:lastName "Maag" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/urs-maag> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=16095> .
+
+<http://diro.umontreal.ca/geniro/person/urs-maag#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/urs-maag> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/urs-maag#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/urs-maag#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/urs-maag#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/urs-maag#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/urs-maag#membership-start>
+    time:inXSDDate "1972-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/urs-maag#membership-end>
+    time:inXSDDate "1995-01-01"^^xsd:date .
 
 ## François Major
 
