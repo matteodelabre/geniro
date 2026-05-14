@@ -1326,6 +1326,31 @@
     org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
     org:role geniro:roleProfessorAssistant .
 
+## Pierre L'Écuyer
+
+<http://diro.umontreal.ca/geniro/person/pierre-l-ecuyer> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/pierre-l-ecuyer" ;
+    foaf:firstName "Pierre" ;
+    foaf:lastName "L'Écuyer" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/pierre-l-ecuyer> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=67984> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-l-ecuyer#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/pierre-l-ecuyer> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorEmeritus ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/pierre-l-ecuyer#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-l-ecuyer#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/pierre-l-ecuyer#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/pierre-l-ecuyer#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/pierre-l-ecuyer#membership-start>
+    time:inXSDDate "1990-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-l-ecuyer#membership-end>
+    time:inXSDDate "2025-01-01"^^xsd:date .
+
 ## Simon Lacoste-Julien
 
 <http://diro.umontreal.ca/geniro/person/simon-lacoste-julien> a foaf:Person ;
