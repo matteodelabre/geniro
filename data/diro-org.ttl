@@ -161,6 +161,29 @@
 <http://diro.umontreal.ca/geniro/person/el-mostapha-aboulhamid#membership-start>
     time:inXSDDate "1985-01-01"^^xsd:date .
 
+# Yossiri Adulyasak
+
+<http://diro.umontreal.ca/geniro/person/yossiri-adulyasak> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/yossiri-adulyasak" ;
+    foaf:firstName "Yossiri" ;
+    foaf:lastName "Adulyasak" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/yossiri-adulyasak> .
+    # MISSING EXTERNAL PROFILE
+    # Yossiri Adulyasak <-[2012]- Jean-François Cordeau (MathGen http://mathgenealogy.org/id.php?id=116911),
+    #                             Raf Jans (MathGen http://mathgenealogy.org/id.php?id=236180).
+
+<http://diro.umontreal.ca/geniro/person/yossiri-adulyasak#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/yossiri-adulyasak> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAdjunct ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/yossiri-adulyasak#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/yossiri-adulyasak#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/yossiri-adulyasak#membership-start> .
+
+<http://diro.umontreal.ca/geniro/person/yossiri-adulyasak#membership-start>
+    time:inXSDDate "2022-05-01"^^xsd:date .
+
 ## Aishwarya Agrawal
 
 <http://diro.umontreal.ca/geniro/person/aishwarya-agrawal> a foaf:Person ;
