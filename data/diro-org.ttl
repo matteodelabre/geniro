@@ -539,10 +539,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/paul-bratley#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/paul-bratley#director-start>
-    time:inXSDDate "1973-01-01"^^xsd:date .
+    time:inXSDDate "1972-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/paul-bratley#director-end>
-    time:inXSDDate "1977-01-01"^^xsd:date .
+    time:inXSDDate "1976-06-01"^^xsd:date .
 
 ## Margarida Carvalho
 
@@ -645,10 +645,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/robert-cleroux#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/robert-cleroux#director-start>
-    time:inXSDDate "1977-01-01"^^xsd:date .
+    time:inXSDDate "1976-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/robert-cleroux#director-end>
-    time:inXSDDate "1981-01-01"^^xsd:date .
+    time:inXSDDate "1981-06-01"^^xsd:date .
 
 ## Alain Colmerauer
 
@@ -927,10 +927,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/jacques-ferland#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/jacques-ferland#director-start>
-    time:inXSDDate "1989-01-01"^^xsd:date .
+    time:inXSDDate "1989-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/jacques-ferland#director-end>
-    time:inXSDDate "1993-01-01"^^xsd:date .
+    time:inXSDDate "1993-06-01"^^xsd:date .
 
 ## Claude Frasson
 
@@ -1158,7 +1158,7 @@
     time:hasBeginning <http://diro.umontreal.ca/geniro/person/sylvie-hamel#director-start> .
 
 <http://diro.umontreal.ca/geniro/person/sylvie-hamel#director-start>
-    time:inXSDDate "2021-01-01"^^xsd:date .
+    time:inXSDDate "2021-06-01"^^xsd:date .
 
 ## Alex Hernandez-Garcia
 
@@ -1273,10 +1273,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/guy-lapalme#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/guy-lapalme#director-start>
-    time:inXSDDate "1993-01-01"^^xsd:date .
+    time:inXSDDate "1993-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/guy-lapalme#director-end>
-    time:inXSDDate "1997-01-01"^^xsd:date .
+    time:inXSDDate "1997-06-01"^^xsd:date .
 
 ## Bang Liu
 
@@ -1329,10 +1329,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/francois-lustman#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/francois-lustman#director-start>
-    time:inXSDDate "1985-01-01"^^xsd:date .
+    time:inXSDDate "1985-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/francois-lustman#director-end>
-    time:inXSDDate "1989-01-01"^^xsd:date .
+    time:inXSDDate "1989-06-01"^^xsd:date .
 
 ## François Major
 
@@ -1387,10 +1387,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/patrice-marcotte#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/patrice-marcotte#director-start>
-    time:inXSDDate "2009-01-01"^^xsd:date .
+    time:inXSDDate "2009-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/patrice-marcotte#director-end>
-    time:inXSDDate "2013-01-01"^^xsd:date .
+    time:inXSDDate "2013-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/michael-florian> a foaf:Person ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/person/michael-florian" ;
@@ -1531,10 +1531,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/pierre-mckenzie#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/pierre-mckenzie#director-start>
-    time:inXSDDate "2001-01-01"^^xsd:date .
+    time:inXSDDate "2001-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/pierre-mckenzie#director-end>
-    time:inXSDDate "2005-01-01"^^xsd:date .
+    time:inXSDDate "2005-06-01"^^xsd:date .
 
 ## Jean Meunier
 
@@ -1572,10 +1572,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/jean-meunier#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/jean-meunier#director-start>
-    time:inXSDDate "2005-01-01"^^xsd:date .
+    time:inXSDDate "2005-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/jean-meunier#director-end>
-    time:inXSDDate "2009-01-01"^^xsd:date .
+    time:inXSDDate "2009-06-01"^^xsd:date .
 
 ## Max Mignotte
 
@@ -1681,10 +1681,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/sang-nguyen#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/sang-nguyen#director-start>
-    time:inXSDDate "1997-01-01"^^xsd:date .
+    time:inXSDDate "1997-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/sang-nguyen#director-end>
-    time:inXSDDate "2001-01-01"^^xsd:date .
+    time:inXSDDate "2001-06-01"^^xsd:date .
 
 ## Jian-Yun Nie
 
@@ -1857,10 +1857,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/pierre-poulin#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/pierre-poulin#director-start>
-    time:inXSDDate "2017-01-01"^^xsd:date .
+    time:inXSDDate "2017-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/pierre-poulin#director-end>
-    time:inXSDDate "2021-01-01"^^xsd:date .
+    time:inXSDDate "2021-06-01"^^xsd:date .
 
 ## Guillaume Rabusseau
 
@@ -1979,10 +1979,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/pierre-robert#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/pierre-robert#director-start>
-    time:inXSDDate "1969-01-01"^^xsd:date .
+    time:inXSDDate "1968-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/pierre-robert#director-end>
-    time:inXSDDate "1973-01-01"^^xsd:date .
+    time:inXSDDate "1972-06-01"^^xsd:date .
 
 ## Jean-Marc Rousseau
 
@@ -2097,10 +2097,10 @@
     time:hasEnd <http://diro.umontreal.ca/geniro/person/houari-sahraoui#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/houari-sahraoui#director-start>
-    time:inXSDDate "2013-01-01"^^xsd:date .
+    time:inXSDDate "2013-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/houari-sahraoui#director-end>
-    time:inXSDDate "2017-01-01"^^xsd:date .
+    time:inXSDDate "2017-06-01"^^xsd:date .
 
 ## Louis Salvail
 
@@ -2209,10 +2209,10 @@ My dissertation addresses the challenges of computational science domains by dev
     time:hasEnd <http://diro.umontreal.ca/geniro/person/jacques-st-pierre#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/jacques-st-pierre#director-start>
-    time:inXSDDate "1966-01-01"^^xsd:date .
+    time:inXSDDate "1966-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/jacques-st-pierre#director-end>
-    time:inXSDDate "1969-01-01"^^xsd:date .
+    time:inXSDDate "1968-06-01"^^xsd:date .
 
 ## Neil Stewart
 
@@ -2246,10 +2246,10 @@ My dissertation addresses the challenges of computational science domains by dev
     time:hasEnd <http://diro.umontreal.ca/geniro/person/neil-stewart#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/neil-stewart#director-start>
-    time:inXSDDate "1983-01-01"^^xsd:date .
+    time:inXSDDate "1983-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/neil-stewart#director-end>
-    time:inXSDDate "1985-01-01"^^xsd:date .
+    time:inXSDDate "1985-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/thomas-hull> a foaf:Person ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/person/thomas-hull" ;
@@ -2399,10 +2399,10 @@ My dissertation addresses the challenges of computational science domains by dev
     time:hasEnd <http://diro.umontreal.ca/geniro/person/jean-vaucher#director-end> .
 
 <http://diro.umontreal.ca/geniro/person/jean-vaucher#director-start>
-    time:inXSDDate "1981-01-01"^^xsd:date .
+    time:inXSDDate "1981-06-01"^^xsd:date .
 
 <http://diro.umontreal.ca/geniro/person/jean-vaucher#director-end>
-    time:inXSDDate "1983-01-01"^^xsd:date .
+    time:inXSDDate "1983-06-01"^^xsd:date .
 
 ## Pascal Vincent
 
