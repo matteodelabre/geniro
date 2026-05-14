@@ -1006,6 +1006,52 @@
 <http://diro.umontreal.ca/geniro/person/jacques-ferland#director-end>
     time:inXSDDate "1993-06-01"^^xsd:date .
 
+## Michael Florian
+
+<http://diro.umontreal.ca/geniro/person/michael-florian> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/michael-florian" ;
+    foaf:firstName "Michael" ;
+    foaf:lastName "Florian" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/michael-florian> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=72554> .
+
+<http://diro.umontreal.ca/geniro/person/michael-florian#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/michael-florian> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorEmeritus ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/michael-florian#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/michael-florian#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/michael-florian#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/michael-florian#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/michael-florian#membership-start>
+    time:inXSDDate "1969-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/michael-florian#membership-end>
+    time:inXSDDate "2004-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/morton-klein> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/morton-klein" ;
+    foaf:firstName "Morton" ;
+    foaf:lastName "Klein" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=156179> .
+
+<http://diro.umontreal.ca/geniro/project/michael-florian-1969> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/michael-florian-1969" ;
+    dcterms:title "Deterministic production planning models with capacity constraints and concave costs" ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/morton-klein> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/michael-florian> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/columbia-university> ;
+    geniro:thesis <https://clio.columbia.edu/catalog/1939297> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod/end>
+    time:inXSDDate "1969-01-01"^^xsd:date .
+
 ## Claude Frasson
 
 <http://diro.umontreal.ca/geniro/person/claude-frasson> a foaf:Person ;
@@ -1466,13 +1512,6 @@
 <http://diro.umontreal.ca/geniro/person/patrice-marcotte#director-end>
     time:inXSDDate "2013-06-01"^^xsd:date .
 
-<http://diro.umontreal.ca/geniro/person/michael-florian> a foaf:Person ;
-    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/michael-florian" ;
-    foaf:firstName "Michael" ;
-    foaf:lastName "Florian" ;
-    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/michael-florian> ;
-    owl:sameAs <http://mathgenealogy.org/id.php?id=72554> .
-
 <http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982> a geniro:PhDProject ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982" ;
     dcterms:title "Design optimal d'un réseau de transport en présence d'effets de congestion" ;
@@ -1487,27 +1526,6 @@
 
 <http://diro.umontreal.ca/geniro/project/patrice-marcotte-1982#timePeriod/end>
     time:inXSDDate "1982-01-01"^^xsd:date .
-
-<http://diro.umontreal.ca/geniro/person/morton-klein> a foaf:Person ;
-    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/morton-klein" ;
-    foaf:firstName "Morton" ;
-    foaf:lastName "Klein" ;
-    owl:sameAs <http://mathgenealogy.org/id.php?id=156179> .
-
-<http://diro.umontreal.ca/geniro/project/michael-florian-1969> a geniro:PhDProject ;
-    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/michael-florian-1969" ;
-    dcterms:title "Deterministic production planning models with capacity constraints and concave costs" ;
-    geniro:advisor <http://diro.umontreal.ca/geniro/person/morton-klein> ;
-    geniro:student <http://diro.umontreal.ca/geniro/person/michael-florian> ;
-    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/columbia-university> ;
-    geniro:thesis <https://clio.columbia.edu/catalog/1939297> ;
-    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod> .
-
-<http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod>
-    time:hasEnd <http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod/end> .
-
-<http://diro.umontreal.ca/geniro/project/michael-florian-1969#timePeriod/end>
-    time:inXSDDate "1969-01-01"^^xsd:date .
 
 ## Damien Masson
 
