@@ -117,6 +117,12 @@ geniro:roleProfessorAssistant a org:Role ;
     skos:prefLabel "Professeur·e adjoint·e"@fr-ca ;
     skos:prefLabel "Assistant professor"@en .
 
+geniro:roleProfessorAdjunct a org:Role ;
+    skos:broader geniro:professorRole ;
+    skos:prefLabel "Professeur·e associé·e"@fr-ca ;
+    skos:prefLabel "Adjunct professor"@en ;
+    skos:prefLabel "Professeur·e vacataire"@fr-fr .
+
 geniro:roleStudent a org:Role ;
     skos:prefLabel "Étudiant·e"@fr ;
     skos:prefLabel "Student"@en .
