@@ -2639,6 +2639,31 @@ My dissertation addresses the challenges of computational science domains by dev
 <http://diro.umontreal.ca/geniro/person/jean-vaucher#director-end>
     time:inXSDDate "1983-06-01"^^xsd:date .
 
+## Jean-Pierre Verjus
+
+<http://diro.umontreal.ca/geniro/person/jean-pierre-verjus> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jean-pierre-verjus" ;
+    foaf:firstName "Jean-Pierre" ;
+    foaf:lastName "Verjus" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/jean-pierre-verjus> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=150735> .
+
+<http://diro.umontreal.ca/geniro/person/jean-pierre-verjus#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jean-pierre-verjus> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jean-pierre-verjus#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jean-pierre-verjus#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jean-pierre-verjus#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jean-pierre-verjus#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/jean-pierre-verjus#membership-start>
+    time:inXSDDate "1968-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jean-pierre-verjus#membership-end>
+    time:inXSDDate "1970-01-01"^^xsd:date .
+
 ## Pascal Vincent
 
 <http://diro.umontreal.ca/geniro/person/pascal-vincent> a foaf:Person ;
