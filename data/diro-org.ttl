@@ -2500,6 +2500,31 @@ My dissertation addresses the challenges of computational science domains by dev
 <http://diro.umontreal.ca/geniro/person/alain-tapp#membership-start>
     time:inXSDDate "2001-01-01"^^xsd:date .
 
+## Daniel Thalmann
+
+<http://diro.umontreal.ca/geniro/person/daniel-thalmann> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/daniel-thalmann" ;
+    foaf:firstName "Daniel" ;
+    foaf:lastName "Thalmann" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/daniel-thalmann> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=106342> .
+
+<http://diro.umontreal.ca/geniro/person/daniel-thalmann#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/daniel-thalmann> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/daniel-thalmann#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/daniel-thalmann#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/daniel-thalmann#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/daniel-thalmann#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/daniel-thalmann#membership-start>
+    time:inXSDDate "1977-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/daniel-thalmann#membership-end>
+    time:inXSDDate "1989-01-01"^^xsd:date .
+
 ## Julie Vachon
 
 <http://diro.umontreal.ca/geniro/person/julie-vachon> a foaf:Person ;
