@@ -2726,3 +2726,17 @@ My dissertation addresses the challenges of computational science domains by dev
     org:member <http://diro.umontreal.ca/geniro/person/kimberly-yu> ;
     org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
     org:role geniro:roleProfessorAssistant .
+
+## Ramsay Zahar
+
+<http://diro.umontreal.ca/geniro/person/ramsay-zahar> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/ramsay-zahar" ;
+    foaf:firstName "Ramsay" ;
+    foaf:lastName "Zahar" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/ramsay-zahar> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=35017> .
+
+<http://diro.umontreal.ca/geniro/person/ramsay-zahar#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/ramsay-zahar> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorFull .
