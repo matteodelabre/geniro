@@ -2525,6 +2525,31 @@ My dissertation addresses the challenges of computational science domains by dev
 <http://diro.umontreal.ca/geniro/person/daniel-thalmann#membership-end>
     time:inXSDDate "1989-01-01"^^xsd:date .
 
+## Laurent Trilling
+
+<http://diro.umontreal.ca/geniro/person/laurent-trilling> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/laurent-trilling" ;
+    foaf:firstName "Laurent" ;
+    foaf:lastName "Trilling" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/laurent-trilling> ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=295674> .
+
+<http://diro.umontreal.ca/geniro/person/laurent-trilling#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/laurent-trilling> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/laurent-trilling#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/laurent-trilling#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/laurent-trilling#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/laurent-trilling#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/laurent-trilling#membership-start>
+    time:inXSDDate "1967-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/laurent-trilling#membership-end>
+    time:inXSDDate "1970-01-01"^^xsd:date .
+
 ## Julie Vachon
 
 <http://diro.umontreal.ca/geniro/person/julie-vachon> a foaf:Person ;
