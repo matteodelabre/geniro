@@ -2308,6 +2308,32 @@
 <http://diro.umontreal.ca/geniro/person/louis-salvail#membership-start>
     time:inXSDDate "2008-06-01"^^xsd:date .
 
+## Jacques Savoy
+
+<http://diro.umontreal.ca/geniro/person/jacques-savoy> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jacques-savoy" ;
+    foaf:firstName "Jacques" ;
+    foaf:lastName "Savoy" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/jacques-savoy> .
+    # MISSING EXTERNAL PROFILE
+    # thesis: <https://bcufr.swisscovery.ch/permalink/41SLSP_BCUFR/crjdc2/alma991006284869705509>
+
+<http://diro.umontreal.ca/geniro/person/jacques-savoy#membership> a org:Membership ;
+    org:member <http://diro.umontreal.ca/geniro/person/jacques-savoy> ;
+    org:organization <http://diro.umontreal.ca/geniro/org/diro> ;
+    org:role geniro:roleProfessorAssistant ;
+    org:memberDuring <http://diro.umontreal.ca/geniro/person/jacques-savoy#membership-duration> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-savoy#membership-duration>
+    time:hasBeginning <http://diro.umontreal.ca/geniro/person/jacques-savoy#membership-start> ;
+    time:hasEnd <http://diro.umontreal.ca/geniro/person/jacques-savoy#membership-end> .
+
+<http://diro.umontreal.ca/geniro/person/jacques-savoy#membership-start>
+    time:inXSDDate "1989-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jacques-savoy#membership-end>
+    time:inXSDDate "1992-01-01"^^xsd:date .
+
 ## Dmitry Sokolov
 
 <http://diro.umontreal.ca/geniro/person/dmitry-sokolov> a foaf:Person ;
