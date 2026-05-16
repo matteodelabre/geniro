@@ -104,6 +104,16 @@
     skos:prefLabel "Université de Bretagne Occidentale" ;
     owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/1264> .
 
+<http://diro.umontreal.ca/geniro/org/universite-de-nantes> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-de-nantes" ;
+    skos:prefLabel "Université de Nantes" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/1286> .
+
+<http://diro.umontreal.ca/geniro/org/universite-pierre-et-marie-curie> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-pierre-et-marie-curie" ;
+    skos:prefLabel "Université Pierre-et-Marie-Curie - Paris VI, France" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/1243> .
+
 # Templates
 
 ## For professors
@@ -1210,13 +1220,6 @@
     foaf:lastName "Guéheneuc" ;
     owl:sameAs <http://diro.umontreal.ca/geniro/external/umontreal.scholaris.ca/person/yann-gael-gueheneuc> ;
     owl:sameAs <http://mathgenealogy.org/id.php?id=188826> .
-    # INCOMPLETE PROFILE, MISSING ADVISOR
-    # Yann-Gaël Guéheneuc <-[2003]- Pierre Cointe
-    # (http://www.yann-gael.gueheneuc.net/Work/PhDThesis/)
-    # (https://theses.fr/073410969)
-    # Pierre Cointe <-- ???
-    # (https://umontreal.on.worldcat.org/oclc/41431050)
-    # Copie demandée PEB
 
 <http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc#membership> a org:Membership ;
     org:member <http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc> ;
@@ -1233,6 +1236,48 @@
 
 <http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc#membership-end>
     time:inXSDDate "2008-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/pierre-cointe> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/pierre-cointe" ;
+    foaf:firstName "Pierre" ;
+    foaf:lastName "Cointe" .
+
+<http://diro.umontreal.ca/geniro/project/yann-gael-gueheneuc-2003> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/yann-gael-gueheneuc-2003" ;
+    dcterms:title "Un cadre pour la traçabilité des motifs de conception" ;
+    dcterms:description """Les patrons de conception sont importants en génie logiciel à objets car ils contribuent à la qualité des programmes. Ils proposent des solutions élégantes à des problèmes récurrents de conception, des motifs utilisés pendant l'implantation. A l'usage, ces motifs de conception sont disséminés dans le code source et ne sont plus explicites lors de la maintenance ; pourtant, ils aideraient à comprendre l'implantation et la conception des programmes, assurant leur qualité. Ce mémoire propose des modèles et des algorithmes pour garantir la traçabilité des motifs de conception entre les phases d'implantation et de rétroconception des programmes par l'identification semi-automatique des micro-architectures similaires à ces motifs dans le code source.""" ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/pierre-cointe> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/yann-gael-gueheneuc> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-de-nantes> ;
+    geniro:thesis <http://theses.fr/073410969> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/yann-gael-gueheneuc-2003#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/yann-gael-gueheneuc-2003#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/yann-gael-gueheneuc-2003#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/yann-gael-gueheneuc-2003#timePeriod/end>
+    time:inXSDDate "2003-01-01"^^xsd:date .
+
+<http://diro.umontreal.ca/geniro/person/jean-francois-perrot> a foaf:Person ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/person/jean-francois-perrot" ;
+    foaf:firstName "Jean-François" ;
+    foaf:lastName "Perrot" ;
+    owl:sameAs <http://mathgenealogy.org/id.php?id=113205> .
+
+<http://diro.umontreal.ca/geniro/project/jean-francois-perrot-1984> a geniro:PhDProject ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/project/jean-francois-perrot-1984" ;
+    dcterms:title "Implémentation et interprétation des langages orientés objets : application aux langages Smalltalk, Objvlisp et Formes" ;
+    geniro:advisor <http://diro.umontreal.ca/geniro/person/jean-francois-perrot> ;
+    geniro:student <http://diro.umontreal.ca/geniro/person/pierre-cointe> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-pierre-et-marie-curie> ;
+    geniro:thesis <http://umontreal.on.worldcat.org/oclc/41431050> ;
+    geniro:timePeriod <http://diro.umontreal.ca/geniro/project/jean-francois-perrot-1984#timePeriod> .
+
+<http://diro.umontreal.ca/geniro/project/jean-francois-perrot-1984#timePeriod>
+    time:hasEnd <http://diro.umontreal.ca/geniro/project/jean-francois-perrot-1984#timePeriod/end> .
+
+<http://diro.umontreal.ca/geniro/project/jean-francois-perrot-1984#timePeriod/end>
+    time:inXSDDate "1984-01-01"^^xsd:date .
 
 ## Abdelhakim Hafid
 
