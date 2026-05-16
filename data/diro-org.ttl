@@ -14,77 +14,95 @@
     skos:prefLabel "Département d’informatique et de recherche opérationnelle" ;
     skos:altLabel "DIRO" .
 
-<http://diro.umontreal.ca/geniro/org/cornell> a org:Organization ;
-    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/cornell" ;
-    skos:prefLabel "Cornell University" .
+<http://diro.umontreal.ca/geniro/org/cornell-university> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/cornell-university" ;
+    skos:prefLabel "Cornell University" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/109> .
 
-<http://diro.umontreal.ca/geniro/org/mcgill> a org:Organization ;
-    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/mcgill" ;
-    skos:prefLabel "McGill University" .
+<http://diro.umontreal.ca/geniro/org/mcgill-university> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/mcgill-university" ;
+    skos:prefLabel "McGill University" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/388> .
 
-<http://diro.umontreal.ca/geniro/org/universite-rennes-1> a org:Organization ;
-    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-rennes-1" ;
-    skos:prefLabel "Université de Rennes 1" .
+<http://diro.umontreal.ca/geniro/org/universite-de-rennes-1> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-de-rennes-1" ;
+    skos:prefLabel "Université de Rennes 1" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/1250> .
 
 <http://diro.umontreal.ca/geniro/org/university-british-columbia> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-british-columbia" ;
-    skos:prefLabel "University of British Columbia" .
+    skos:prefLabel "University of British Columbia" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/862> .
 
 <http://diro.umontreal.ca/geniro/org/universidade-do-porto> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universidade-do-porto" ;
-    skos:prefLabel "Universidade do Porto" .
+    skos:prefLabel "Universidade do Porto" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/797> .
 
 <http://diro.umontreal.ca/geniro/org/university-of-toronto> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-of-toronto" ;
-    skos:prefLabel "University of Toronto" .
+    skos:prefLabel "University of Toronto" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/1075> .
 
 <http://diro.umontreal.ca/geniro/org/universite-de-nice-sophia-antipolis> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-de-nice" ;
-    skos:prefLabel "Université Nice-Sophia-Antipolis" .
+    skos:prefLabel "Université Nice-Sophia-Antipolis" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/1288> .
 
 <http://diro.umontreal.ca/geniro/org/aix-marseille-universite> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/aix-marseille-universite" ;
-    skos:prefLabel "Université d'Aix-Marseille" .
+    skos:prefLabel "Aix-Marseille Université" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/2652> .
 
 <http://diro.umontreal.ca/geniro/org/university-of-california-irvine> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-of-california-irvine" ;
-    skos:prefLabel "University of California, Irvine" .
+    skos:prefLabel "University of California, Irvine" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/868> .
 
 <http://diro.umontreal.ca/geniro/org/university-of-california-santa-cruz> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-of-california-santa-cruz" ;
-    skos:prefLabel "University of California, Santa Cruz" .
+    skos:prefLabel "University of California, Santa Cruz" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/875> .
 
 <http://diro.umontreal.ca/geniro/org/hec-montreal> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/hec-montreal" ;
-    skos:prefLabel "HEC Montréal" .
+    skos:prefLabel "HEC Montréal" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/2439> .
 
 <http://diro.umontreal.ca/geniro/org/ecole-polytechnique-federale-de-lausanne> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/ecole-polytechnique-federale-de-lausanne" ;
-    skos:prefLabel "École Polytechnique Fédérale de Lausanne" .
+    skos:prefLabel "École Polytechnique Fédérale de Lausanne (EPFL)" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/1402> .
 
 <http://diro.umontreal.ca/geniro/org/universite-joseph-fourier> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-joseph-fourier" ;
-    skos:prefLabel "Université Joseph-Fourier" .
+    skos:prefLabel "Université Joseph-Fourier" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/1228> .
 
-<http://diro.umontreal.ca/geniro/org/georgia-tech> a org:Organization ;
-    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/georgia-tech" ;
-    skos:prefLabel "Georgia Tech" .
+<http://diro.umontreal.ca/geniro/org/georgia-institute-of-technology> a org:Organization ;
+    geniro:preferredUri "http://diro.umontreal.ca/geniro/org/georgia-institute-of-technology" ;
+    skos:prefLabel "Georgia Institute of Technology" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/173> .
 
 <http://diro.umontreal.ca/geniro/org/carnegie-mellon-university> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/carnegie-mellon-university" ;
-    skos:prefLabel "Carnegie Mellon University" .
+    skos:prefLabel "Carnegie Mellon University" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/73> .
 
 <http://diro.umontreal.ca/geniro/org/columbia-university> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/columbia-university" ;
-    skos:prefLabel "Columbia University" .
+    skos:prefLabel "Columbia University" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/104> .
 
 <http://diro.umontreal.ca/geniro/org/university-of-waterloo> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/university-of-waterloo" ;
-    skos:prefLabel "University of Waterloo" .
+    skos:prefLabel "University of Waterloo" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/1095> .
 
 <http://diro.umontreal.ca/geniro/org/universite-de-bretagne-occidentale> a org:Organization ;
     geniro:preferredUri "http://diro.umontreal.ca/geniro/org/universite-de-bretagne-occidentale" ;
-    skos:prefLabel "Université de Bretagne-Occidentale" .
+    skos:prefLabel "Université de Bretagne Occidentale" ;
+    owl:sameAs <http://diro.umontreal.ca/geniro/external/mathgenealogy.org/school/1264> .
 
 # Templates
 
@@ -208,7 +226,7 @@
     dcterms:description """In this dissertation, I propose and study a multi-modal Artificial Intelligence (AI) task called Visual Question Answering (VQA) -- given an image and a natural language question about the image (e.g., "What kind of store is this?", "Is it safe to cross the street?"), the machine's task is to automatically produce an accurate natural language answer ("bakery", "yes"). Applications of VQA include -- aiding visually impaired users in understanding their surroundings, aiding analysts in examining large quantities of surveillance data, teaching children through interactive demos, interacting with personal AI assistants, and making visual social media content more accessible. Specifically, I study the following -- 1) how to create a large-scale dataset and define evaluation metrics for free-form and open-ended VQA, 2) how to develop techniques for characterizing the behavior of VQA models, and 3) how to build VQA models that are less driven by language biases in training data and are more visually grounded, by proposing -- a) a new evaluation protocol, b) a new model architecture, and c) a novel objective function. Most of my past work has been towards building agents that can "see" and "talk". However, for a lot of practical applications (e.g., physical agents navigating inside our houses executing natural language commands) we need agents that can not only "see" and "talk" but can also take actions. In chapter 6, I present future directions towards generalizing vision and language agents to be able to take actions."""@en ;
     geniro:advisor <http://diro.umontreal.ca/geniro/person/dhruv-batra> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/aishwarya-agrawal> ;
-    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/georgia-tech> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/georgia-institute-of-technology> ;
     geniro:thesis <http://hdl.handle.net/1853/62277> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/aishwarya-agrawal-2019#timePeriod> .
 
@@ -293,7 +311,7 @@
     dcterms:description """I situate computer programming as a cultural practice. I develop this perspective in two ways: exploring how programming practices can support intercultural learning, and examining how programming tools themselves embed cultural assumptions and values. For the former, I study how relationships across difference are formed over computing activities in K-12 classrooms in Kenya and the U.S. Asking how programming concepts may serve people's intercultural development, I develop a new type of activity, "cultural algorithms," which uses algorithmic concepts to teach about the social construction of societies. Turning to the material means through which we 'write' code, I then trace the earliest history of programming and reveal epistemological tendencies and biases in the field. From the resulting insights, I develop a new AI-powered paradigm, notational programming, as one critical design that seeks to disrupt dominant norms around typing code. Throughout, I aim to muddle the boundaries between 'programming' and 'culture,' exploring programming both as a tool for making change (changing the programming in culture), and as a tool to be changed (changing the culture in programming). Ultimately, I argue that intercultural approaches to computing are focused on ontological change; that is, changing the boundaries and categories that people deploy to divide themselves from others and diminish the complexity of the world."""@en ;
     geniro:advisor <http://diro.umontreal.ca/geniro/person/tapan-parikh> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/ian-arawjo> ;
-    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/cornell> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/cornell-university> ;
     geniro:thesis <http://hdl.handle.net/1813/113983> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/ian-arawjo-2023#timePeriod> .
 
@@ -353,7 +371,7 @@
     dcterms:description """Throughout this thesis, I develop the idea that the problem of learning good temporal abstractions in reinforcement learning is intimately tied to a kind of representation learning problem that I call "temporal representation learning". This choice of terminology is meant to highlight the fact that time is an indissociable aspect of learning systems experiencing their environment. Reconciling the notion of time with learning leads us to solution methods that better fit into a continual learning paradigm (Ring, 1991). Based on this principle, I propose the option-critic architecture for constructing temporal abstractions end-to-end, in the options framework (Sutton et al., 1999a). Furthermore, acknowledging the importance of time renders inevitable the fact that learning should be as efficient as possible when facing limited resources. I express this idea in the bounded rationality framework of Simon (1957) and extend the option-critic architecture accordingly to learn better options. I also establish a connection between the bounded rationality perspective on options discovery and the problem of finding good matrix preconditioners in numerical linear algebra. I show this point formally by exposing a common mathematical structure between multi-step RL methods and options using matrix splitting theory (Varga, 1962)."""@en ;
     geniro:advisor <http://diro.umontreal.ca/geniro/person/doina-precup> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/pierre-luc-bacon> ;
-    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/mcgill> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/mcgill-university> ;
     geniro:thesis <http://escholarship.mcgill.ca/concern/theses/vh53wz12w> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/pierre-luc-bacon-2018#timePeriod> .
 
@@ -410,7 +428,7 @@
     dcterms:description """Le test de logiciel apparaît aujourd'hui comme le moyen principal pour la validation du fonctionnement d'un programme. Les travaux présentés au cours de cette thèse s'articulent autour de trois contributions qui se concentrent sur certaines spécificités de la programmation et de la conception orientée objet pour l'étude de solutions particulières pour le test d'un composant. La qualité des cas de test étant un facteur important pour une validation efficace, le premier point concerne l'étude d'algorithmes évolutionnistes pour la génération automatique de cas de test pour un composant. Nous nous intéressons ensuite à l'impact de la conception par contrat sur deux aspects du test d'un assemblage de composants : la détection et la localisation d'erreur. Enfin, certaines configurations sont identifiées sur un diagramme de classes, comme difficiles à tester, et des solutions sont proposées pour résoudre ces problèmes dés la conception et éviter ainsi d'implanter un programme peu testable."""@fr ;
     geniro:advisor <http://diro.umontreal.ca/geniro/person/jean-marc-jezequel> ;
     geniro:student <http://diro.umontreal.ca/geniro/person/benoit-baudry> ;
-    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-rennes-1> ;
+    geniro:grantedBy <http://diro.umontreal.ca/geniro/org/universite-de-rennes-1> ;
     geniro:thesis <http://www.sudoc.fr/073553948> ;
     geniro:timePeriod <http://diro.umontreal.ca/geniro/project/benoit-baudry-2003#timePeriod> .
 
