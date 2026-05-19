@@ -26,10 +26,6 @@ Les données récupérées sont stockées sous forme de triplets au format Turtl
 fichiers sous le répertoire `data/`. Ce format facilite l’archivage et la relecture des
 données par les humains, mais ne permet pas l’exécution efficace de requêtes.
 
-**Ces scripts peuvent être lancés à l’aide de la commande `uv run geniro`.** (Lors de la
-première exécution de cette commande, les dépendances Python seront automatiquement
-installées. La commande `uv` doit être disponible sur le système.)
-
 ## Schéma
 
 Les données sont représentées en
@@ -75,7 +71,7 @@ données réfèrent à la même entité.
 
 ## Web
 
-Dans le répertoire `src/geniro-web/`, un serveur et une interface web de base permettent
+Dans le répertoire `src/geniro/`, un serveur et une interface web de base permettent
 de requêter rapidement les données de la base de données. Ce serveur est écrit en
 TypeScript avec [Deno](https://deno.com/) et interagit avec une base de données
 [GraphDB](https://graphdb.ontotext.com/).
@@ -118,5 +114,5 @@ de lancer manuellement des requêtes, à l’adresse `http://localhost:7200`.
 Le **serveur web** peut être lancé à l’aide de la commande suivante.
 
 ```bash
-deno run --allow-net --allow-env=READABLE_STREAM src/geniro-web/server.ts
+deno run --allow-net --allow-env=READABLE_STREAM src/geniro/server.ts
 ```

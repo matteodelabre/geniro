@@ -1,8 +1,8 @@
 {
     "tasks": {
-        "prod": "deno run --allow-net --allow-read=src/geniro-web/static --allow-env=READABLE_STREAM src/geniro-web/server.ts",
-        "dev": "deno run --watch --allow-net --allow-read=src/geniro-web/static --allow-env=READABLE_STREAM src/geniro-web/server.ts",
-        "cli": "deno run --allow-net --allow-env=READABLE_STREAM src/geniro-web/cli.ts"
+        "prod": "deno run --allow-net --allow-read=src/geniro/static --allow-env=READABLE_STREAM src/geniro/server.ts",
+        "dev": "deno run --watch --allow-net --allow-read=src/geniro/static --allow-env=READABLE_STREAM src/geniro/server.ts",
+        "cli": "deno run --allow-net --allow-env=READABLE_STREAM src/geniro/cli.ts"
     },
     "imports": {
         "@oak/commons": "jsr:@oak/commons@^1.0.1",

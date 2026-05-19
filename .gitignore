@@ -1,3 +1,2 @@
 /data/graphdb/
-/.venv
-/src/geniro-web/config.ts
+/src/geniro/config.ts
