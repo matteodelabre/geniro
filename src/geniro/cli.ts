@@ -19,7 +19,7 @@ const fetchOaiPmh = async (baseUrl, baseSet, grantorUri) => {
 };
 
 const fetchMathgen = async () => {
-    const schoolIds = JSON.parse(await Deno.readTextFile("mathgenschools.json"));
+    const schoolIds = JSON.parse(await Deno.readTextFile("data/mathgen-schools.json"));
     const token = await mathgenApi.getToken(mathgenLogin, mathgenPassword);
     await mathgenUpdate.refresh(token, schoolIds);
 };
